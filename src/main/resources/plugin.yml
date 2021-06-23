@@ -1,0 +1,6 @@
+name: CraftingAndStats
+version: ${project.version}
+main: me.pioula111.craftingandstats.CraftingAndStats
+api-version: 1.16
+authors: [ pioula111 ]
+description: Crafting and Stats and fighting
