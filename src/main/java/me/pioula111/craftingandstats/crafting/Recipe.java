@@ -1,9 +1,26 @@
 package me.pioula111.craftingandstats.crafting;
 
-import me.pioula111.craftingandstats.helpers.Pair;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Recipe {
-    protected ArrayList<Pair<Integer, Material>> materials;
+    private String name;
+    private HashSet<Material> materials;
+    private ItemStack result;
+
+    public Recipe(String name, HashSet<Material> materials, ItemStack result) {
+        this.materials = materials;
+        this.name = name;
+        this.result = result;
+    }
+
+    public HashSet<Material> getMaterials() {
+        return materials;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

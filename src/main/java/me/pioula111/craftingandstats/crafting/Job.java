@@ -1,8 +1,43 @@
 package me.pioula111.craftingandstats.crafting;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
-public abstract class Job {
-    protected ArrayList<WorkBench> workBenches;
+public class Job {
+    private String name;
+    private HashSet<WorkBench> workBenches;
 
+    public Job(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void addWorkbench(WorkBench newWorkbench) {
+        workBenches.add(newWorkbench);
+    }
+
+    public boolean hasWorkBench(String arg) {
+        for (WorkBench workBench : workBenches) {
+            if (workBench.getName().equals(arg))
+                return true;
+        }
+
+        return false;
+    }
+
+    public void removeWorkBench(String arg) {
+        workBenches.removeIf(workBench -> workBench.getName().equals(arg));
+    }
+
+    public WorkBench getWorkBench(String arg) {
+        for (WorkBench workBench : workBenches) {
+            if (workBench.getName().equals(arg))
+                return workBench;
+        }
+
+        return null;
+    }
 }
