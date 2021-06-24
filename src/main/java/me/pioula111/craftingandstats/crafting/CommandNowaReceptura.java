@@ -26,31 +26,24 @@ public class CommandNowaReceptura implements CommandExecutor {
         }
         Player player = (Player) sender;
 
-        if (args.length != 3) {
-            player.sendMessage(ChatColor.RED + "Zła komenda! Wpisz /nowareceptura <nazwa_fachu> <nazwa_craftingu> <nazwa_receptury>");
+        if (args.length != 2) {
+            player.sendMessage(ChatColor.RED + "Zła komenda! Wpisz /nowareceptura <nazwa_craftingu> <nazwa_receptury>");
             return true;
         }
-
-        Job job;
-        if (!craftingManager.hasJob(args[0])) {
-            player.sendMessage(ChatColor.RED + "Nie ma takiego fachu!");
-            return true;
-        }
-        job = craftingManager.getJob(args[0]);
 
         WorkBench workBench;
-        if (!craftingManager.hasCrafting(args[1])) {
-            player.sendMessage(ChatColor.RED + "Nie ma takiego craftingu w tym fachu!");
+        if (!craftingManager.hasCrafting(args[0])) {
+            player.sendMessage(ChatColor.RED + "Nie ma takiego craftingu!");
             return true;
         }
-        workBench = job.getWorkBench(args[1]);
+        workBench = craftingManager.getCrafting(args[0]);
 
-        if (workBench.hasRecipe(args[2])) {
+        if (workBench.hasRecipe(args[1])) {
             player.sendMessage(ChatColor.RED + "Jest już taka receptura!");
             return true;
         }
 
-        if (player.getInventory().getItemInOffHand() == null) {
+        if (player.getInventory().getItemInOffHand().getAmount() == 0) {
             player.sendMessage(ChatColor.RED + "Nie masz przedmiotu wynikowego w drugiej dłoni!");
             return true;
         }
@@ -77,7 +70,7 @@ public class CommandNowaReceptura implements CommandExecutor {
             }
         }
 
-        workBench.addRecipe(new Recipe(args[2], materials, player.getInventory().getItemInOffHand()));
+        workBench.addRecipe(new Recipe(args[1], materials, player.getInventory().getItemInOffHand()));
         sender.sendMessage(ChatColor.GREEN + "Receptura została pomyślnie stworzona!");
         return true;
     }

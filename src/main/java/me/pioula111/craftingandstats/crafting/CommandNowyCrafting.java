@@ -34,7 +34,7 @@ public class CommandNowyCrafting implements CommandExecutor {
         }
 
 
-        WorkBench newWorkbench = new WorkBench(args[0], job);
+        WorkBench newWorkbench = new WorkBench(args[1], job);
         job.addWorkbench(newWorkbench);
 
         sender.sendMessage(ChatColor.GREEN + "Crafting został pomyślnie stworzony!");

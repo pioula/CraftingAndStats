@@ -4,3 +4,25 @@ main: me.pioula111.craftingandstats.CraftingAndStats
 api-version: 1.16
 authors: [ pioula111 ]
 description: Crafting and Stats and fighting
+
+commands:
+  nowareceptura:
+    description: nowareceptura
+    usage: Error
+    permission: Operator
+  nowycrafting:
+    description: nowycrafting
+    usage: Error
+    permission: Operator
+  nowyfach:
+    description: nowyfach
+    usage: Error
+    permission: Operator
+  postawcrafting:
+    description: postawcrafting
+    usage: Error
+    permission: Operator
+  destroyer:
+    description: destroyer
+    usage: Error
+    permission: Operator

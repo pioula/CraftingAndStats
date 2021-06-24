@@ -11,16 +11,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class JsonManager {
+public class CraftingJsonManager {
     private GsonBuilder gsonBuilder = new GsonBuilder();
     private Gson gson;
     private File file;
     private JsonReader reader;
     private CraftingManager craftingManager;
 
-    public JsonManager(File file) {
-        craftingManager = new CraftingManager();
+    public CraftingJsonManager(File file) {
         gsonBuilder.setPrettyPrinting();
+        craftingManager = new CraftingManager();
 
         gson = gsonBuilder.create();
         this.file = file;
@@ -50,9 +50,11 @@ public class JsonManager {
         } catch(Exception ex) {
             ex.printStackTrace();
         }
+        if (craftingManager == null)
+            craftingManager = new CraftingManager();
     }
 
-    public CraftingManager getPlayerDataScores() {
+    public CraftingManager getCraftingManager() {
         return craftingManager;
     }
 

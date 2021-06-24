@@ -23,4 +23,24 @@ public class Recipe {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < name.length(); i++) {
+            if (name.charAt(i) == '_') {
+                builder.append(" ");
+            }
+            else {
+                builder.append(name.charAt(i));
+            }
+        }
+
+        builder.append(": ");
+        for (Material material : materials) {
+            builder.append(material.toString()).append(", ");
+        }
+
+        return builder.toString();
+    }
 }

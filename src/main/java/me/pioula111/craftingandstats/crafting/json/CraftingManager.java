@@ -13,10 +13,16 @@ public class CraftingManager {
     }
 
     public void addJob(Job job) {
+        if (jobs == null)
+            jobs = new HashSet<>();
+
         jobs.add(job);
     }
 
     public boolean hasJob(String arg) {
+        if (jobs == null)
+            return false;
+
         for (Job job : jobs) {
             if (job.getName().equals(arg))
                 return true;
@@ -39,6 +45,9 @@ public class CraftingManager {
     }
 
     public boolean hasCrafting(String arg) {
+        if (jobs == null || arg == null)
+            return false;
+
         for (Job job : jobs) {
             if (job.hasWorkBench(arg))
                 return true;

@@ -9,6 +9,7 @@ public class Job {
 
     public Job(String name) {
         this.name = name;
+        workBenches = new HashSet<>();
     }
 
     public String getName() {
@@ -16,10 +17,15 @@ public class Job {
     }
 
     public void addWorkbench(WorkBench newWorkbench) {
+        if (workBenches == null)
+            workBenches = new HashSet<>();
         workBenches.add(newWorkbench);
     }
 
     public boolean hasWorkBench(String arg) {
+        if (workBenches == null)
+            return false;
+
         for (WorkBench workBench : workBenches) {
             if (workBench.getName().equals(arg))
                 return true;

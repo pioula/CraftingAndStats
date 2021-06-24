@@ -1,16 +1,15 @@
 package me.pioula111.craftingandstats.crafting;
 
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
+import me.pioula111.craftingandstats.markers.Marker;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.AreaEffectCloud;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
 public class CommandPostawCrafting implements CommandExecutor {
@@ -37,17 +36,7 @@ public class CommandPostawCrafting implements CommandExecutor {
             return true;
         }
 
-        Player player = (Player) sender;
-        Location spawnPoint = player.getLocation();
-
-        ArmorStand workBench = (ArmorStand) spawnPoint.getWorld().spawnEntity(spawnPoint, EntityType.ARMOR_STAND);
-        workBench.setSmall(true);
-        workBench.setInvisible(true);
-        workBench.setPersistent(true);
-        workBench.setInvulnerable(true);
-        workBench.setCollidable(false);
-        workBench.setCustomName(args[0]);
-        workBench.setCustomNameVisible(true);
+        Marker.newMarker(2, (Player) sender, craftingManager.getCrafting(args[0]).toString());
 
         return true;
     }
