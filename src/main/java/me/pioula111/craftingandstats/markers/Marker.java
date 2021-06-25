@@ -19,7 +19,7 @@ public class Marker implements Listener {
         marker.setSize(size);
         marker.setInvisible(true);
         marker.setPersistent(true);
-        marker.setInvulnerable(true);
+        marker.setRemoveWhenFarAway(false);
         marker.setCollidable(false);
         marker.setAware(false);
         marker.setWander(false);

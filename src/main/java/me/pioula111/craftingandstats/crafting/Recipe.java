@@ -43,4 +43,8 @@ public class Recipe {
 
         return builder.toString();
     }
+
+    public ItemStack getResult() {
+        return result;
+    }
 }

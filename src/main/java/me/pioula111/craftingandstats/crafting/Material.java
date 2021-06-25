@@ -8,6 +8,10 @@ public class Material {
         this.material = material;
     }
 
+    public ItemStack getMaterial() {
+        return material;
+    }
+
     @Override
     public String toString() {
         return material.getI18NDisplayName() + " x" + material.getAmount();

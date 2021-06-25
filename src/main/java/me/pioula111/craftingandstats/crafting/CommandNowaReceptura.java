@@ -66,11 +66,11 @@ public class CommandNowaReceptura implements CommandExecutor {
         HashSet<Material> materials = new HashSet<>();
         for (int i = 0; i < 9; i++) {
             if (player.getInventory().getItem(i) != null) {
-                materials.add(new Material(player.getInventory().getItem(i)));
+                materials.add(new Material(player.getInventory().getItem(i).clone()));
             }
         }
 
-        workBench.addRecipe(new Recipe(args[1], materials, player.getInventory().getItemInOffHand()));
+        workBench.addRecipe(new Recipe(args[1], materials, player.getInventory().getItemInOffHand().clone()));
         sender.sendMessage(ChatColor.GREEN + "Receptura została pomyślnie stworzona!");
         return true;
     }

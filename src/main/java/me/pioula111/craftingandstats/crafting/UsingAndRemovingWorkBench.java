@@ -40,7 +40,7 @@ public class UsingAndRemovingWorkBench implements Listener {
                 craftingManager.hasCrafting(Marker.getName(event.getEntity()))) {
             if (event.getDamager() instanceof Player) {
                 event.setCancelled(true);
-                craftingManager.getCrafting(Marker.getName(event.getEntity())).openMenu((Player) event.getDamager());
+                craftingManager.getCrafting(Marker.getName(event.getEntity())).openMenu((Player) event.getDamager(), event.getEntity());
             }
         }
     }

@@ -26,3 +26,6 @@ commands:
     description: destroyer
     usage: Error
     permission: Operator
+  wytworzprzedmiot:
+    description: wytworzprzedmiot
+    usage: Error
