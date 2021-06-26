@@ -3,8 +3,8 @@ package me.pioula111.craftingandstats;
 import me.pioula111.craftingandstats.crafting.*;
 import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
 import me.pioula111.craftingandstats.itemy.*;
+import me.pioula111.craftingandstats.itemy.komendy.*;
 import me.pioula111.craftingandstats.markers.Marker;
-import org.bukkit.NamespacedKey;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -38,9 +38,24 @@ public final class CraftingAndStats extends JavaPlugin {
 
         ItemManager itemManager = new ItemManager();
         Objects.requireNonNull(this.getCommand("stworzitem")).setExecutor(new CommandStworzItem(itemManager));
+
         Objects.requireNonNull(this.getCommand("rzemieslniczy")).setExecutor(new CommandRzemieslniczy(itemManager));
         Objects.requireNonNull(this.getCommand("zywnosc")).setExecutor(new CommandZywnosc(itemManager));
         Objects.requireNonNull(this.getCommand("inne")).setExecutor(new CommandInne(itemManager));
+        Objects.requireNonNull(this.getCommand("bron")).setExecutor(new CommandBron(itemManager));
+
+        Objects.requireNonNull(this.getCommand("jednoreczna")).setExecutor(new CommandJednoreczna(itemManager));
+        Objects.requireNonNull(this.getCommand("dwureczna")).setExecutor(new CommandDwureczna(itemManager));
+        Objects.requireNonNull(this.getCommand("dlugodystansowa")).setExecutor(new CommandDlugodystansowa(itemManager));
+
+        Objects.requireNonNull(this.getCommand("dmg")).setExecutor(new CommandDmg(itemManager));
+        Objects.requireNonNull(this.getCommand("zrecznosc")).setExecutor(new CommandZrecznosc(itemManager));
+        Objects.requireNonNull(this.getCommand("sila")).setExecutor(new CommandSila(itemManager));
+
+        Objects.requireNonNull(this.getCommand("statystyka")).setExecutor(new CommandStatystyka(itemManager));
+        Objects.requireNonNull(this.getCommand("brak")).setExecutor(new CommandBrak(itemManager));
+        Objects.requireNonNull(this.getCommand("wzmocnienie")).setExecutor(new CommandWzmocnienie(itemManager));
+
     }
 
     @Override

@@ -1,4 +1,6 @@
-package me.pioula111.craftingandstats.itemy;
+package me.pioula111.craftingandstats.itemy.rodzaje;
+
+import me.pioula111.craftingandstats.itemy.rodzaje.RodzajItemu;
 
 public class Zywnosc extends RodzajItemu {
     @Override

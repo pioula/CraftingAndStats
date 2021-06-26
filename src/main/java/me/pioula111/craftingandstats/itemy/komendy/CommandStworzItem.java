@@ -1,11 +1,13 @@
-package me.pioula111.craftingandstats.itemy;
+package me.pioula111.craftingandstats.itemy.komendy;
 
-import me.pioula111.craftingandstats.crafting.CommandWytworzPrzedmiot;
-import me.pioula111.craftingandstats.crafting.Recipe;
+import me.pioula111.craftingandstats.itemy.rodzaje.Inne;
+import me.pioula111.craftingandstats.itemy.ItemManager;
+import me.pioula111.craftingandstats.itemy.MyItem;
+import me.pioula111.craftingandstats.itemy.rodzaje.Bron;
+import me.pioula111.craftingandstats.itemy.rodzaje.Rzemieslniczy;
+import me.pioula111.craftingandstats.itemy.rodzaje.Zywnosc;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
@@ -16,20 +18,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Iterator;
-
 public class CommandStworzItem implements CommandExecutor {
     private ItemManager itemManager;
     private final static TextColor ozdobyK = TextColor.color(0x2C3394);
     private final static TextColor nazwaK = TextColor.color(0x8088FF);
     private final static TextColor rodzajK = TextColor.color(0x947B1E);
     private final static TextColor LPMK = TextColor.color(0xDECA1B);
-    private final static String[] rodzaje = new String[]{"Rzemieślnicze",
-                                                        "Żywność",
-                                                        "Broń",
-                                                        "Pancerz",
-                                                        "Inne",
-                                                        "Narzędzia"};
 
     public CommandStworzItem(ItemManager itemManager) {
         this.itemManager = itemManager;
@@ -65,10 +59,11 @@ public class CommandStworzItem implements CommandExecutor {
         TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(ozdobyK))
                 .append(Component.text().content("Wybierz Rodzaj").style(Style.style(nazwaK, TextDecoration.BOLD)))
                 .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(ozdobyK))).build();
-
-        menu = menu.append(new Rzemieslniczy().menuComponent(1));
-        menu = menu.append(new Zywnosc().menuComponent(2));
-        menu = menu.append(new Inne().menuComponent(3));
+        int enumerator = 0;
+        menu = menu.append(new Rzemieslniczy().menuComponent(++enumerator));
+        menu = menu.append(new Zywnosc().menuComponent(++enumerator));
+        menu = menu.append(new Inne().menuComponent(++enumerator));
+        menu = menu.append(new Bron().menuComponent(++enumerator));
 
         return menu;
     }

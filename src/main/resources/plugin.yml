@@ -45,3 +45,43 @@ commands:
     description: zywnosc
     usage: Error
     permission: Operator
+  bron:
+    description: bron
+    usage: Error
+    permission: Operator
+  jednoreczna:
+    description: jednoreczna
+    usage: Error
+    permission: Operator
+  dwureczna:
+    description: dwureczna
+    usage: Error
+    permission: Operator
+  dlugodystansowa:
+    description: dlugodystansowa
+    usage: Error
+    permission: Operator
+  dmg:
+    description: dmg
+    usage: Error
+    permission: Operator
+  zrecznosc:
+    description: zrecznosc
+    usage: Error
+    permission: Operator
+  sila:
+    description: sila
+    usage: Error
+    permission: Operator
+  statystyka:
+    description: statystyka
+    usage: Error
+    permission: Operator
+  brak:
+    description: brak
+    usage: Error
+    permission: Operator
+  wzmocnienie:
+    description: wzmocnienie
+    usage: Error
+    permission: Operator

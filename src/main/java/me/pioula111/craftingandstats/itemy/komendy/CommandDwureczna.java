@@ -1,5 +1,12 @@
-package me.pioula111.craftingandstats.itemy;
+package me.pioula111.craftingandstats.itemy.komendy;
 
+import me.pioula111.craftingandstats.itemy.ItemManager;
+import me.pioula111.craftingandstats.itemy.MyItem;
+import me.pioula111.craftingandstats.itemy.bronie.Dwureczna;
+import me.pioula111.craftingandstats.itemy.bronie.Jednoreczna;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.Style;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,10 +14,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandRzemieslniczy implements CommandExecutor {
+public class CommandDwureczna implements CommandExecutor {
     private ItemManager itemManager;
+    private final static TextColor nazwaK = TextColor.color(0x8088FF);
 
-    public CommandRzemieslniczy(ItemManager itemManager) {
+    public CommandDwureczna(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -32,10 +40,11 @@ public class CommandRzemieslniczy implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        itemManager.removeMaker(player);
-        item.setRodzaj(new Rzemieslniczy());
+        item.setTypBroni(new Dwureczna());
 
-        player.getInventory().addItem(item.makeItem());
+        itemManager.updateMaker(player, item);
+
+        player.sendMessage(Component.text().content("Podaj obrażenia broni /dmg <obrażenia>").style(Style.style(nazwaK)));
         return true;
     }
 }

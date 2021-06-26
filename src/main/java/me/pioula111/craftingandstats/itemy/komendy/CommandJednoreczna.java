@@ -1,5 +1,11 @@
-package me.pioula111.craftingandstats.itemy;
+package me.pioula111.craftingandstats.itemy.komendy;
 
+import me.pioula111.craftingandstats.itemy.ItemManager;
+import me.pioula111.craftingandstats.itemy.bronie.Jednoreczna;
+import me.pioula111.craftingandstats.itemy.MyItem;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.Style;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -7,10 +13,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandZywnosc implements CommandExecutor {
+public class CommandJednoreczna implements CommandExecutor {
     private ItemManager itemManager;
+    private final static TextColor nazwaK = TextColor.color(0x8088FF);
 
-    public CommandZywnosc(ItemManager itemManager) {
+    public CommandJednoreczna(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -32,10 +39,11 @@ public class CommandZywnosc implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        itemManager.removeMaker(player);
-        item.setRodzaj(new Zywnosc());
+        item.setTypBroni(new Jednoreczna());
 
-        player.getInventory().addItem(item.makeItem());
+        itemManager.updateMaker(player,item);
+
+        player.sendMessage(Component.text().content("Podaj obrażenia broni /dmg <obrażenia>").style(Style.style(nazwaK)));
         return true;
     }
 }
