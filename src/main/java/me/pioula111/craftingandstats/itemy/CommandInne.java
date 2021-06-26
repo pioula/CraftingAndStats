@@ -7,10 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandZywnosc implements CommandExecutor {
+public class CommandInne implements CommandExecutor {
     private ItemManager itemManager;
 
-    public CommandZywnosc(ItemManager itemManager) {
+    public CommandInne(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -33,7 +33,7 @@ public class CommandZywnosc implements CommandExecutor {
 
         MyItem item = itemManager.getItem(player);
         itemManager.removeMaker(player);
-        item.setRodzaj(new Zywnosc());
+        item.setRodzaj(new Inne());
 
         player.getInventory().addItem(item.makeItem());
         return true;

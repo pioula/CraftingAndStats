@@ -27,14 +27,7 @@ public class Recipe {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < name.length(); i++) {
-            if (name.charAt(i) == '_') {
-                builder.append(" ");
-            }
-            else {
-                builder.append(name.charAt(i));
-            }
-        }
+        builder.append(name.replace("_"," "));
 
         builder.append(": ");
         for (Material material : materials) {

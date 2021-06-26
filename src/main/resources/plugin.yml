@@ -29,3 +29,19 @@ commands:
   wytworzprzedmiot:
     description: wytworzprzedmiot
     usage: Error
+  stworzitem:
+    description: stworzitem
+    usage: Error
+    permission: Operator
+  rzemieslniczy:
+    description: rzemieslniczy
+    usage: Error
+    permission: Operator
+  zywnosc:
+    description: zywnosc
+    usage: Error
+    permission: Operator
+  inne:
+    description: zywnosc
+    usage: Error
+    permission: Operator

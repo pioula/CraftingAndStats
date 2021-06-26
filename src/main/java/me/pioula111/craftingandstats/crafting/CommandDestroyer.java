@@ -1,6 +1,7 @@
 package me.pioula111.craftingandstats.crafting;
 
 import me.pioula111.craftingandstats.CraftingAndStats;
+import me.pioula111.craftingandstats.NameSpacedKeys;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
@@ -42,7 +43,7 @@ public class CommandDestroyer implements CommandExecutor {
         List<Component> lore = new ArrayList<>();
         lore.add(Component.text().content("Niszczy craftingi!").style(Style.style(TextColor.color(0x009999),TextDecoration.ITALIC)).build());
         meta.lore(lore);
-        meta.getPersistentDataContainer().set(plugin.getDestroyerKey(), PersistentDataType.BYTE, (byte) 1);
+        meta.getPersistentDataContainer().set(NameSpacedKeys.destroyerKey, PersistentDataType.BYTE, (byte) 1);
 
         destroyer.setItemMeta(meta);
         player.getInventory().addItem(destroyer);

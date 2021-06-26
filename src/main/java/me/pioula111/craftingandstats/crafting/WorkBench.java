@@ -84,17 +84,7 @@ public class WorkBench {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < name.length(); i++) {
-            if (name.charAt(i) == '_') {
-                builder.append(" ");
-            }
-            else {
-                builder.append(name.charAt(i));
-            }
-        }
-
-        return builder.toString();
+        return name.replace("_"," ");
     }
 
     public Recipe getRecipe(String arg) {

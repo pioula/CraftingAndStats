@@ -1,6 +1,7 @@
 package me.pioula111.craftingandstats.crafting;
 
 import me.pioula111.craftingandstats.CraftingAndStats;
+import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
 import me.pioula111.craftingandstats.markers.Marker;
 import net.kyori.adventure.audience.Audience;
@@ -50,7 +51,7 @@ public class UsingAndRemovingWorkBench implements Listener {
         if (Marker.isMarker(event.getRightClicked()) &&
                 craftingManager.hasCrafting(Marker.getName(event.getRightClicked()))) {
             if (event.getPlayer().getInventory().getItemInMainHand().getAmount() != 0 &&
-                    event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(plugin.getDestroyerKey(), PersistentDataType.BYTE)
+                    event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.destroyerKey, PersistentDataType.BYTE)
                     && event.getPlayer().isOp()) {
                 Marker.removeMarker(event.getRightClicked());
             }
