@@ -2,18 +2,17 @@ package me.pioula111.craftingandstats.itemy;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.itemy.bronie.TypBroni;
+import me.pioula111.craftingandstats.itemy.napoje.*;
 import me.pioula111.craftingandstats.itemy.narzedzia.Kilof;
 import me.pioula111.craftingandstats.itemy.narzedzia.TypNarzedzia;
-import me.pioula111.craftingandstats.itemy.rodzaje.Bron;
-import me.pioula111.craftingandstats.itemy.rodzaje.Narzedzia;
-import me.pioula111.craftingandstats.itemy.rodzaje.Pancerz;
-import me.pioula111.craftingandstats.itemy.rodzaje.RodzajItemu;
+import me.pioula111.craftingandstats.itemy.rodzaje.*;
 import me.pioula111.craftingandstats.itemy.statystyki.Statystyka;
 import me.pioula111.craftingandstats.itemy.ulepszenia.Ulepszenie;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -23,6 +22,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectTypeWrapper;
 
 import java.util.ArrayList;
@@ -40,6 +40,9 @@ public class MyItem {
     private Ulepszenie ulepszenie;
     private int obrona;
     private TypNarzedzia typNarzedzia;
+    private TypNapoju typNapoju;
+    private ArrayList<Efekt> efekty;
+    private int kolorNapoju;
 
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
@@ -58,50 +61,77 @@ public class MyItem {
     }
 
     public ItemStack makeItem() {
-        ItemStack item = new ItemStack(podmienionyItem, 1);
-        ItemMeta meta = item.getItemMeta();
+        if (rodzaj instanceof Napoj) {
+            ItemStack item = null;
+            if (typNapoju instanceof Zwykly)
+                item = new ItemStack(Material.POTION, 1);
+            if (typNapoju instanceof Lingering)
+                item = new ItemStack(Material.LINGERING_POTION, 1);
+            if (typNapoju instanceof Splash)
+                item = new ItemStack(Material.SPLASH_POTION, 1);
 
-        meta.displayName(Component.text().content(nazwa.replace("_"," ")).decoration(TextDecoration.ITALIC, false).build());
-        List<Component> lore = new ArrayList<>();
-        lore.add(Component.text().content(rodzaj.prettyToString()).style(Style.style(TextColor.color(0x009999))).build());
-
-        meta.getPersistentDataContainer().set(NameSpacedKeys.podmienionyItemKey, PersistentDataType.STRING, podmienionyItem.name());
-        meta.getPersistentDataContainer().set(NameSpacedKeys.nazwaKey, PersistentDataType.STRING, nazwa);
-        meta.getPersistentDataContainer().set(NameSpacedKeys.rodzajKey, PersistentDataType.STRING, rodzaj.toString());
-        if (typBroni != null) {
-            lore.add(Component.text().content(typBroni.prettyToString()).style(Style.style(TextColor.color(0x009999))).build());
-            meta.getPersistentDataContainer().set(NameSpacedKeys.typBroniKey, PersistentDataType.STRING, typBroni.toString());
-
-            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,new AttributeModifier(UUID.randomUUID(), "dmg", dmg, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
-            meta.getPersistentDataContainer().set(NameSpacedKeys.dmgKey, PersistentDataType.DOUBLE, dmg);
-
-            lore.add(Component.text().content("Wymagana " + wymaganaStatystyka.prettyToString() + ": " + wielkoscStatystyki).style(Style.style(TextColor.color(0x009999))).build());
-            meta.getPersistentDataContainer().set(NameSpacedKeys.wymaganaStatystykaKey, PersistentDataType.STRING, wymaganaStatystyka.toString());
-            meta.getPersistentDataContainer().set(NameSpacedKeys.wielkoscStatystykiKey, PersistentDataType.INTEGER, wielkoscStatystyki);
-            meta.setUnbreakable(true);
-        }
-
-        if (ulepszenie != null) {
-            if (!ulepszenie.toString().equals("brak")) {
-                lore.add(Component.text().content("Ulepszenie: " + ulepszenie.prettyToString()).style(Style.style(TextColor.color(0x009999))).build());
+            PotionMeta pMeta = (PotionMeta) item.getItemMeta();
+            for (Efekt efekt : efekty) {
+                pMeta.addCustomEffect(new PotionEffect(efekt.getTypEfektu(), efekt.getCzasTrwania(), efekt.getMoc()), true);
             }
-            meta.getPersistentDataContainer().set(NameSpacedKeys.ulepszenieKey, PersistentDataType.STRING, ulepszenie.toString());
-        }
 
-        if (rodzaj instanceof Pancerz) {
-            meta.addAttributeModifier(Attribute.GENERIC_ARMOR,new AttributeModifier(UUID.randomUUID(), "armor", obrona, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST));
-            meta.getPersistentDataContainer().set(NameSpacedKeys.obronaKey, PersistentDataType.INTEGER, obrona);
-            meta.setUnbreakable(true);
-        }
+            pMeta.getPersistentDataContainer().set(NameSpacedKeys.efektyKey, PersistentDataType.STRING, efekty.toString());
+            pMeta.setColor(Color.fromBGR(kolorNapoju));
+            pMeta.getPersistentDataContainer().set(NameSpacedKeys.kolorNapojuKey, PersistentDataType.INTEGER, kolorNapoju);
+            pMeta.displayName(Component.text().content(nazwa.replace("_"," ")).decoration(TextDecoration.ITALIC, false).build());
+            pMeta.getPersistentDataContainer().set(NameSpacedKeys.nazwaKey, PersistentDataType.STRING, nazwa);
+            pMeta.getPersistentDataContainer().set(NameSpacedKeys.autorKey, PersistentDataType.STRING, "pioula111");
 
-        if (rodzaj instanceof Narzedzia) {
-            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,new AttributeModifier(UUID.randomUUID(), "dmg", 0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
-            meta.getPersistentDataContainer().set(NameSpacedKeys.typNarzedziaKey, PersistentDataType.STRING, typNarzedzia.toString());
+            item.setItemMeta(pMeta);
+            return item;
         }
+        else {
+            ItemStack item = new ItemStack(podmienionyItem, 1);
+            ItemMeta meta = item.getItemMeta();
 
-        meta.lore(lore);
-        item.setItemMeta(meta);
-        return item;
+            meta.displayName(Component.text().content(nazwa.replace("_"," ")).decoration(TextDecoration.ITALIC, false).build());
+            List<Component> lore = new ArrayList<>();
+            lore.add(Component.text().content(rodzaj.prettyToString()).style(Style.style(TextColor.color(0x009999))).build());
+
+            meta.getPersistentDataContainer().set(NameSpacedKeys.podmienionyItemKey, PersistentDataType.STRING, podmienionyItem.name());
+            meta.getPersistentDataContainer().set(NameSpacedKeys.nazwaKey, PersistentDataType.STRING, nazwa);
+            meta.getPersistentDataContainer().set(NameSpacedKeys.rodzajKey, PersistentDataType.STRING, rodzaj.toString());
+            if (typBroni != null) {
+                lore.add(Component.text().content(typBroni.prettyToString()).style(Style.style(TextColor.color(0x009999))).build());
+                meta.getPersistentDataContainer().set(NameSpacedKeys.typBroniKey, PersistentDataType.STRING, typBroni.toString());
+
+                meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,new AttributeModifier(UUID.randomUUID(), "dmg", dmg, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
+                meta.getPersistentDataContainer().set(NameSpacedKeys.dmgKey, PersistentDataType.DOUBLE, dmg);
+
+                lore.add(Component.text().content("Wymagana " + wymaganaStatystyka.prettyToString() + ": " + wielkoscStatystyki).style(Style.style(TextColor.color(0x009999))).build());
+                meta.getPersistentDataContainer().set(NameSpacedKeys.wymaganaStatystykaKey, PersistentDataType.STRING, wymaganaStatystyka.toString());
+                meta.getPersistentDataContainer().set(NameSpacedKeys.wielkoscStatystykiKey, PersistentDataType.INTEGER, wielkoscStatystyki);
+                meta.setUnbreakable(true);
+            }
+
+            if (ulepszenie != null) {
+                if (!ulepszenie.toString().equals("brak")) {
+                    lore.add(Component.text().content("Ulepszenie: " + ulepszenie.prettyToString()).style(Style.style(TextColor.color(0x009999))).build());
+                }
+                meta.getPersistentDataContainer().set(NameSpacedKeys.ulepszenieKey, PersistentDataType.STRING, ulepszenie.toString());
+            }
+
+            if (rodzaj instanceof Pancerz) {
+                meta.addAttributeModifier(Attribute.GENERIC_ARMOR,new AttributeModifier(UUID.randomUUID(), "armor", obrona, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+                meta.getPersistentDataContainer().set(NameSpacedKeys.obronaKey, PersistentDataType.INTEGER, obrona);
+                meta.setUnbreakable(true);
+            }
+
+            if (rodzaj instanceof Narzedzia) {
+                meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,new AttributeModifier(UUID.randomUUID(), "dmg", 0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
+                meta.getPersistentDataContainer().set(NameSpacedKeys.typNarzedziaKey, PersistentDataType.STRING, typNarzedzia.toString());
+            }
+
+            meta.lore(lore);
+            meta.getPersistentDataContainer().set(NameSpacedKeys.autorKey, PersistentDataType.STRING, "pioula111");
+            item.setItemMeta(meta);
+            return item;
+        }
     }
 
     public void setDmg(double dmg) {
@@ -126,5 +156,20 @@ public class MyItem {
 
     public void setTypNarzedzia(TypNarzedzia typNarzedzia) {
         this.typNarzedzia = typNarzedzia;
+    }
+
+    public void setTypNapoju(TypNapoju typNapoju) {
+        this.typNapoju = typNapoju;
+    }
+
+    public void addEfekt(Efekt efekt) {
+        if (efekty == null)
+            efekty = new ArrayList<>();
+
+        efekty.add(efekt);
+    }
+
+    public void setKolorNapoju(int kolorNapoju) {
+        this.kolorNapoju = kolorNapoju;
     }
 }

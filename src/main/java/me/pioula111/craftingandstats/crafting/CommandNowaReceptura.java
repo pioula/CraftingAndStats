@@ -1,11 +1,13 @@
 package me.pioula111.craftingandstats.crafting;
 
+import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -48,6 +50,11 @@ public class CommandNowaReceptura implements CommandExecutor {
             return true;
         }
 
+        if (!player.getInventory().getItemInOffHand().getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.autorKey, PersistentDataType.STRING)) {
+            player.sendMessage(ChatColor.RED + "Przedmiot wynikowy musi być stworzony w przy pomocy komendy /stworzprzedmiot <nazwa_przedmiotu>!");
+            return true;
+        }
+
         boolean isEmpty = true;
         for (int i = 0; i < 9; i++) {
             if (player.getInventory().getItem(i) != null) {
@@ -61,6 +68,14 @@ public class CommandNowaReceptura implements CommandExecutor {
             return true;
         }
 
+        for (int i = 0; i < 9; i++) {
+            if (player.getInventory().getItem(i) != null &&
+                    (!player.getInventory().getItem(i).hasItemMeta() ||
+                    !player.getInventory().getItem(i).getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.autorKey, PersistentDataType.STRING))) {
+                player.sendMessage(ChatColor.RED + "Materiały muszą byś stworzone przy pomocy /stworzprzedmiot <nazwa_przedmiotu>!");
+                return true;
+            }
+        }
 
 
         HashSet<Material> materials = new HashSet<>();

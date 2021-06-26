@@ -1,14 +1,19 @@
 package me.pioula111.craftingandstats.crafting;
 
+import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Set;
 
 public class CommandWytworzPrzedmiot implements CommandExecutor {
     public static final String PASSWORD = "s=D3A{8E>GV~L}k3";
@@ -16,6 +21,16 @@ public class CommandWytworzPrzedmiot implements CommandExecutor {
 
     public CommandWytworzPrzedmiot(CraftingManager craftingManager) {
         this.craftingManager = craftingManager;
+    }
+
+    private boolean isEqual(ItemStack a, ItemStack b) {
+        if (!(a.hasItemMeta() && a.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.nazwaKey, PersistentDataType.STRING)))
+            return false;
+        if (!(b.hasItemMeta() && b.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.nazwaKey, PersistentDataType.STRING)))
+            return false;
+
+        return a.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.nazwaKey, PersistentDataType.STRING)
+                .equals(b.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.nazwaKey, PersistentDataType.STRING));
     }
 
     @Override
@@ -48,7 +63,7 @@ public class CommandWytworzPrzedmiot implements CommandExecutor {
             ItemStack itemStack = material.getMaterial();
             int numberOfItems = itemStack.getAmount();
             for (ItemStack content : player.getInventory().getContents()) {
-                if (content != null && content.asOne().equals(itemStack.asOne())) {
+                if (content != null && isEqual(content, material.getMaterial())) {
                     numberOfItems -= content.getAmount();
                 }
                 if (numberOfItems <= 0)
@@ -65,7 +80,7 @@ public class CommandWytworzPrzedmiot implements CommandExecutor {
             ItemStack itemStack = material.getMaterial();
             int numberOfItems = itemStack.getAmount();
             for (ItemStack content : player.getInventory().getContents()) {
-                if (content != null && content.asOne().equals(itemStack.asOne())) {
+                if (content != null && isEqual(content, material.getMaterial())) {
                     int removedItems = Math.min(numberOfItems, content.getAmount());
                     content.setAmount(content.getAmount() - removedItems);
                     if (content.getAmount() <= 0) {

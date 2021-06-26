@@ -1,6 +1,8 @@
 package me.pioula111.craftingandstats.crafting;
 
+import me.pioula111.craftingandstats.NameSpacedKeys;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 public class Material {
     private ItemStack material;
@@ -14,6 +16,10 @@ public class Material {
 
     @Override
     public String toString() {
-        return material.getI18NDisplayName() + " x" + material.getAmount();
+        if (material.hasItemMeta() &&
+        material.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.nazwaKey, PersistentDataType.STRING))
+            return material.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.nazwaKey, PersistentDataType.STRING).replace("_", " ") + " x" + material.getAmount();
+        else
+            return material.getI18NDisplayName() + " x" + material.getAmount();
     }
 }

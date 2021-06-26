@@ -63,6 +63,7 @@ public class CommandStworzItem implements CommandExecutor {
         menu = menu.append(new Bron().menuComponent(++enumerator));
         menu = menu.append(new Pancerz().menuComponent(++enumerator));
         menu = menu.append(new Narzedzia().menuComponent(++enumerator));
+        menu = menu.append(new Napoj().menuComponent(++enumerator));
 
         return menu;
     }

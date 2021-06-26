@@ -117,3 +117,27 @@ commands:
     description: wedka
     usage: Error
     permission: Operator
+  napoj:
+    description: napoj
+    usage: Error
+    permission: Operator
+  lingering:
+    description: lingering
+    usage: Error
+    permission: Operator
+  splash:
+    description: splash
+    usage: Error
+    permission: Operator
+  zwykly:
+    description: zwykly
+    usage: Error
+    permission: Operator
+  efekty:
+    description: efekty
+    usage: Error
+    permission: Operator
+  kolornapoju:
+    description: kolornapoju
+    usage: Error
+    permission: Operator

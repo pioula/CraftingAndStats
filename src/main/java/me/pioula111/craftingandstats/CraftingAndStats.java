@@ -5,6 +5,7 @@ import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
 import me.pioula111.craftingandstats.itemy.*;
 import me.pioula111.craftingandstats.itemy.komendy.komendyBroni.*;
 import me.pioula111.craftingandstats.itemy.komendy.komendyInne.CommandStworzItem;
+import me.pioula111.craftingandstats.itemy.komendy.komendyNapoje.*;
 import me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia.*;
 import me.pioula111.craftingandstats.itemy.komendy.komendyPancerze.CommandObrona;
 import me.pioula111.craftingandstats.itemy.komendy.komendyPancerze.CommandPancerz;
@@ -74,6 +75,14 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("wedka")).setExecutor(new CommandWedka(itemManager));
         Objects.requireNonNull(this.getCommand("topor")).setExecutor(new CommandTopor(itemManager));
         Objects.requireNonNull(this.getCommand("sierp")).setExecutor(new CommandSierp(itemManager));
+
+        Objects.requireNonNull(this.getCommand("napoj")).setExecutor(new CommandNapoj(itemManager));
+        Objects.requireNonNull(this.getCommand("lingering")).setExecutor(new CommandLingering(itemManager));
+        Objects.requireNonNull(this.getCommand("splash")).setExecutor(new CommandSplash(itemManager));
+        Objects.requireNonNull(this.getCommand("zwykly")).setExecutor(new CommandZwykly(itemManager));
+        Objects.requireNonNull(this.getCommand("efekty")).setExecutor(new CommandEfekty(itemManager));
+        Objects.requireNonNull(this.getCommand("kolornapoju")).setExecutor(new CommandKolorNapoju(itemManager));
+
     }
 
     @Override
