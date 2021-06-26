@@ -3,7 +3,16 @@ package me.pioula111.craftingandstats;
 import me.pioula111.craftingandstats.crafting.*;
 import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
 import me.pioula111.craftingandstats.itemy.*;
-import me.pioula111.craftingandstats.itemy.komendy.*;
+import me.pioula111.craftingandstats.itemy.komendy.komendyBroni.*;
+import me.pioula111.craftingandstats.itemy.komendy.komendyInne.CommandStworzItem;
+import me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia.*;
+import me.pioula111.craftingandstats.itemy.komendy.komendyPancerze.CommandObrona;
+import me.pioula111.craftingandstats.itemy.komendy.komendyPancerze.CommandPancerz;
+import me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle.CommandInne;
+import me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle.CommandRzemieslniczy;
+import me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle.CommandZywnosc;
+import me.pioula111.craftingandstats.itemy.komendy.komendyUlepszenia.CommandBrak;
+import me.pioula111.craftingandstats.itemy.komendy.komendyUlepszenia.CommandWzmocnienie;
 import me.pioula111.craftingandstats.markers.Marker;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -56,6 +65,15 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("brak")).setExecutor(new CommandBrak(itemManager));
         Objects.requireNonNull(this.getCommand("wzmocnienie")).setExecutor(new CommandWzmocnienie(itemManager));
 
+        Objects.requireNonNull(this.getCommand("obrona")).setExecutor(new CommandObrona(itemManager));
+        Objects.requireNonNull(this.getCommand("pancerz")).setExecutor(new CommandPancerz(itemManager));
+
+        Objects.requireNonNull(this.getCommand("narzedzia")).setExecutor(new CommandNarzedzia(itemManager));
+        Objects.requireNonNull(this.getCommand("kilof")).setExecutor(new CommandKilof(itemManager));
+        Objects.requireNonNull(this.getCommand("kosa")).setExecutor(new CommandKosa(itemManager));
+        Objects.requireNonNull(this.getCommand("wedka")).setExecutor(new CommandWedka(itemManager));
+        Objects.requireNonNull(this.getCommand("topor")).setExecutor(new CommandTopor(itemManager));
+        Objects.requireNonNull(this.getCommand("sierp")).setExecutor(new CommandSierp(itemManager));
     }
 
     @Override

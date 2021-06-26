@@ -85,3 +85,35 @@ commands:
     description: wzmocnienie
     usage: Error
     permission: Operator
+  obrona:
+    description: obrona
+    usage: Error
+    permission: Operator
+  pancerz:
+    description: pancerz
+    usage: Error
+    permission: Operator
+  narzedzia:
+    description: narzedzia
+    usage: Error
+    permission: Operator
+  kilof:
+    description: kilof
+    usage: Error
+    permission: Operator
+  kosa:
+    description: kosa
+    usage: Error
+    permission: Operator
+  sierp:
+    description: sierp
+    usage: Error
+    permission: Operator
+  topor:
+    description: topor
+    usage: Error
+    permission: Operator
+  wedka:
+    description: wedka
+    usage: Error
+    permission: Operator

@@ -1,12 +1,9 @@
-package me.pioula111.craftingandstats.itemy.komendy;
+package me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.bronie.Dlugodystansowa;
-import me.pioula111.craftingandstats.itemy.bronie.Jednoreczna;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
+import me.pioula111.craftingandstats.itemy.narzedzia.Kilof;
+import me.pioula111.craftingandstats.itemy.narzedzia.Kosa;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,11 +11,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandDlugodystansowa implements CommandExecutor {
+public class CommandKosa implements CommandExecutor {
     private ItemManager itemManager;
-    private final static TextColor nazwaK = TextColor.color(0x8088FF);
 
-    public CommandDlugodystansowa(ItemManager itemManager) {
+    public CommandKosa(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -40,11 +36,11 @@ public class CommandDlugodystansowa implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        item.setTypBroni(new Dlugodystansowa());
+        itemManager.removeMaker(player);
+        item.setTypNarzedzia(new Kosa());
 
-        itemManager.updateMaker(player, item);
-
-        player.sendMessage(Component.text().content("Podaj obrażenia broni /dmg <obrażenia>").style(Style.style(nazwaK)));
+        player.getInventory().addItem(item.makeItem());
+        player.sendMessage(ChatColor.GREEN + "Stworzono kosę!");
         return true;
     }
 }

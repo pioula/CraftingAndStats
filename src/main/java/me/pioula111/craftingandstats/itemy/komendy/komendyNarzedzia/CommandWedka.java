@@ -1,8 +1,9 @@
-package me.pioula111.craftingandstats.itemy.komendy;
+package me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.rodzaje.Rzemieslniczy;
+import me.pioula111.craftingandstats.itemy.narzedzia.Kilof;
+import me.pioula111.craftingandstats.itemy.narzedzia.Wedka;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,10 +11,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandRzemieslniczy implements CommandExecutor {
+public class CommandWedka implements CommandExecutor {
     private ItemManager itemManager;
 
-    public CommandRzemieslniczy(ItemManager itemManager) {
+    public CommandWedka(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -36,10 +37,10 @@ public class CommandRzemieslniczy implements CommandExecutor {
 
         MyItem item = itemManager.getItem(player);
         itemManager.removeMaker(player);
-        item.setRodzaj(new Rzemieslniczy());
+        item.setTypNarzedzia(new Wedka());
 
         player.getInventory().addItem(item.makeItem());
-        player.sendMessage(ChatColor.GREEN + "Stworzono item!");
+        player.sendMessage(ChatColor.GREEN + "Stworzono wędkę!");
         return true;
     }
 }

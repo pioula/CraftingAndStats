@@ -1,8 +1,8 @@
-package me.pioula111.craftingandstats.itemy.komendy;
+package me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.rodzaje.Zywnosc;
+import me.pioula111.craftingandstats.itemy.rodzaje.Rzemieslniczy;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,10 +10,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandZywnosc implements CommandExecutor {
+public class CommandRzemieslniczy implements CommandExecutor {
     private ItemManager itemManager;
 
-    public CommandZywnosc(ItemManager itemManager) {
+    public CommandRzemieslniczy(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -36,7 +36,7 @@ public class CommandZywnosc implements CommandExecutor {
 
         MyItem item = itemManager.getItem(player);
         itemManager.removeMaker(player);
-        item.setRodzaj(new Zywnosc());
+        item.setRodzaj(new Rzemieslniczy());
 
         player.getInventory().addItem(item.makeItem());
         player.sendMessage(ChatColor.GREEN + "Stworzono item!");

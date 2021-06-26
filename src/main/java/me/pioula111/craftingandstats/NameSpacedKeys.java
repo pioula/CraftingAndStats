@@ -12,6 +12,8 @@ public class NameSpacedKeys {
     public static NamespacedKey ulepszenieKey;
     public static NamespacedKey wymaganaStatystykaKey;
     public static NamespacedKey wielkoscStatystykiKey;
+    public static NamespacedKey obronaKey;
+    public static NamespacedKey typNarzedziaKey;
     private CraftingAndStats plugin;
 
     public NameSpacedKeys(CraftingAndStats plugin) {
@@ -25,6 +27,8 @@ public class NameSpacedKeys {
         ulepszenieKey = new NamespacedKey(plugin, "ulepszenie");
         wymaganaStatystykaKey = new NamespacedKey(plugin, "wymaganaStatystyka");
         wielkoscStatystykiKey = new NamespacedKey(plugin, "wielkoscStatystyki");
+        obronaKey = new NamespacedKey(plugin, "obrona");
+        typNarzedziaKey = new NamespacedKey(plugin, "typNarzedzia");
     }
 
 }

@@ -1,4 +1,4 @@
-package me.pioula111.craftingandstats.itemy.komendy;
+package me.pioula111.craftingandstats.itemy.komendy.komendyUlepszenia;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;

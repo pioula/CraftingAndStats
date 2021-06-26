@@ -1,11 +1,10 @@
-package me.pioula111.craftingandstats.itemy.komendy;
+package me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia;
 
-import me.pioula111.craftingandstats.itemy.rodzaje.Inne;
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.rodzaje.Bron;
-import me.pioula111.craftingandstats.itemy.rodzaje.Rzemieslniczy;
-import me.pioula111.craftingandstats.itemy.rodzaje.Zywnosc;
+import me.pioula111.craftingandstats.itemy.bronie.Dwureczna;
+import me.pioula111.craftingandstats.itemy.narzedzia.*;
+import me.pioula111.craftingandstats.itemy.rodzaje.Narzedzia;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.Style;
@@ -18,52 +17,53 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandStworzItem implements CommandExecutor {
+public class CommandNarzedzia implements CommandExecutor {
     private ItemManager itemManager;
     private final static TextColor ozdobyK = TextColor.color(0x2C3394);
     private final static TextColor nazwaK = TextColor.color(0x8088FF);
     private final static TextColor rodzajK = TextColor.color(0x947B1E);
     private final static TextColor LPMK = TextColor.color(0xDECA1B);
 
-    public CommandStworzItem(ItemManager itemManager) {
+    public CommandNarzedzia(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player))
             return false;
-        }
 
-        if (args.length != 1) {
-            sender.sendMessage(ChatColor.RED + "Zła Komenda! Wpisz /stworzitem <nazwa_itemu>");
+        if (args.length != 0) {
+            sender.sendMessage(ChatColor.RED + "Użyj /stworzitem żeby stworzyć nowy item!");
             return true;
         }
 
         Player player = (Player) sender;
-        if (player.getInventory().getItemInMainHand().getAmount() != 1) {
-            player.sendMessage(ChatColor.RED + "Musisz mieć dokładnie jeden item w głównej ręce, który chcesz podmienić!");
+
+        if (!itemManager.isMakingItem(player)) {
+            sender.sendMessage(ChatColor.RED + "Użyj /stworzitem żeby stworzyć nowy item!");
             return true;
         }
 
-        MyItem item = new MyItem();
-        item.setPodmienionyItem(player.getInventory().getItemInMainHand().getType());
-        item.setNazwa(args[0]);
-        itemManager.updateMaker(player, item);
+        MyItem item = itemManager.getItem(player);
+        item.setRodzaj(new Narzedzia());
 
+        itemManager.updateMaker(player, item);
         player.sendMessage(createMenu());
+
         return true;
     }
 
     private TextComponent createMenu() {
         TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(ozdobyK))
-                .append(Component.text().content("Wybierz Rodzaj").style(Style.style(nazwaK, TextDecoration.BOLD)))
+                .append(Component.text().content("Wybierz Narzędzie").style(Style.style(nazwaK, TextDecoration.BOLD)))
                 .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(ozdobyK))).build();
         int enumerator = 0;
-        menu = menu.append(new Rzemieslniczy().menuComponent(++enumerator));
-        menu = menu.append(new Zywnosc().menuComponent(++enumerator));
-        menu = menu.append(new Inne().menuComponent(++enumerator));
-        menu = menu.append(new Bron().menuComponent(++enumerator));
+        menu = menu.append(new Kilof().menuComponent(++enumerator));
+        menu = menu.append(new Kosa().menuComponent(++enumerator));
+        menu = menu.append(new Sierp().menuComponent(++enumerator));
+        menu = menu.append(new Topor().menuComponent(++enumerator));
+        menu = menu.append(new Wedka().menuComponent(++enumerator));
 
         return menu;
     }

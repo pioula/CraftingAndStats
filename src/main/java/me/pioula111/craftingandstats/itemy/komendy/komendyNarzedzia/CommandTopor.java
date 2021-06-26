@@ -1,12 +1,9 @@
-package me.pioula111.craftingandstats.itemy.komendy;
+package me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.bronie.Dwureczna;
-import me.pioula111.craftingandstats.itemy.bronie.Jednoreczna;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
+import me.pioula111.craftingandstats.itemy.narzedzia.Kilof;
+import me.pioula111.craftingandstats.itemy.narzedzia.Topor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,11 +11,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandDwureczna implements CommandExecutor {
+public class CommandTopor implements CommandExecutor {
     private ItemManager itemManager;
-    private final static TextColor nazwaK = TextColor.color(0x8088FF);
 
-    public CommandDwureczna(ItemManager itemManager) {
+    public CommandTopor(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -40,11 +36,11 @@ public class CommandDwureczna implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        item.setTypBroni(new Dwureczna());
+        itemManager.removeMaker(player);
+        item.setTypNarzedzia(new Topor());
 
-        itemManager.updateMaker(player, item);
-
-        player.sendMessage(Component.text().content("Podaj obrażenia broni /dmg <obrażenia>").style(Style.style(nazwaK)));
+        player.getInventory().addItem(item.makeItem());
+        player.sendMessage(ChatColor.GREEN + "Stworzono topór!");
         return true;
     }
 }

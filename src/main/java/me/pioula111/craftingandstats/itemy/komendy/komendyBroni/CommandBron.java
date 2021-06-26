@@ -1,13 +1,10 @@
-package me.pioula111.craftingandstats.itemy.komendy;
+package me.pioula111.craftingandstats.itemy.komendy.komendyBroni;
 
-import me.pioula111.craftingandstats.itemy.ItemManager;
-import me.pioula111.craftingandstats.itemy.MyItem;
+import me.pioula111.craftingandstats.itemy.*;
 import me.pioula111.craftingandstats.itemy.bronie.Dlugodystansowa;
 import me.pioula111.craftingandstats.itemy.bronie.Dwureczna;
 import me.pioula111.craftingandstats.itemy.bronie.Jednoreczna;
 import me.pioula111.craftingandstats.itemy.rodzaje.Bron;
-import me.pioula111.craftingandstats.itemy.statystyki.Sila;
-import me.pioula111.craftingandstats.itemy.statystyki.Zrecznosc;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.Style;
@@ -20,14 +17,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandDmg implements CommandExecutor {
+public class CommandBron implements CommandExecutor {
     private ItemManager itemManager;
     private final static TextColor ozdobyK = TextColor.color(0x2C3394);
     private final static TextColor nazwaK = TextColor.color(0x8088FF);
     private final static TextColor rodzajK = TextColor.color(0x947B1E);
     private final static TextColor LPMK = TextColor.color(0xDECA1B);
 
-    public CommandDmg(ItemManager itemManager) {
+    public CommandBron(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -36,7 +33,7 @@ public class CommandDmg implements CommandExecutor {
         if (!(sender instanceof Player))
             return false;
 
-        if (args.length != 1) {
+        if (args.length != 0) {
             sender.sendMessage(ChatColor.RED + "Użyj /stworzitem żeby stworzyć nowy item!");
             return true;
         }
@@ -49,13 +46,7 @@ public class CommandDmg implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        try {
-            item.setDmg(Double.parseDouble(args[0]));
-        }
-        catch(NumberFormatException ex) {
-            sender.sendMessage(ChatColor.RED + "Zły format dmg! Spróbuj wpisać jeszcze raz /dmg <obrażenia> np. /dmg 5.3");
-            return true;
-        }
+        item.setRodzaj(new Bron());
 
         itemManager.updateMaker(player, item);
         player.sendMessage(createMenu());
@@ -65,11 +56,12 @@ public class CommandDmg implements CommandExecutor {
 
     private TextComponent createMenu() {
         TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(ozdobyK))
-                .append(Component.text().content("Wybierz Wymaganą Statystykę").style(Style.style(nazwaK, TextDecoration.BOLD)))
+                .append(Component.text().content("Wybierz Typ Broni").style(Style.style(nazwaK, TextDecoration.BOLD)))
                 .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(ozdobyK))).build();
         int enumerator = 0;
-        menu = menu.append(new Sila().menuComponent(++enumerator));
-        menu = menu.append(new Zrecznosc().menuComponent(++enumerator));
+        menu = menu.append(new Jednoreczna().menuComponent(++enumerator));
+        menu = menu.append(new Dwureczna().menuComponent(++enumerator));
+        menu = menu.append(new Dlugodystansowa().menuComponent(++enumerator));
 
         return menu;
     }

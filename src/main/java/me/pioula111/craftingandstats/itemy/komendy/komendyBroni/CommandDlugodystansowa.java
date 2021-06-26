@@ -1,15 +1,12 @@
-package me.pioula111.craftingandstats.itemy.komendy;
+package me.pioula111.craftingandstats.itemy.komendy.komendyBroni;
 
-import me.pioula111.craftingandstats.itemy.*;
+import me.pioula111.craftingandstats.itemy.ItemManager;
+import me.pioula111.craftingandstats.itemy.MyItem;
 import me.pioula111.craftingandstats.itemy.bronie.Dlugodystansowa;
-import me.pioula111.craftingandstats.itemy.bronie.Dwureczna;
 import me.pioula111.craftingandstats.itemy.bronie.Jednoreczna;
-import me.pioula111.craftingandstats.itemy.rodzaje.Bron;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,14 +14,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandBron implements CommandExecutor {
+public class CommandDlugodystansowa implements CommandExecutor {
     private ItemManager itemManager;
-    private final static TextColor ozdobyK = TextColor.color(0x2C3394);
     private final static TextColor nazwaK = TextColor.color(0x8088FF);
-    private final static TextColor rodzajK = TextColor.color(0x947B1E);
-    private final static TextColor LPMK = TextColor.color(0xDECA1B);
 
-    public CommandBron(ItemManager itemManager) {
+    public CommandDlugodystansowa(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -46,23 +40,11 @@ public class CommandBron implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        item.setRodzaj(new Bron());
+        item.setTypBroni(new Dlugodystansowa());
 
         itemManager.updateMaker(player, item);
-        player.sendMessage(createMenu());
 
+        player.sendMessage(Component.text().content("Podaj obrażenia broni /dmg <obrażenia>").style(Style.style(nazwaK)));
         return true;
-    }
-
-    private TextComponent createMenu() {
-        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(ozdobyK))
-                .append(Component.text().content("Wybierz Typ Broni").style(Style.style(nazwaK, TextDecoration.BOLD)))
-                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(ozdobyK))).build();
-        int enumerator = 0;
-        menu = menu.append(new Jednoreczna().menuComponent(++enumerator));
-        menu = menu.append(new Dwureczna().menuComponent(++enumerator));
-        menu = menu.append(new Dlugodystansowa().menuComponent(++enumerator));
-
-        return menu;
     }
 }

@@ -1,8 +1,9 @@
-package me.pioula111.craftingandstats.itemy.komendy;
+package me.pioula111.craftingandstats.itemy.komendy.komendyBroni;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
-import me.pioula111.craftingandstats.itemy.bronie.Jednoreczna;
 import me.pioula111.craftingandstats.itemy.MyItem;
+import me.pioula111.craftingandstats.itemy.statystyki.Sila;
+import me.pioula111.craftingandstats.itemy.statystyki.Zrecznosc;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
@@ -13,11 +14,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandJednoreczna implements CommandExecutor {
+public class CommandZrecznosc implements CommandExecutor {
     private ItemManager itemManager;
+    private final static TextColor ozdobyK = TextColor.color(0x2C3394);
     private final static TextColor nazwaK = TextColor.color(0x8088FF);
+    private final static TextColor rodzajK = TextColor.color(0x947B1E);
+    private final static TextColor LPMK = TextColor.color(0xDECA1B);
 
-    public CommandJednoreczna(ItemManager itemManager) {
+    public CommandZrecznosc(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 
@@ -39,11 +43,10 @@ public class CommandJednoreczna implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        item.setTypBroni(new Jednoreczna());
+        item.setStatystyka(new Zrecznosc());
 
-        itemManager.updateMaker(player,item);
-
-        player.sendMessage(Component.text().content("Podaj obrażenia broni /dmg <obrażenia>").style(Style.style(nazwaK)));
+        itemManager.updateMaker(player, item);
+        player.sendMessage(Component.text().content("Podaj wielkość statystyki /statystyka <wielkość_statystyki>").style(Style.style(nazwaK)));
         return true;
     }
 }

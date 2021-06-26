@@ -2,7 +2,11 @@ package me.pioula111.craftingandstats.itemy;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.itemy.bronie.TypBroni;
+import me.pioula111.craftingandstats.itemy.narzedzia.Kilof;
+import me.pioula111.craftingandstats.itemy.narzedzia.TypNarzedzia;
 import me.pioula111.craftingandstats.itemy.rodzaje.Bron;
+import me.pioula111.craftingandstats.itemy.rodzaje.Narzedzia;
+import me.pioula111.craftingandstats.itemy.rodzaje.Pancerz;
 import me.pioula111.craftingandstats.itemy.rodzaje.RodzajItemu;
 import me.pioula111.craftingandstats.itemy.statystyki.Statystyka;
 import me.pioula111.craftingandstats.itemy.ulepszenia.Ulepszenie;
@@ -15,8 +19,11 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.potion.PotionEffectTypeWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +38,8 @@ public class MyItem {
     private Statystyka wymaganaStatystyka;
     private int wielkoscStatystyki;
     private Ulepszenie ulepszenie;
-
+    private int obrona;
+    private TypNarzedzia typNarzedzia;
 
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
@@ -70,13 +78,26 @@ public class MyItem {
             lore.add(Component.text().content("Wymagana " + wymaganaStatystyka.prettyToString() + ": " + wielkoscStatystyki).style(Style.style(TextColor.color(0x009999))).build());
             meta.getPersistentDataContainer().set(NameSpacedKeys.wymaganaStatystykaKey, PersistentDataType.STRING, wymaganaStatystyka.toString());
             meta.getPersistentDataContainer().set(NameSpacedKeys.wielkoscStatystykiKey, PersistentDataType.INTEGER, wielkoscStatystyki);
+            meta.setUnbreakable(true);
+        }
 
+        if (ulepszenie != null) {
             if (!ulepszenie.toString().equals("brak")) {
                 lore.add(Component.text().content("Ulepszenie: " + ulepszenie.prettyToString()).style(Style.style(TextColor.color(0x009999))).build());
             }
             meta.getPersistentDataContainer().set(NameSpacedKeys.ulepszenieKey, PersistentDataType.STRING, ulepszenie.toString());
         }
 
+        if (rodzaj instanceof Pancerz) {
+            meta.addAttributeModifier(Attribute.GENERIC_ARMOR,new AttributeModifier(UUID.randomUUID(), "armor", obrona, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST));
+            meta.getPersistentDataContainer().set(NameSpacedKeys.obronaKey, PersistentDataType.INTEGER, obrona);
+            meta.setUnbreakable(true);
+        }
+
+        if (rodzaj instanceof Narzedzia) {
+            meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,new AttributeModifier(UUID.randomUUID(), "dmg", 0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
+            meta.getPersistentDataContainer().set(NameSpacedKeys.typNarzedziaKey, PersistentDataType.STRING, typNarzedzia.toString());
+        }
 
         meta.lore(lore);
         item.setItemMeta(meta);
@@ -97,5 +118,13 @@ public class MyItem {
 
     public void setUlepszenie(Ulepszenie ulepszenie) {
         this.ulepszenie = ulepszenie;
+    }
+
+    public void setObrona(int obrona) {
+        this.obrona = obrona;
+    }
+
+    public void setTypNarzedzia(TypNarzedzia typNarzedzia) {
+        this.typNarzedzia = typNarzedzia;
     }
 }
