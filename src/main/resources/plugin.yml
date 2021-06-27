@@ -141,3 +141,7 @@ commands:
     description: kolornapoju
     usage: Error
     permission: Operator
+  przerwijrobienieitemu:
+    description: przerwijrobienieitemu
+    usage: Error
+    permission: Operator

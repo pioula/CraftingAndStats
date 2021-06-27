@@ -4,6 +4,7 @@ import me.pioula111.craftingandstats.crafting.*;
 import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
 import me.pioula111.craftingandstats.itemy.*;
 import me.pioula111.craftingandstats.itemy.komendy.komendyBroni.*;
+import me.pioula111.craftingandstats.itemy.komendy.komendyInne.CommandPrzerwijRobienieItemu;
 import me.pioula111.craftingandstats.itemy.komendy.komendyInne.CommandStworzItem;
 import me.pioula111.craftingandstats.itemy.komendy.komendyNapoje.*;
 import me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia.*;
@@ -82,6 +83,8 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("zwykly")).setExecutor(new CommandZwykly(itemManager));
         Objects.requireNonNull(this.getCommand("efekty")).setExecutor(new CommandEfekty(itemManager));
         Objects.requireNonNull(this.getCommand("kolornapoju")).setExecutor(new CommandKolorNapoju(itemManager));
+
+        Objects.requireNonNull(this.getCommand("przerwijrobienieitemu")).setExecutor(new CommandPrzerwijRobienieItemu(itemManager));
 
     }
 
