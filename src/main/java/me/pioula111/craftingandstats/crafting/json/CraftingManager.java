@@ -65,4 +65,8 @@ public class CraftingManager {
 
         return null;
     }
+
+    public HashSet<Job> getJobs() {
+        return jobs;
+    }
 }

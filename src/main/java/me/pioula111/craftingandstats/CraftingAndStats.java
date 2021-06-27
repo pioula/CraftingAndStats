@@ -16,6 +16,7 @@ import me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle.Comma
 import me.pioula111.craftingandstats.itemy.komendy.komendyUlepszenia.CommandBrak;
 import me.pioula111.craftingandstats.itemy.komendy.komendyUlepszenia.CommandWzmocnienie;
 import me.pioula111.craftingandstats.markers.Marker;
+import me.pioula111.craftingandstats.stats.CommandTest;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -46,6 +47,9 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("postawcrafting")).setExecutor(new CommandPostawCrafting(jsonManager.getCraftingManager()));
         Objects.requireNonNull(this.getCommand("destroyer")).setExecutor(new CommandDestroyer(this));
         Objects.requireNonNull(this.getCommand("wytworzprzedmiot")).setExecutor(new CommandWytworzPrzedmiot(jsonManager.getCraftingManager()));
+        Objects.requireNonNull(this.getCommand("craftingi")).setExecutor(new CommandCraftingi(jsonManager.getCraftingManager()));
+        Objects.requireNonNull(this.getCommand("fachy")).setExecutor(new CommandFachy(jsonManager.getCraftingManager()));
+        Objects.requireNonNull(this.getCommand("receptury")).setExecutor(new CommandReceptury(jsonManager.getCraftingManager()));
 
         ItemManager itemManager = new ItemManager();
         Objects.requireNonNull(this.getCommand("stworzitem")).setExecutor(new CommandStworzItem(itemManager));
@@ -86,6 +90,7 @@ public final class CraftingAndStats extends JavaPlugin {
 
         Objects.requireNonNull(this.getCommand("przerwijrobienieitemu")).setExecutor(new CommandPrzerwijRobienieItemu(itemManager));
 
+        Objects.requireNonNull(this.getCommand("test")).setExecutor(new CommandTest(this));
     }
 
     @Override

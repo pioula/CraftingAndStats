@@ -95,4 +95,22 @@ public class WorkBench {
 
         return null;
     }
+
+    public Component menuComponent(int nr) {
+        HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
+                Component.text().content("Naciśnij ")
+                        .append(Component.text().content("LPM").style(Style.style(LPMcolor, TextDecoration.BOLD)))
+                        .append(Component.text().content(", aby zobaczyć receptury craftingu!")).build());
+
+        ClickEvent clickEvent = ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/receptury " + name);
+
+        return Component.text().content("   " + nr + ". ").style(Style.style(decorations)).append(Component.text()
+                .content(this + "\n").style(Style.style(recipeName)))
+                .clickEvent(clickEvent)
+                .hoverEvent(hov).build();
+    }
+
+    public HashSet<Recipe> getRecipes() {
+        return recipes;
+    }
 }

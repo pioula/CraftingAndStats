@@ -13,14 +13,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandReceptury implements CommandExecutor {
+import java.util.HashSet;
+
+public class CommandFachy implements CommandExecutor {
     private final static TextColor ozdobyK = TextColor.color(0x2C3394);
     private final static TextColor nazwaK = TextColor.color(0x8088FF);
     private final static TextColor rodzajK = TextColor.color(0x947B1E);
     private final static TextColor LPMK = TextColor.color(0xDECA1B);
     private CraftingManager craftingManager;
 
-    public CommandReceptury(CraftingManager craftingManager) {
+    public CommandFachy(CraftingManager craftingManager) {
         this.craftingManager = craftingManager;
     }
 
@@ -29,29 +31,24 @@ public class CommandReceptury implements CommandExecutor {
         if (!(sender instanceof Player))
             return false;
 
-        if (args.length != 1) {
-            sender.sendMessage(ChatColor.RED + "Zła komenda! Użyj /craftingi <nazwa_fachu>");
+        if (args.length != 0) {
+            sender.sendMessage(ChatColor.RED + "Zła komenda! Użyj /fachy");
             return true;
         }
 
-        if (!craftingManager.hasCrafting(args[0])) {
-            sender.sendMessage(ChatColor.RED + "Nie ma takiego craftingu!");
-            return true;
-        }
+        HashSet<Job> jobs =  craftingManager.getJobs();
 
-        WorkBench workBench = craftingManager.getCrafting(args[0]);
-
-        sender.sendMessage(createMenu(workBench));
+        sender.sendMessage(createMenu(jobs));
         return true;
     }
 
-    private TextComponent createMenu(WorkBench workBench) {
+    private TextComponent createMenu(HashSet<Job> jobs) {
         TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(ozdobyK))
-                .append(Component.text().content("Receptury craftingu " + workBench).style(Style.style(nazwaK, TextDecoration.BOLD)))
+                .append(Component.text().content("Fachy").style(Style.style(nazwaK, TextDecoration.BOLD)))
                 .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(ozdobyK))).build();
         int enumerator = 0;
-        for (Recipe recipe : workBench.getRecipes()) {
-            menu = menu.append(recipe.menuComponent(++enumerator));
+        for (Job job : jobs) {
+            menu = menu.append(job.menuComponent(++enumerator));
         }
 
         return menu;

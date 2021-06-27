@@ -145,3 +145,19 @@ commands:
     description: przerwijrobienieitemu
     usage: Error
     permission: Operator
+  craftingi:
+    description: craftingi
+    usage: Error
+    permission: Operator
+  fachy:
+    description: fachy
+    usage: Error
+    permission: Operator
+  receptury:
+    description: receptury
+    usage: Error
+    permission: Operator
+  test:
+    description: test
+    usage: Error
+    permission: Operator
