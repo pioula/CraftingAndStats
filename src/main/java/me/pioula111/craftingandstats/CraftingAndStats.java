@@ -43,8 +43,11 @@ public final class CraftingAndStats extends JavaPlugin {
 
         PluginManager pluginManager = getServer().getPluginManager();
 
+        NauczFachuManager nauczFachuManager = new NauczFachuManager(statManager, this);
+
         pluginManager.registerEvents(new UsingAndRemovingWorkBench(jsonManager.getCraftingManager(), this), this);
         pluginManager.registerEvents(new Marker(), this);
+        pluginManager.registerEvents(nauczFachuManager, this);
 
 
         pluginManager.registerEvents(new StatJsonOnJoin(statManager), this);
@@ -60,6 +63,9 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("craftingi")).setExecutor(new CommandCraftingi(jsonManager.getCraftingManager()));
         Objects.requireNonNull(this.getCommand("fachy")).setExecutor(new CommandFachy(jsonManager.getCraftingManager()));
         Objects.requireNonNull(this.getCommand("receptury")).setExecutor(new CommandReceptury(jsonManager.getCraftingManager()));
+        Objects.requireNonNull(this.getCommand("nauczfachu")).setExecutor(new CommandNauczFachu(statManager, nauczFachuManager,this));
+        Objects.requireNonNull(this.getCommand("akceptujnauke")).setExecutor(new CommandAkceptujNauke(statManager, nauczFachuManager));
+        Objects.requireNonNull(this.getCommand("ustawfach")).setExecutor(new CommandUstawFach(statManager));
 
         ItemManager itemManager = new ItemManager();
         Objects.requireNonNull(this.getCommand("stworzitem")).setExecutor(new CommandStworzItem(itemManager));

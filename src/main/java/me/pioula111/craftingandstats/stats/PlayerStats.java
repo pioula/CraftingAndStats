@@ -5,6 +5,11 @@ public class PlayerStats {
     private int oneHandedHits, twoHandedHits, archeryHits, numOfDexAndStr, oreMined, mobsKilled;
     private int oneHandedLevelsADay, twoHandedLevelsADay, archeryLevelsADay, strengLevelsADay, dexterityLevelsADay;
     private int minigLevelsADay, huntingLevelsADay;
+    private String job;
+    public static final String archer = "Łuczarz";
+    public static final String smith = "Kowal";
+    public static final String alchemist = "Alchemik";
+    public static final String noJob = "Nie Masz Fachu!";
 
     public PlayerStats() {
         resetStats();
@@ -32,6 +37,35 @@ public class PlayerStats {
         dexterityLevelsADay = 0;
         minigLevelsADay = 0;
         huntingLevelsADay = 0;
+        setJobNone();
+    }
+
+    public void setJobArcher() {
+        job = archer;
+    }
+
+    public void setJobSmith() {
+        job = smith;
+    }
+
+    public void setJobAlchemist() {
+        job = alchemist;
+    }
+
+    public void setJobNone() {
+        job = noJob;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public int getArchery() {
+        return archery;
     }
 
     public int getDexterity() {

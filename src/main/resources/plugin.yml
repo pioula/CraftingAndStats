@@ -160,4 +160,13 @@ commands:
   staty:
     description: staty
     usage: Error
+  nauczfachu:
+    description: nauczfachu
+    usage: Error
+  akceptujnauke:
+    description: akceptujnauke
+    usage: Error
+  ustawfach:
+    description: ustawfach
+    usage: Error
     permission: Operator
