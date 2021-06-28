@@ -157,7 +157,7 @@ commands:
     description: receptury
     usage: Error
     permission: Operator
-  test:
-    description: test
+  staty:
+    description: staty
     usage: Error
     permission: Operator
