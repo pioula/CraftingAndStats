@@ -1,5 +1,6 @@
 package me.pioula111.craftingandstats.itemy.komendy.komendyBroni;
 
+import me.pioula111.craftingandstats.MenuColors;
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
 import me.pioula111.craftingandstats.itemy.bronie.Dlugodystansowa;
@@ -21,10 +22,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandSila implements CommandExecutor {
     private ItemManager itemManager;
-    private final static TextColor ozdobyK = TextColor.color(0x2C3394);
-    private final static TextColor nazwaK = TextColor.color(0x8088FF);
-    private final static TextColor rodzajK = TextColor.color(0x947B1E);
-    private final static TextColor LPMK = TextColor.color(0xDECA1B);
 
     public CommandSila(ItemManager itemManager) {
         this.itemManager = itemManager;
@@ -51,7 +48,7 @@ public class CommandSila implements CommandExecutor {
         item.setStatystyka(new Sila());
 
         itemManager.updateMaker(player, item);
-        player.sendMessage(Component.text().content("Podaj wielkość statystyki /statystyka <wielkość_statystyki>").style(Style.style(nazwaK)));
+        player.sendMessage(Component.text().content("Podaj wielkość statystyki /statystyka <wielkość_statystyki>").style(Style.style(MenuColors.MAIN_NAME)));
         return true;
     }
 }

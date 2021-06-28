@@ -1,5 +1,6 @@
 package me.pioula111.craftingandstats.itemy.komendy.komendyBroni;
 
+import me.pioula111.craftingandstats.MenuColors;
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
 import me.pioula111.craftingandstats.itemy.bronie.Dlugodystansowa;
@@ -16,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandDlugodystansowa implements CommandExecutor {
     private ItemManager itemManager;
-    private final static TextColor nazwaK = TextColor.color(0x8088FF);
 
     public CommandDlugodystansowa(ItemManager itemManager) {
         this.itemManager = itemManager;
@@ -44,7 +44,7 @@ public class CommandDlugodystansowa implements CommandExecutor {
 
         itemManager.updateMaker(player, item);
 
-        player.sendMessage(Component.text().content("Podaj obrażenia broni /dmg <obrażenia>").style(Style.style(nazwaK)));
+        player.sendMessage(Component.text().content("Podaj obrażenia broni /dmg <obrażenia>").style(Style.style(MenuColors.MAIN_NAME)));
         return true;
     }
 }

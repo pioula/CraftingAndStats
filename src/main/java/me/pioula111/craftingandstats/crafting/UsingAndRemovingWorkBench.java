@@ -4,6 +4,7 @@ import me.pioula111.craftingandstats.CraftingAndStats;
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
 import me.pioula111.craftingandstats.markers.Marker;
+import me.pioula111.craftingandstats.stats.json.StatManager;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentBuilder;
@@ -28,10 +29,13 @@ import java.util.Set;
 public class UsingAndRemovingWorkBench implements Listener {
     private CraftingManager craftingManager;
     private CraftingAndStats plugin;
+    private StatManager statManager;
 
-    public UsingAndRemovingWorkBench(CraftingManager craftingManager, CraftingAndStats plugin) {
+
+    public UsingAndRemovingWorkBench(CraftingManager craftingManager, CraftingAndStats plugin, StatManager statManager) {
         this.craftingManager = craftingManager;
         this.plugin = plugin;
+        this.statManager = statManager;
     }
 
 
@@ -41,7 +45,29 @@ public class UsingAndRemovingWorkBench implements Listener {
                 craftingManager.hasCrafting(Marker.getName(event.getEntity()))) {
             if (event.getDamager() instanceof Player) {
                 event.setCancelled(true);
-                craftingManager.getCrafting(Marker.getName(event.getEntity())).openMenu((Player) event.getDamager(), event.getEntity());
+                WorkBench workBench = craftingManager.getCrafting(Marker.getName(event.getEntity()));
+                boolean isAllowed = true;
+
+                Player player = (Player) event.getDamager();
+
+                switch(workBench.getJob()) {
+                    case "Kowal":
+                        isAllowed = statManager.getPlayerStats(player).getJob().equals("Kowal");
+                        break;
+                    case "Alchemik":
+                        isAllowed = statManager.getPlayerStats(player).getJob().equals("Alchemik");
+                        break;
+                    case "Łuczarz":
+                        isAllowed = statManager.getPlayerStats(player).getJob().equals("Łuczarz");
+                        break;
+                }
+
+                if(!isAllowed) {
+                    player.sendMessage(ChatColor.RED + "Nie potrafisz nic z tym zrobić!");
+                    return;
+                }
+
+                workBench.openMenu((Player) event.getDamager(), event.getEntity());
             }
         }
     }

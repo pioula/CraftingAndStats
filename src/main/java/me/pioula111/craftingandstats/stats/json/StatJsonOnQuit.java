@@ -12,32 +12,13 @@ import java.io.FileWriter;
 
 public class StatJsonOnQuit implements Listener {
     private StatManager statManager;
-    private GsonBuilder gsonBuilder = new GsonBuilder();
-    private Gson gson;
 
     public StatJsonOnQuit(StatManager statManager) {
         this.statManager = statManager;
-        gsonBuilder.setPrettyPrinting();
-        gson = gsonBuilder.create();
-    }
-
-    public void writeToJson(File file, Player player) {
-        FileWriter writer;
-        try {
-            writer = new FileWriter(file);
-            writer.write(gson.toJson(statManager.getPlayerStats(player)));
-            statManager.removePlayer(player);
-            writer.close();
-        }
-        catch(Exception ex) {
-            System.out.println("[CraftingAndStats] Blad");
-        }
     }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        File jsonFile = new File("plugins/CraftingAndStats/stats/" + event.getPlayer().getUniqueId() + ".json");
-
-        writeToJson(jsonFile, event.getPlayer());
+       statManager.savePlayer(event.getPlayer());
     }
 }

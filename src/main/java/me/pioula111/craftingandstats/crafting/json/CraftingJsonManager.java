@@ -4,7 +4,9 @@ package me.pioula111.craftingandstats.crafting.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import me.pioula111.craftingandstats.crafting.json.serializers.ItemStackSerializer;
 import org.bukkit.Bukkit;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,6 +23,8 @@ public class CraftingJsonManager {
     public CraftingJsonManager(File file) {
         gsonBuilder.setPrettyPrinting();
         craftingManager = new CraftingManager();
+
+        gsonBuilder.registerTypeAdapter(ItemStack.class, new ItemStackSerializer(this));
 
         gson = gsonBuilder.create();
         this.file = file;

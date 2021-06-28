@@ -1,5 +1,6 @@
 package me.pioula111.craftingandstats.crafting;
 
+import me.pioula111.craftingandstats.MenuColors;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -14,10 +15,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class CommandReceptury implements CommandExecutor {
-    private final static TextColor ozdobyK = TextColor.color(0x2C3394);
-    private final static TextColor nazwaK = TextColor.color(0x8088FF);
-    private final static TextColor rodzajK = TextColor.color(0x947B1E);
-    private final static TextColor LPMK = TextColor.color(0xDECA1B);
     private CraftingManager craftingManager;
 
     public CommandReceptury(CraftingManager craftingManager) {
@@ -46,9 +43,9 @@ public class CommandReceptury implements CommandExecutor {
     }
 
     private TextComponent createMenu(WorkBench workBench) {
-        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(ozdobyK))
-                .append(Component.text().content("Receptury craftingu " + workBench).style(Style.style(nazwaK, TextDecoration.BOLD)))
-                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(ozdobyK))).build();
+        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuColors.DECORATIONS))
+                .append(Component.text().content("Receptury craftingu " + workBench).style(Style.style(MenuColors.MAIN_NAME, TextDecoration.BOLD)))
+                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(MenuColors.DECORATIONS))).build();
         int enumerator = 0;
         for (Recipe recipe : workBench.getRecipes()) {
             menu = menu.append(recipe.menuComponent(++enumerator));

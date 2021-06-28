@@ -78,7 +78,7 @@ public class CommandNowaReceptura implements CommandExecutor {
         }
 
 
-        HashSet<Material> materials = new HashSet<>();
+        ArrayList<Material> materials = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             if (player.getInventory().getItem(i) != null) {
                 materials.add(new Material(player.getInventory().getItem(i).clone()));

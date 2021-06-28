@@ -1,5 +1,6 @@
 package me.pioula111.craftingandstats.itemy.komendy.komendyNapoje;
 
+import me.pioula111.craftingandstats.MenuColors;
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
 import me.pioula111.craftingandstats.itemy.napoje.Lingering;
@@ -16,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandSplash implements CommandExecutor {
     private ItemManager itemManager;
-    private final static TextColor nazwaK = TextColor.color(0x8088FF);
 
     public CommandSplash(ItemManager itemManager) {
         this.itemManager = itemManager;
@@ -44,7 +44,7 @@ public class CommandSplash implements CommandExecutor {
 
         itemManager.updateMaker(player, item);
 
-        player.sendMessage(Component.text().content("Podaj pierwszy efekt napoju /efekty <nazwa_efektu> <czas_efektu_w_sekundach> <poziom_efektu_liczone_od_1>").style(Style.style(nazwaK)));
+        player.sendMessage(Component.text().content("Podaj pierwszy efekt napoju /efekty <nazwa_efektu> <czas_efektu_w_sekundach> <poziom_efektu_liczone_od_1>").style(Style.style(MenuColors.MAIN_NAME)));
         return true;
     }
 }

@@ -18,10 +18,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandKolorNapoju implements CommandExecutor {
     private ItemManager itemManager;
-    private final static TextColor ozdobyK = TextColor.color(0x2C3394);
-    private final static TextColor nazwaK = TextColor.color(0x8088FF);
-    private final static TextColor rodzajK = TextColor.color(0x947B1E);
-    private final static TextColor LPMK = TextColor.color(0xDECA1B);
 
     public CommandKolorNapoju(ItemManager itemManager) {
         this.itemManager = itemManager;

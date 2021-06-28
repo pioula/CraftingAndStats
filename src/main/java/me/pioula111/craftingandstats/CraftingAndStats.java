@@ -21,6 +21,7 @@ import me.pioula111.craftingandstats.stats.CommandStaty;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnJoin;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnQuit;
 import me.pioula111.craftingandstats.stats.json.StatManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -45,7 +46,7 @@ public final class CraftingAndStats extends JavaPlugin {
 
         NauczFachuManager nauczFachuManager = new NauczFachuManager(statManager, this);
 
-        pluginManager.registerEvents(new UsingAndRemovingWorkBench(jsonManager.getCraftingManager(), this), this);
+        pluginManager.registerEvents(new UsingAndRemovingWorkBench(jsonManager.getCraftingManager(), this, statManager), this);
         pluginManager.registerEvents(new Marker(), this);
         pluginManager.registerEvents(nauczFachuManager, this);
 
@@ -118,5 +119,6 @@ public final class CraftingAndStats extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         jsonManager.writeToJson();
+        statManager.savePlayers();
     }
 }

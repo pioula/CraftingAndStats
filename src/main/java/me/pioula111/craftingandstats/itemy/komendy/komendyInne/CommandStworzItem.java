@@ -1,5 +1,6 @@
 package me.pioula111.craftingandstats.itemy.komendy.komendyInne;
 
+import me.pioula111.craftingandstats.MenuColors;
 import me.pioula111.craftingandstats.itemy.rodzaje.*;
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
@@ -17,10 +18,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandStworzItem implements CommandExecutor {
     private ItemManager itemManager;
-    private final static TextColor ozdobyK = TextColor.color(0x2C3394);
-    private final static TextColor nazwaK = TextColor.color(0x8088FF);
-    private final static TextColor rodzajK = TextColor.color(0x947B1E);
-    private final static TextColor LPMK = TextColor.color(0xDECA1B);
 
     public CommandStworzItem(ItemManager itemManager) {
         this.itemManager = itemManager;
@@ -53,9 +50,9 @@ public class CommandStworzItem implements CommandExecutor {
     }
 
     private TextComponent createMenu() {
-        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(ozdobyK))
-                .append(Component.text().content("Wybierz Rodzaj").style(Style.style(nazwaK, TextDecoration.BOLD)))
-                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(ozdobyK))).build();
+        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuColors.DECORATIONS))
+                .append(Component.text().content("Wybierz Rodzaj").style(Style.style(MenuColors.MAIN_NAME, TextDecoration.BOLD)))
+                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(MenuColors.DECORATIONS))).build();
         int enumerator = 0;
         menu = menu.append(new Rzemieslniczy().menuComponent(++enumerator));
         menu = menu.append(new Zywnosc().menuComponent(++enumerator));

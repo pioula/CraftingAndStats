@@ -1,6 +1,7 @@
 package me.pioula111.craftingandstats;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.persistence.PersistentDataType;
 
 public class NameSpacedKeys {
     public static NamespacedKey destroyerKey;
@@ -21,20 +22,19 @@ public class NameSpacedKeys {
 
     public NameSpacedKeys(CraftingAndStats plugin) {
         this.plugin = plugin;
-        destroyerKey = new NamespacedKey(plugin, "destroyer");
-        nazwaKey = new NamespacedKey(plugin, "nazwa");
-        rodzajKey = new NamespacedKey(plugin, "rodzaj");
-        podmienionyItemKey = new NamespacedKey(plugin, "podmienionyItem");
-        typBroniKey = new NamespacedKey(plugin, "typBroni");
-        dmgKey = new NamespacedKey(plugin, "dmg");
-        ulepszenieKey = new NamespacedKey(plugin, "ulepszenie");
-        wymaganaStatystykaKey = new NamespacedKey(plugin, "wymaganaStatystyka");
-        wielkoscStatystykiKey = new NamespacedKey(plugin, "wielkoscStatystyki");
-        obronaKey = new NamespacedKey(plugin, "obrona");
-        typNarzedziaKey = new NamespacedKey(plugin, "typNarzedzia");
-        efektyKey = new NamespacedKey(plugin, "efekty");
-        kolorNapojuKey = new NamespacedKey(plugin, "kolorNapoju");
-        autorKey = new NamespacedKey(plugin, "autor");
+        destroyerKey = new NamespacedKey(plugin, "destroyer");//BYTE
+        nazwaKey = new NamespacedKey(plugin, "nazwa");//STRING
+        rodzajKey = new NamespacedKey(plugin, "rodzaj");//STRING
+        podmienionyItemKey = new NamespacedKey(plugin, "podmienionyItem");//STRING
+        typBroniKey = new NamespacedKey(plugin, "typBroni");//STRING
+        dmgKey = new NamespacedKey(plugin, "dmg");//INT
+        ulepszenieKey = new NamespacedKey(plugin, "ulepszenie");//STRING
+        wymaganaStatystykaKey = new NamespacedKey(plugin, "wymaganaStatystyka");//STRING
+        wielkoscStatystykiKey = new NamespacedKey(plugin, "wielkoscStatystyki");//INT
+        obronaKey = new NamespacedKey(plugin, "obrona");//INT
+        typNarzedziaKey = new NamespacedKey(plugin, "typNarzedzia");//STRING
+        efektyKey = new NamespacedKey(plugin, "efekty");//STRING
+        kolorNapojuKey = new NamespacedKey(plugin, "kolorNapoju");//INT
+        autorKey = new NamespacedKey(plugin, "autor");//STRING
     }
-
 }

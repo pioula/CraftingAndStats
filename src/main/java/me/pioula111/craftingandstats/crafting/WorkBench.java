@@ -1,5 +1,6 @@
 package me.pioula111.craftingandstats.crafting;
 
+import me.pioula111.craftingandstats.MenuColors;
 import me.pioula111.craftingandstats.markers.Marker;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -20,15 +21,12 @@ import java.util.Iterator;
 
 public class WorkBench {
     private String name;
-    private Job job;
+    private String job;
     private HashSet<Recipe> recipes;
-    private final static TextColor decorations = TextColor.color(0x2C3394);
-    private final static TextColor mainName = TextColor.color(0x8088FF);
-    private final static TextColor recipeName = TextColor.color(0x947B1E);
-    private final static TextColor LPMcolor = TextColor.color(0xDECA1B);
+
     public WorkBench(String name, Job job) {
         this.name = name;
-        this.job = job;
+        this.job = job.toString();
     }
 
     public void addRecipe(Recipe recipe) {
@@ -60,23 +58,23 @@ public class WorkBench {
             return;
         }
 
-        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(decorations))
-                .append(Component.text().content(this.toString()).style(Style.style(mainName,TextDecoration.BOLD)))
-                .append(Component.text().content(" ᚾᛁᚷᚺᛏ").style(Style.style(decorations))).build();
+        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuColors.DECORATIONS))
+                .append(Component.text().content(this.toString()).style(Style.style(MenuColors.MAIN_NAME,TextDecoration.BOLD)))
+                .append(Component.text().content(" ᚾᛁᚷᚺᛏ").style(Style.style(MenuColors.DECORATIONS))).build();
         player.sendMessage(menu);
         Iterator<Recipe> it = recipes.iterator();
         for (int i = 0; i < recipes.size(); i++) {
             Recipe recipe = it.next();
             HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
                     Component.text().content("Naciśnij ")
-                            .append(Component.text().content("LPM").style(Style.style(LPMcolor,TextDecoration.BOLD)))
+                            .append(Component.text().content("LPM").style(Style.style(MenuColors.LPM_COLOR,TextDecoration.BOLD)))
                             .append(Component.text().content(", aby stworzyć ten przedmiot!")).build());
 
             ClickEvent clickEvent = ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/wytworzprzedmiot " + marker.getLocation().getX() + " "
             + marker.getLocation().getY() + " " + marker.getLocation().getZ() + " " + name + " " + recipe.getName() + " " + CommandWytworzPrzedmiot.PASSWORD);
 
-            player.sendMessage(Component.text().content("   " + (i + 1) + ". ").style(Style.style(decorations)).append(Component.text()
-                    .content(recipe.toString()).style(Style.style(recipeName)))
+            player.sendMessage(Component.text().content("   " + (i + 1) + ". ").style(Style.style(MenuColors.DECORATIONS)).append(Component.text()
+                    .content(recipe.toString()).style(Style.style(MenuColors.RECIPE_NAME)))
                     .clickEvent(clickEvent)
                     .hoverEvent(hov));
         }
@@ -99,18 +97,22 @@ public class WorkBench {
     public Component menuComponent(int nr) {
         HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
                 Component.text().content("Naciśnij ")
-                        .append(Component.text().content("LPM").style(Style.style(LPMcolor, TextDecoration.BOLD)))
+                        .append(Component.text().content("LPM").style(Style.style(MenuColors.LPM_COLOR, TextDecoration.BOLD)))
                         .append(Component.text().content(", aby zobaczyć receptury craftingu!")).build());
 
         ClickEvent clickEvent = ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/receptury " + name);
 
-        return Component.text().content("   " + nr + ". ").style(Style.style(decorations)).append(Component.text()
-                .content(this + "\n").style(Style.style(recipeName)))
+        return Component.text().content("   " + nr + ". ").style(Style.style(MenuColors.DECORATIONS)).append(Component.text()
+                .content(this + "\n").style(Style.style(MenuColors.RECIPE_NAME)))
                 .clickEvent(clickEvent)
                 .hoverEvent(hov).build();
     }
 
     public HashSet<Recipe> getRecipes() {
         return recipes;
+    }
+
+    public String getJob() {
+        return job;
     }
 }
