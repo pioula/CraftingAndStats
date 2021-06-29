@@ -9,6 +9,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -40,7 +41,7 @@ public class CommandSplash implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        item.setTypNapoju(new Splash());
+        item.setPodmienionyItem(Material.SPLASH_POTION);
 
         itemManager.updateMaker(player, item);
 

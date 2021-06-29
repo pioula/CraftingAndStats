@@ -44,8 +44,8 @@ public class CommandEfekty implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        int czasTrwania = 0;
-        int poziom = 0;
+        int czasTrwania;
+        int poziom;
         try {
             czasTrwania = Integer.parseInt(args[1]);
         }
@@ -68,11 +68,11 @@ public class CommandEfekty implements CommandExecutor {
             return true;
         }
 
-        Efekt efekt = new Efekt(typEfektu, czasTrwania * 20, poziom);
+        Efekt efekt = new Efekt(typEfektu, czasTrwania * 20, poziom - 1);
         item.addEfekt(efekt);
 
         itemManager.updateMaker(player, item);
-        player.sendMessage(ChatColor.GOLD + "Jeżeli chcesz skończyć dodawanie efektów wpisz /kolornapoju <kolor_w_systemie_szesnastkowym> np. /kolor 0xFFFFFF, jeżeli chcesz dalej dodawać efekty wpisz /efekty <nazwa_efektu> <czas_trwania_w_sekundach> <poziom_efektu_liczone_od_1>");
+        player.sendMessage(ChatColor.GOLD + "Jeżeli chcesz skończyć dodawanie efektów wpisz /kolornapoju <kolor_w_systemie_szesnastkowym> np. /kolornapoju 0xFFFFFF, jeżeli chcesz dalej dodawać efekty wpisz /efekty <nazwa_efektu> <czas_trwania_w_sekundach> <poziom_efektu_liczone_od_1>");
 
         return true;
     }

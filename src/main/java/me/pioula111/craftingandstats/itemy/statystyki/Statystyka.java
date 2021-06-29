@@ -10,6 +10,17 @@ import net.kyori.adventure.text.format.TextDecoration;
 
 public abstract class Statystyka {
 
+    public static Statystyka serialize(String s) {
+        switch(s) {
+            case "sila":
+                return new Sila();
+            case "zrecznosc":
+                return new Zrecznosc();
+        }
+
+        return null;
+    }
+
     public Component menuComponent(int nr) {
         HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
                 Component.text().content("Naciśnij ")

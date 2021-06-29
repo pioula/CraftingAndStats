@@ -39,7 +39,7 @@ public class CommandKilof implements CommandExecutor {
         itemManager.removeMaker(player);
         item.setTypNarzedzia(new Kilof());
 
-        player.getInventory().addItem(item.makeItem());
+        player.getInventory().addItem(item.makeItem(1));
         player.sendMessage(ChatColor.GREEN + "Stworzono kilof!");
         return true;
     }

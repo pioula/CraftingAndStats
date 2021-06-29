@@ -47,7 +47,7 @@ public class CommandBrak implements CommandExecutor {
         item.setUlepszenie(new Brak());
 
         itemManager.removeMaker(player);
-        player.getInventory().addItem(item.makeItem());
+        player.getInventory().addItem(item.makeItem(1));
         player.sendMessage(ChatColor.GREEN + "Pomyślnie stworzono przedmiot!");
 
         return true;

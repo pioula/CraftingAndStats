@@ -40,7 +40,7 @@ public class CommandWzmocnienie implements CommandExecutor {
         item.setUlepszenie(new Wzmocnienie());
 
         itemManager.removeMaker(player);
-        player.getInventory().addItem(item.makeItem());
+        player.getInventory().addItem(item.makeItem(1));
         player.sendMessage(ChatColor.GREEN + "Pomyślnie stworzono przedmiot!");
 
         return true;

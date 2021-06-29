@@ -2,6 +2,7 @@ package me.pioula111.craftingandstats.crafting;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
+import me.pioula111.craftingandstats.itemy.MyItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -23,13 +24,11 @@ public class CommandWytworzPrzedmiot implements CommandExecutor {
         this.craftingManager = craftingManager;
     }
 
-    private boolean isEqual(ItemStack a, ItemStack b) {
-        if (!(a.hasItemMeta() && a.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.nazwaKey, PersistentDataType.STRING)))
-            return false;
+    private boolean isEqual(MyItem a, ItemStack b) {
         if (!(b.hasItemMeta() && b.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.nazwaKey, PersistentDataType.STRING)))
             return false;
 
-        return a.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.nazwaKey, PersistentDataType.STRING)
+        return a.getNazwa()
                 .equals(b.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.nazwaKey, PersistentDataType.STRING));
     }
 
@@ -60,10 +59,9 @@ public class CommandWytworzPrzedmiot implements CommandExecutor {
         WorkBench crafting = craftingManager.getCrafting(args[3]);
         Recipe recipe = crafting.getRecipe(args[4]);
         for (Material material : recipe.getMaterials()) {
-            ItemStack itemStack = material.getMaterial();
-            int numberOfItems = itemStack.getAmount();
+            int numberOfItems = material.getAmount();
             for (ItemStack content : player.getInventory().getContents()) {
-                if (content != null && isEqual(content, material.getMaterial())) {
+                if (content != null && isEqual(material.getMaterial(), content)) {
                     numberOfItems -= content.getAmount();
                 }
                 if (numberOfItems <= 0)
@@ -77,10 +75,9 @@ public class CommandWytworzPrzedmiot implements CommandExecutor {
         }
 
         for (Material material : recipe.getMaterials()) {
-            ItemStack itemStack = material.getMaterial();
-            int numberOfItems = itemStack.getAmount();
+            int numberOfItems = material.getAmount();
             for (ItemStack content : player.getInventory().getContents()) {
-                if (content != null && isEqual(content, material.getMaterial())) {
+                if (content != null && isEqual(material.getMaterial(), content)) {
                     int removedItems = Math.min(numberOfItems, content.getAmount());
                     content.setAmount(content.getAmount() - removedItems);
                     if (content.getAmount() <= 0) {
@@ -93,7 +90,7 @@ public class CommandWytworzPrzedmiot implements CommandExecutor {
             }
         }
 
-        player.getInventory().addItem(recipe.getResult());
+         player.getInventory().addItem(recipe.getResult().getMaterial().makeItem(recipe.getResult().getAmount()));
         player.sendMessage(ChatColor.GREEN + "Wytworzono przedmiot!");
 
         return true;

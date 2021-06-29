@@ -27,7 +27,7 @@ public class NameSpacedKeys {
         rodzajKey = new NamespacedKey(plugin, "rodzaj");//STRING
         podmienionyItemKey = new NamespacedKey(plugin, "podmienionyItem");//STRING
         typBroniKey = new NamespacedKey(plugin, "typBroni");//STRING
-        dmgKey = new NamespacedKey(plugin, "dmg");//INT
+        dmgKey = new NamespacedKey(plugin, "dmg");//Double
         ulepszenieKey = new NamespacedKey(plugin, "ulepszenie");//STRING
         wymaganaStatystykaKey = new NamespacedKey(plugin, "wymaganaStatystyka");//STRING
         wielkoscStatystykiKey = new NamespacedKey(plugin, "wielkoscStatystyki");//INT

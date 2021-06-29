@@ -1,6 +1,7 @@
 package me.pioula111.craftingandstats.crafting;
 
 import me.pioula111.craftingandstats.MenuColors;
+import me.pioula111.craftingandstats.itemy.MyItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -15,9 +16,9 @@ import java.util.HashSet;
 public class Recipe {
     private String name;
     private ArrayList<Material> materials;
-    private ItemStack result;
+    private Material result;
 
-    public Recipe(String name, ArrayList<Material> materials, ItemStack result) {
+    public Recipe(String name, ArrayList<Material> materials, Material result) {
         this.materials = materials;
         this.name = name;
         this.result = result;
@@ -44,7 +45,7 @@ public class Recipe {
         return builder.toString();
     }
 
-    public ItemStack getResult() {
+    public Material getResult() {
         return result;
     }
 

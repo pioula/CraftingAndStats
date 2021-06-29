@@ -9,6 +9,19 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 
 public abstract class TypBroni {
+    public static TypBroni serialize(String s) {
+        switch (s) {
+            case "dlugodystansowa":
+                return new Dlugodystansowa();
+            case "jednoreczna":
+                return new Jednoreczna();
+            case "dwureczna":
+                return new Dwureczna();
+        }
+
+        return null;
+    }
+
     public Component menuComponent(int nr) {
         HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
                 Component.text().content("Naciśnij ")

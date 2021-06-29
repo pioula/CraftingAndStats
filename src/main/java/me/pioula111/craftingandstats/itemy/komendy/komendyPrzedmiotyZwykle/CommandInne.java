@@ -38,7 +38,7 @@ public class CommandInne implements CommandExecutor {
         itemManager.removeMaker(player);
         item.setRodzaj(new Inne());
 
-        player.getInventory().addItem(item.makeItem());
+        player.getInventory().addItem(item.makeItem(1));
         player.sendMessage(ChatColor.GREEN + "Stworzono item!");
         return true;
     }

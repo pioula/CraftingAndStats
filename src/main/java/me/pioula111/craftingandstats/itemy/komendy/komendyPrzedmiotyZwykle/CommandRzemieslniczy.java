@@ -38,7 +38,7 @@ public class CommandRzemieslniczy implements CommandExecutor {
         itemManager.removeMaker(player);
         item.setRodzaj(new Rzemieslniczy());
 
-        player.getInventory().addItem(item.makeItem());
+        player.getInventory().addItem(item.makeItem(1));
         player.sendMessage(ChatColor.GREEN + "Stworzono item!");
         return true;
     }

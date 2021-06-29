@@ -2,6 +2,7 @@ package me.pioula111.craftingandstats.crafting;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
+import me.pioula111.craftingandstats.itemy.MyItem;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -81,11 +82,11 @@ public class CommandNowaReceptura implements CommandExecutor {
         ArrayList<Material> materials = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             if (player.getInventory().getItem(i) != null) {
-                materials.add(new Material(player.getInventory().getItem(i).clone()));
+                materials.add(new Material(new MyItem(player.getInventory().getItem(i)), player.getInventory().getItem(i).getAmount()));
             }
         }
 
-        workBench.addRecipe(new Recipe(args[1], materials, player.getInventory().getItemInOffHand().clone()));
+        workBench.addRecipe(new Recipe(args[1], materials, new Material(new MyItem(player.getInventory().getItemInOffHand()), player.getInventory().getItemInOffHand().getAmount())));
         sender.sendMessage(ChatColor.GREEN + "Receptura została pomyślnie stworzona!");
         return true;
     }

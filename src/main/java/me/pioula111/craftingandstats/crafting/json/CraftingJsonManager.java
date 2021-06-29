@@ -4,8 +4,15 @@ package me.pioula111.craftingandstats.crafting.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
-import me.pioula111.craftingandstats.crafting.json.serializers.ItemStackSerializer;
+import me.pioula111.craftingandstats.crafting.json.serializers.*;
+import me.pioula111.craftingandstats.itemy.bronie.TypBroni;
+import me.pioula111.craftingandstats.itemy.napoje.Efekt;
+import me.pioula111.craftingandstats.itemy.narzedzia.TypNarzedzia;
+import me.pioula111.craftingandstats.itemy.rodzaje.RodzajItemu;
+import me.pioula111.craftingandstats.itemy.statystyki.Statystyka;
+import me.pioula111.craftingandstats.itemy.ulepszenia.Ulepszenie;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
@@ -24,7 +31,13 @@ public class CraftingJsonManager {
         gsonBuilder.setPrettyPrinting();
         craftingManager = new CraftingManager();
 
-        gsonBuilder.registerTypeAdapter(ItemStack.class, new ItemStackSerializer(this));
+        gsonBuilder.registerTypeAdapter(Efekt.class, new EfektSerializer());
+        gsonBuilder.registerTypeAdapter(Material.class, new MaterialSerializer());
+        gsonBuilder.registerTypeAdapter(RodzajItemu.class, new RodzajItemuSerializer());
+        gsonBuilder.registerTypeAdapter(Statystyka.class, new StatystykaSerializer());
+        gsonBuilder.registerTypeAdapter(TypNarzedzia.class, new TypNarzedziaSerializer());
+        gsonBuilder.registerTypeAdapter(Ulepszenie.class, new UlepszenieSerializer());
+        gsonBuilder.registerTypeAdapter(TypBroni.class, new TypBroniSerializer());
 
         gson = gsonBuilder.create();
         this.file = file;
@@ -74,7 +87,7 @@ public class CraftingJsonManager {
             writer.close();
         }
         catch(Exception ex) {
-            System.out.println("[CraftingAndStats] Blad");
+            ex.printStackTrace();
         }
     }
 }

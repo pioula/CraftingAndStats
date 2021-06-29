@@ -10,6 +10,17 @@ import net.kyori.adventure.text.format.TextDecoration;
 
 public abstract class Ulepszenie {
 
+    public static Ulepszenie serialize(String s) {
+        switch(s) {
+            case "brak":
+                return new Brak();
+            case "wzmocnienie":
+                return new Wzmocnienie();
+        }
+
+        return null;
+    }
+
     public Component menuComponent(int nr) {
         HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
                 Component.text().content("Naciśnij ")

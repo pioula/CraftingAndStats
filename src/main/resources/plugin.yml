@@ -170,3 +170,7 @@ commands:
     description: ustawfach
     usage: Error
     permission: Operator
+  listaefektow:
+    description: listaefektow
+    usage: Error
+    permission: Operator

@@ -14,6 +14,7 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
@@ -21,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectTypeWrapper;
@@ -40,9 +42,59 @@ public class MyItem {
     private Ulepszenie ulepszenie;
     private int obrona;
     private TypNarzedzia typNarzedzia;
-    private TypNapoju typNapoju;
+    //private TypNapoju typNapoju;
     private ArrayList<Efekt> efekty;
     private int kolorNapoju;
+
+    public MyItem() {}
+
+    public MyItem(ItemStack item) {
+        if (item.hasItemMeta()) {
+            PersistentDataContainer pdc = item.getItemMeta().getPersistentDataContainer();
+            for (NamespacedKey key : pdc.getKeys()) {
+                switch (key.getKey()) {
+                    case "nazwa":
+                        nazwa = pdc.get(key, PersistentDataType.STRING);
+                        break;
+                    case "rodzaj":
+                        rodzaj = RodzajItemu.serialize(pdc.get(key, PersistentDataType.STRING));
+                        break;
+                    case "podmienionyitem":
+                        podmienionyItem = Material.getMaterial(pdc.get(key, PersistentDataType.STRING));
+                        break;
+                    case "typbroni":
+                        typBroni = TypBroni.serialize(pdc.get(key, PersistentDataType.STRING));
+                        break;
+                    case "dmg":
+                        dmg = pdc.get(key, PersistentDataType.DOUBLE);
+                        break;
+                    case "ulepszenie":
+                        ulepszenie = Ulepszenie.serialize(pdc.get(key, PersistentDataType.STRING));
+                        break;
+                    case "wymaganastatystyka":
+                        wymaganaStatystyka = Statystyka.serialize(pdc.get(key, PersistentDataType.STRING));
+                        break;
+                    case "wielkoscstatystyki":
+                        wielkoscStatystyki = pdc.get(key, PersistentDataType.INTEGER);
+                        break;
+                    case "obrona":
+                        obrona = pdc.get(key, PersistentDataType.INTEGER);
+                        break;
+                    case "typnarzedzia":
+                        typNarzedzia = TypNarzedzia.serialize(pdc.get(key, PersistentDataType.STRING));
+                        break;
+                    case "efekty":
+                        efekty = Efekt.serialize(pdc.get(key, PersistentDataType.STRING));
+                        break;
+                    case "kolornapoju":
+                        kolorNapoju = pdc.get(key, PersistentDataType.INTEGER);
+                        break;
+                    case "autor":
+                        break;
+                }
+            }
+        }
+    }
 
     public void setNazwa(String nazwa) {
         this.nazwa = nazwa;
@@ -60,17 +112,14 @@ public class MyItem {
         this.typBroni = typBroni;
     }
 
-    public ItemStack makeItem() {
+    public ItemStack makeItem(int amount) {
         if (rodzaj instanceof Napoj) {
-            ItemStack item = null;
-            if (typNapoju instanceof Zwykly)
-                item = new ItemStack(Material.POTION, 1);
-            if (typNapoju instanceof Lingering)
-                item = new ItemStack(Material.LINGERING_POTION, 1);
-            if (typNapoju instanceof Splash)
-                item = new ItemStack(Material.SPLASH_POTION, 1);
+            ItemStack item = new ItemStack(podmienionyItem, amount);
 
             PotionMeta pMeta = (PotionMeta) item.getItemMeta();
+            pMeta.getPersistentDataContainer().set(NameSpacedKeys.podmienionyItemKey, PersistentDataType.STRING, podmienionyItem.name());
+            pMeta.getPersistentDataContainer().set(NameSpacedKeys.rodzajKey, PersistentDataType.STRING, rodzaj.toString());
+
             for (Efekt efekt : efekty) {
                 pMeta.addCustomEffect(new PotionEffect(efekt.getTypEfektu(), efekt.getCzasTrwania(), efekt.getMoc()), true);
             }
@@ -86,7 +135,7 @@ public class MyItem {
             return item;
         }
         else {
-            ItemStack item = new ItemStack(podmienionyItem, 1);
+            ItemStack item = new ItemStack(podmienionyItem, amount);
             ItemMeta meta = item.getItemMeta();
 
             meta.displayName(Component.text().content(nazwa.replace("_"," ")).decoration(TextDecoration.ITALIC, false).build());
@@ -158,10 +207,6 @@ public class MyItem {
         this.typNarzedzia = typNarzedzia;
     }
 
-    public void setTypNapoju(TypNapoju typNapoju) {
-        this.typNapoju = typNapoju;
-    }
-
     public void addEfekt(Efekt efekt) {
         if (efekty == null)
             efekty = new ArrayList<>();
@@ -171,5 +216,9 @@ public class MyItem {
 
     public void setKolorNapoju(int kolorNapoju) {
         this.kolorNapoju = kolorNapoju;
+    }
+
+    public String getNazwa() {
+        return nazwa;
     }
 }

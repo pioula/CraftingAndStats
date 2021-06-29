@@ -17,6 +17,7 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -48,6 +49,7 @@ public class CommandNapoj implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
+        item.setPodmienionyItem(Material.POTION);
         item.setRodzaj(new Napoj());
 
         itemManager.updateMaker(player, item);

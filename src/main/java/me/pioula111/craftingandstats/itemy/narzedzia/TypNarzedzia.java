@@ -10,6 +10,23 @@ import net.kyori.adventure.text.format.TextDecoration;
 
 public abstract class TypNarzedzia {
 
+    public static TypNarzedzia serialize(String s) {
+        switch(s) {
+            case "kilof":
+                return new Kilof();
+            case "kosa":
+                return new Kosa();
+            case "sierp":
+                return new Sierp();
+            case "topor":
+                return new Topor();
+            case "wedka":
+                return new Wedka();
+        }
+
+        return null;
+    }
+
     public Component menuComponent(int nr) {
         HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
                 Component.text().content("Naciśnij ")

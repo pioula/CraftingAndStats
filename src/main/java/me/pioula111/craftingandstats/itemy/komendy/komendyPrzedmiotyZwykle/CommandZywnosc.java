@@ -38,7 +38,7 @@ public class CommandZywnosc implements CommandExecutor {
         itemManager.removeMaker(player);
         item.setRodzaj(new Zywnosc());
 
-        player.getInventory().addItem(item.makeItem());
+        player.getInventory().addItem(item.makeItem(1));
         player.sendMessage(ChatColor.GREEN + "Stworzono item!");
         return true;
     }

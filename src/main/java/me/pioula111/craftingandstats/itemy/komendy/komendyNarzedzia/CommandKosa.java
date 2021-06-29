@@ -39,7 +39,7 @@ public class CommandKosa implements CommandExecutor {
         itemManager.removeMaker(player);
         item.setTypNarzedzia(new Kosa());
 
-        player.getInventory().addItem(item.makeItem());
+        player.getInventory().addItem(item.makeItem(1));
         player.sendMessage(ChatColor.GREEN + "Stworzono kosę!");
         return true;
     }

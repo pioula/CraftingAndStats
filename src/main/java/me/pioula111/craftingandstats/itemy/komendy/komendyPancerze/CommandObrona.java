@@ -56,7 +56,7 @@ public class CommandObrona implements CommandExecutor {
 
         if (obrona == 0) {
             itemManager.removeMaker(player);
-            player.getInventory().addItem(item.makeItem());
+            player.getInventory().addItem(item.makeItem(1));
             player.sendMessage(ChatColor.GREEN + "Stworzono item!");
             return true;
         }

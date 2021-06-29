@@ -40,7 +40,6 @@ public class CommandZwykly implements CommandExecutor {
         }
 
         MyItem item = itemManager.getItem(player);
-        item.setTypNapoju(new Zwykly());
 
         itemManager.updateMaker(player, item);
 

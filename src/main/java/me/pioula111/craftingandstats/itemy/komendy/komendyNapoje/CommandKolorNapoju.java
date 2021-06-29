@@ -50,8 +50,9 @@ public class CommandKolorNapoju implements CommandExecutor {
         }
 
         itemManager.removeMaker(player);
-        player.getInventory().addItem(item.makeItem());
+        player.getInventory().addItem(item.makeItem(1));
 
+        player.sendMessage(ChatColor.GREEN + "Stworzono napój!");
         return true;
     }
 }

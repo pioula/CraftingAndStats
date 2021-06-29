@@ -104,6 +104,7 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("zwykly")).setExecutor(new CommandZwykly(itemManager));
         Objects.requireNonNull(this.getCommand("efekty")).setExecutor(new CommandEfekty(itemManager));
         Objects.requireNonNull(this.getCommand("kolornapoju")).setExecutor(new CommandKolorNapoju(itemManager));
+        Objects.requireNonNull(this.getCommand("listaefektow")).setExecutor(new CommandlistaEfektow());
 
         Objects.requireNonNull(this.getCommand("przerwijrobienieitemu")).setExecutor(new CommandPrzerwijRobienieItemu(itemManager));
 
