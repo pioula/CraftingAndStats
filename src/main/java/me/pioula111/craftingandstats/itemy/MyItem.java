@@ -1,13 +1,13 @@
 package me.pioula111.craftingandstats.itemy;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
-import me.pioula111.craftingandstats.itemy.bronie.TypBroni;
-import me.pioula111.craftingandstats.itemy.napoje.*;
-import me.pioula111.craftingandstats.itemy.narzedzia.Kilof;
-import me.pioula111.craftingandstats.itemy.narzedzia.TypNarzedzia;
-import me.pioula111.craftingandstats.itemy.rodzaje.*;
-import me.pioula111.craftingandstats.itemy.statystyki.Statystyka;
-import me.pioula111.craftingandstats.itemy.ulepszenia.Ulepszenie;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.Wlasciwosc;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.bronie.TypBroni;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.napoje.*;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.narzedzia.TypNarzedzia;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.rodzaje.*;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.statystyki.Statystyka;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.ulepszenia.Ulepszenie;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
@@ -19,13 +19,11 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectTypeWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,15 +32,14 @@ import java.util.UUID;
 public class MyItem {
     private String nazwa;
     private Material podmienionyItem;
-    private RodzajItemu rodzaj;
-    private TypBroni typBroni;
+    private Wlasciwosc rodzaj;
+    private Wlasciwosc typBroni;
     private double dmg;
-    private Statystyka wymaganaStatystyka;
+    private Wlasciwosc wymaganaStatystyka;
     private int wielkoscStatystyki;
-    private Ulepszenie ulepszenie;
+    private Wlasciwosc ulepszenie;
     private int obrona;
-    private TypNarzedzia typNarzedzia;
-    //private TypNapoju typNapoju;
+    private Wlasciwosc typNarzedzia;
     private ArrayList<Efekt> efekty;
     private int kolorNapoju;
 
@@ -57,22 +54,22 @@ public class MyItem {
                         nazwa = pdc.get(key, PersistentDataType.STRING);
                         break;
                     case "rodzaj":
-                        rodzaj = RodzajItemu.serialize(pdc.get(key, PersistentDataType.STRING));
+                        rodzaj = Wlasciwosc.deserialize(pdc.get(key, PersistentDataType.STRING));
                         break;
                     case "podmienionyitem":
                         podmienionyItem = Material.getMaterial(pdc.get(key, PersistentDataType.STRING));
                         break;
                     case "typbroni":
-                        typBroni = TypBroni.serialize(pdc.get(key, PersistentDataType.STRING));
+                        typBroni = Wlasciwosc.deserialize(pdc.get(key, PersistentDataType.STRING));
                         break;
                     case "dmg":
                         dmg = pdc.get(key, PersistentDataType.DOUBLE);
                         break;
                     case "ulepszenie":
-                        ulepszenie = Ulepszenie.serialize(pdc.get(key, PersistentDataType.STRING));
+                        ulepszenie = Wlasciwosc.deserialize(pdc.get(key, PersistentDataType.STRING));
                         break;
                     case "wymaganastatystyka":
-                        wymaganaStatystyka = Statystyka.serialize(pdc.get(key, PersistentDataType.STRING));
+                        wymaganaStatystyka = Wlasciwosc.deserialize(pdc.get(key, PersistentDataType.STRING));
                         break;
                     case "wielkoscstatystyki":
                         wielkoscStatystyki = pdc.get(key, PersistentDataType.INTEGER);
@@ -81,10 +78,10 @@ public class MyItem {
                         obrona = pdc.get(key, PersistentDataType.INTEGER);
                         break;
                     case "typnarzedzia":
-                        typNarzedzia = TypNarzedzia.serialize(pdc.get(key, PersistentDataType.STRING));
+                        typNarzedzia = Wlasciwosc.deserialize(pdc.get(key, PersistentDataType.STRING));
                         break;
                     case "efekty":
-                        efekty = Efekt.serialize(pdc.get(key, PersistentDataType.STRING));
+                        efekty = Efekt.deserialize(pdc.get(key, PersistentDataType.STRING));
                         break;
                     case "kolornapoju":
                         kolorNapoju = pdc.get(key, PersistentDataType.INTEGER);

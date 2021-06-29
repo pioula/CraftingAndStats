@@ -1,7 +1,7 @@
 package me.pioula111.craftingandstats.crafting.json.deserializers;
 
 import com.google.gson.*;
-import me.pioula111.craftingandstats.itemy.napoje.Efekt;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.napoje.Efekt;
 import org.bukkit.potion.PotionEffectTypeWrapper;
 
 import java.lang.reflect.Type;

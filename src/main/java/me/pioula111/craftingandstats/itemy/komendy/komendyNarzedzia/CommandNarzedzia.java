@@ -3,13 +3,11 @@ package me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia;
 import me.pioula111.craftingandstats.MenuColors;
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.bronie.Dwureczna;
-import me.pioula111.craftingandstats.itemy.narzedzia.*;
-import me.pioula111.craftingandstats.itemy.rodzaje.Narzedzia;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.narzedzia.*;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.rodzaje.Narzedzia;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -52,9 +50,7 @@ public class CommandNarzedzia implements CommandExecutor {
     }
 
     private TextComponent createMenu() {
-        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuColors.DECORATIONS))
-                .append(Component.text().content("Wybierz Narzędzie").style(Style.style(MenuColors.MAIN_NAME, TextDecoration.BOLD)))
-                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(MenuColors.DECORATIONS))).build();
+        TextComponent menu = MenuColors.createMenu("Wybierz Narzędzie");
         int enumerator = 0;
         menu = menu.append(new Kilof().menuComponent(++enumerator));
         menu = menu.append(new Kosa().menuComponent(++enumerator));

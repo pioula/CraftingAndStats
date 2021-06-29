@@ -6,15 +6,15 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import me.pioula111.craftingandstats.crafting.json.deserializers.*;
 import me.pioula111.craftingandstats.crafting.json.serializers.*;
-import me.pioula111.craftingandstats.itemy.bronie.TypBroni;
-import me.pioula111.craftingandstats.itemy.napoje.Efekt;
-import me.pioula111.craftingandstats.itemy.narzedzia.TypNarzedzia;
-import me.pioula111.craftingandstats.itemy.rodzaje.RodzajItemu;
-import me.pioula111.craftingandstats.itemy.statystyki.Statystyka;
-import me.pioula111.craftingandstats.itemy.ulepszenia.Ulepszenie;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.Wlasciwosc;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.bronie.TypBroni;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.napoje.Efekt;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.narzedzia.TypNarzedzia;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.rodzaje.RodzajItemu;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.statystyki.Statystyka;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.ulepszenia.Ulepszenie;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,19 +34,11 @@ public class CraftingJsonManager {
 
         gsonBuilder.registerTypeAdapter(Efekt.class, new EfektSerializer());
         gsonBuilder.registerTypeAdapter(Material.class, new MaterialSerializer());
-        gsonBuilder.registerTypeAdapter(RodzajItemu.class, new RodzajItemuSerializer());
-        gsonBuilder.registerTypeAdapter(Statystyka.class, new StatystykaSerializer());
-        gsonBuilder.registerTypeAdapter(TypNarzedzia.class, new TypNarzedziaSerializer());
-        gsonBuilder.registerTypeAdapter(Ulepszenie.class, new UlepszenieSerializer());
-        gsonBuilder.registerTypeAdapter(TypBroni.class, new TypBroniSerializer());
+        gsonBuilder.registerTypeAdapter(Wlasciwosc.class, new WlasciwoscSerializer());
 
         gsonBuilder.registerTypeAdapter(Efekt.class, new EfektDeserializer());
         gsonBuilder.registerTypeAdapter(Material.class, new MaterialDeserializer());
-        gsonBuilder.registerTypeAdapter(RodzajItemu.class, new RodzajItemuDeserializer());
-        gsonBuilder.registerTypeAdapter(Statystyka.class, new StatystykaDeserializer());
-        gsonBuilder.registerTypeAdapter(TypNarzedzia.class, new TypNarzedziaDeserializer());
-        gsonBuilder.registerTypeAdapter(Ulepszenie.class, new UlepszenieDeserializer());
-        gsonBuilder.registerTypeAdapter(TypBroni.class, new TypBroniDeserializer());
+        gsonBuilder.registerTypeAdapter(Wlasciwosc.class, new WlasciwoscDeserializer());
 
         gson = gsonBuilder.create();
         this.file = file;

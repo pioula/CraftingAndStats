@@ -2,14 +2,8 @@ package me.pioula111.craftingandstats.itemy.komendy.komendyInne;
 
 import me.pioula111.craftingandstats.MenuColors;
 import me.pioula111.craftingandstats.itemy.ItemManager;
-import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.bronie.Dlugodystansowa;
-import me.pioula111.craftingandstats.itemy.rodzaje.*;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

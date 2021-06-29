@@ -2,9 +2,7 @@ package me.pioula111.craftingandstats.itemy.komendy.komendyUlepszenia;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.ulepszenia.Brak;
-import me.pioula111.craftingandstats.itemy.ulepszenia.Wzmocnienie;
-import net.kyori.adventure.text.format.TextColor;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.ulepszenia.Wzmocnienie;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

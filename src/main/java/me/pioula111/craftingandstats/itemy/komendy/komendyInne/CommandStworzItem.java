@@ -1,13 +1,12 @@
 package me.pioula111.craftingandstats.itemy.komendy.komendyInne;
 
 import me.pioula111.craftingandstats.MenuColors;
-import me.pioula111.craftingandstats.itemy.rodzaje.*;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.rodzaje.*;
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -50,9 +49,7 @@ public class CommandStworzItem implements CommandExecutor {
     }
 
     private TextComponent createMenu() {
-        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuColors.DECORATIONS))
-                .append(Component.text().content("Wybierz Rodzaj").style(Style.style(MenuColors.MAIN_NAME, TextDecoration.BOLD)))
-                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(MenuColors.DECORATIONS))).build();
+        TextComponent menu = MenuColors.createMenu("Wybierz Rodzaj");
         int enumerator = 0;
         menu = menu.append(new Rzemieslniczy().menuComponent(++enumerator));
         menu = menu.append(new Zywnosc().menuComponent(++enumerator));

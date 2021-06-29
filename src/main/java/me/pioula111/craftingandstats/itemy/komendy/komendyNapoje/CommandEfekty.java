@@ -2,14 +2,7 @@ package me.pioula111.craftingandstats.itemy.komendy.komendyNapoje;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.napoje.Efekt;
-import me.pioula111.craftingandstats.itemy.statystyki.Sila;
-import me.pioula111.craftingandstats.itemy.statystyki.Zrecznosc;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.napoje.Efekt;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

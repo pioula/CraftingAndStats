@@ -2,16 +2,7 @@ package me.pioula111.craftingandstats.itemy.komendy.komendyUlepszenia;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.bronie.Dlugodystansowa;
-import me.pioula111.craftingandstats.itemy.bronie.Dwureczna;
-import me.pioula111.craftingandstats.itemy.bronie.Jednoreczna;
-import me.pioula111.craftingandstats.itemy.rodzaje.Bron;
-import me.pioula111.craftingandstats.itemy.ulepszenia.Brak;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
-import net.kyori.adventure.text.format.TextDecoration;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.ulepszenia.Brak;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

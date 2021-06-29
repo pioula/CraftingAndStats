@@ -2,8 +2,7 @@ package me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.narzedzia.Kilof;
-import me.pioula111.craftingandstats.itemy.narzedzia.Topor;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.narzedzia.Topor;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

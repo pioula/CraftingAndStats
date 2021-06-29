@@ -2,7 +2,7 @@ package me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.rodzaje.Rzemieslniczy;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.rodzaje.Rzemieslniczy;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

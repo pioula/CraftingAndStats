@@ -2,8 +2,7 @@ package me.pioula111.craftingandstats.itemy.komendy.komendyPancerze;
 
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.bronie.Dwureczna;
-import me.pioula111.craftingandstats.itemy.rodzaje.Pancerz;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.rodzaje.Pancerz;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;

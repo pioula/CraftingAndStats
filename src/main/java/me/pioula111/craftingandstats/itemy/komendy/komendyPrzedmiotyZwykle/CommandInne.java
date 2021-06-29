@@ -1,6 +1,6 @@
 package me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle;
 
-import me.pioula111.craftingandstats.itemy.rodzaje.Inne;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.rodzaje.Inne;
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
 import org.bukkit.ChatColor;

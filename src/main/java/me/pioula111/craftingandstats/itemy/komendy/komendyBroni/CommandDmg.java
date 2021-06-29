@@ -3,16 +3,11 @@ package me.pioula111.craftingandstats.itemy.komendy.komendyBroni;
 import me.pioula111.craftingandstats.MenuColors;
 import me.pioula111.craftingandstats.itemy.ItemManager;
 import me.pioula111.craftingandstats.itemy.MyItem;
-import me.pioula111.craftingandstats.itemy.bronie.Dlugodystansowa;
-import me.pioula111.craftingandstats.itemy.bronie.Dwureczna;
-import me.pioula111.craftingandstats.itemy.bronie.Jednoreczna;
-import me.pioula111.craftingandstats.itemy.rodzaje.Bron;
-import me.pioula111.craftingandstats.itemy.statystyki.Sila;
-import me.pioula111.craftingandstats.itemy.statystyki.Zrecznosc;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.statystyki.Sila;
+import me.pioula111.craftingandstats.itemy.wlasciwosci.statystyki.Zrecznosc;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -61,9 +56,7 @@ public class CommandDmg implements CommandExecutor {
     }
 
     private TextComponent createMenu() {
-        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuColors.DECORATIONS))
-                .append(Component.text().content("Wybierz Wymaganą Statystykę").style(Style.style(MenuColors.MAIN_NAME, TextDecoration.BOLD)))
-                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(MenuColors.DECORATIONS))).build();
+        TextComponent menu = MenuColors.createMenu("Wybierz Wymaganą Statystykę");
         int enumerator = 0;
         menu = menu.append(new Sila().menuComponent(++enumerator));
         menu = menu.append(new Zrecznosc().menuComponent(++enumerator));
