@@ -54,17 +54,8 @@ public class Marker implements Listener {
         List<Entity> passengers = marker.getPassengers();
         if (passengers.size() == 0)
             return null;
-        StringBuilder builder = new StringBuilder();
-        String name = passengers.get(0).getName();
 
-        for (int i = 0; i < name.length(); i++) {
-            if (name.charAt(i) == ' ')
-                builder.append("_");
-            else
-                builder.append(name.charAt(i));
-        }
-
-        return builder.toString();
+        return passengers.get(0).getName().replace("_", " ");
     }
 
     @EventHandler

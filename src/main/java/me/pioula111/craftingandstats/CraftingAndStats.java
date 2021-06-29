@@ -67,6 +67,9 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("nauczfachu")).setExecutor(new CommandNauczFachu(statManager, nauczFachuManager,this));
         Objects.requireNonNull(this.getCommand("akceptujnauke")).setExecutor(new CommandAkceptujNauke(statManager, nauczFachuManager));
         Objects.requireNonNull(this.getCommand("ustawfach")).setExecutor(new CommandUstawFach(statManager));
+        Objects.requireNonNull(this.getCommand("usunfach")).setExecutor(new CommandUsunFach(jsonManager.getCraftingManager()));
+        Objects.requireNonNull(this.getCommand("usuncrafting")).setExecutor(new CommandUsunCrafting(jsonManager.getCraftingManager()));
+        Objects.requireNonNull(this.getCommand("usunrecepture")).setExecutor(new CommandUsunRecepture(jsonManager.getCraftingManager()));
 
         ItemManager itemManager = new ItemManager();
         Objects.requireNonNull(this.getCommand("stworzitem")).setExecutor(new CommandStworzItem(itemManager));

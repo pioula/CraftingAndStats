@@ -4,6 +4,7 @@ package me.pioula111.craftingandstats.crafting.json;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import me.pioula111.craftingandstats.crafting.json.deserializers.*;
 import me.pioula111.craftingandstats.crafting.json.serializers.*;
 import me.pioula111.craftingandstats.itemy.bronie.TypBroni;
 import me.pioula111.craftingandstats.itemy.napoje.Efekt;
@@ -38,6 +39,14 @@ public class CraftingJsonManager {
         gsonBuilder.registerTypeAdapter(TypNarzedzia.class, new TypNarzedziaSerializer());
         gsonBuilder.registerTypeAdapter(Ulepszenie.class, new UlepszenieSerializer());
         gsonBuilder.registerTypeAdapter(TypBroni.class, new TypBroniSerializer());
+
+        gsonBuilder.registerTypeAdapter(Efekt.class, new EfektDeserializer());
+        gsonBuilder.registerTypeAdapter(Material.class, new MaterialDeserializer());
+        gsonBuilder.registerTypeAdapter(RodzajItemu.class, new RodzajItemuDeserializer());
+        gsonBuilder.registerTypeAdapter(Statystyka.class, new StatystykaDeserializer());
+        gsonBuilder.registerTypeAdapter(TypNarzedzia.class, new TypNarzedziaDeserializer());
+        gsonBuilder.registerTypeAdapter(Ulepszenie.class, new UlepszenieDeserializer());
+        gsonBuilder.registerTypeAdapter(TypBroni.class, new TypBroniDeserializer());
 
         gson = gsonBuilder.create();
         this.file = file;

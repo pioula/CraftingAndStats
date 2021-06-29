@@ -11,6 +11,7 @@ import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -94,6 +95,17 @@ public class WorkBench {
         return null;
     }
 
+    public static void removeWorkBenches(World world, String crafting) {
+        crafting = crafting.replace("_"," ");
+        for (Entity entity : world.getEntities()) {
+            if (Marker.isMarker(entity)) {
+                if (Marker.getName(entity).equals(crafting)) {
+                    Marker.removeMarker(entity);
+                }
+            }
+        }
+    }
+
     public Component menuComponent(int nr) {
         HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
                 Component.text().content("Naciśnij ")
@@ -114,5 +126,14 @@ public class WorkBench {
 
     public String getJob() {
         return job;
+    }
+
+    public void removeRecipe(String arg) {
+        for (Recipe recipe : recipes) {
+            if (recipe.getName().equals(arg)) {
+                recipes.remove(recipe);
+                break;
+            }
+        }
     }
 }

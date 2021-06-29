@@ -174,3 +174,17 @@ commands:
     description: listaefektow
     usage: Error
     permission: Operator
+  usunfach:
+    description: usunfach
+    usage: Error
+    permission: Operator
+  usuncrafting:
+    description: usuncrafting
+    usage: Error
+    permission: Operator
+  usunrecepture:
+    description: usunrecepture
+    usage: Error
+    permission: Operator
+
+
