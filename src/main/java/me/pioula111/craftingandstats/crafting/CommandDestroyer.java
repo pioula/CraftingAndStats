@@ -8,7 +8,6 @@ import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,7 +42,7 @@ public class CommandDestroyer implements CommandExecutor {
         List<Component> lore = new ArrayList<>();
         lore.add(Component.text().content("Niszczy craftingi!").style(Style.style(TextColor.color(0x009999),TextDecoration.ITALIC)).build());
         meta.lore(lore);
-        meta.getPersistentDataContainer().set(NameSpacedKeys.destroyerKey, PersistentDataType.BYTE, (byte) 1);
+        meta.getPersistentDataContainer().set(NameSpacedKeys.KEY_DESTROYER, PersistentDataType.BYTE, (byte) 1);
 
         destroyer.setItemMeta(meta);
         player.getInventory().addItem(destroyer);

@@ -1,11 +1,10 @@
 package me.pioula111.craftingandstats.crafting;
 
-import me.pioula111.craftingandstats.MenuColors;
+import me.pioula111.craftingandstats.MenuHelper;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -40,9 +39,9 @@ public class CommandFachy implements CommandExecutor {
     }
 
     private TextComponent createMenu(HashSet<Job> jobs) {
-        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuColors.DECORATIONS))
-                .append(Component.text().content("Fachy").style(Style.style(MenuColors.MAIN_NAME, TextDecoration.BOLD)))
-                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(MenuColors.DECORATIONS))).build();
+        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuHelper.DECORATIONS))
+                .append(Component.text().content("Fachy").style(Style.style(MenuHelper.MAIN_NAME, TextDecoration.BOLD)))
+                .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(MenuHelper.DECORATIONS))).build();
         int enumerator = 0;
         for (Job job : jobs) {
             menu = menu.append(job.menuComponent(++enumerator));

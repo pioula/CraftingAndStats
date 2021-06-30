@@ -1,8 +1,7 @@
 package me.pioula111.craftingandstats.harvestBlocks;
 
-import me.pioula111.craftingandstats.itemy.MyItem;
+import me.pioula111.craftingandstats.items.myItems.MyItem;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 
 public class HarvestBlock {
     private Material block;

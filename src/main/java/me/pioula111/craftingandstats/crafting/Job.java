@@ -1,14 +1,12 @@
 package me.pioula111.craftingandstats.crafting;
 
-import me.pioula111.craftingandstats.MenuColors;
+import me.pioula111.craftingandstats.MenuHelper;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.format.TextDecoration;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Job {
@@ -67,13 +65,13 @@ public class Job {
     public Component menuComponent(int nr) {
         HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
                 Component.text().content("Naciśnij ")
-                        .append(Component.text().content("LPM").style(Style.style(MenuColors.LPM_COLOR, TextDecoration.BOLD)))
+                        .append(Component.text().content("LPM").style(Style.style(MenuHelper.LPM_COLOR, TextDecoration.BOLD)))
                         .append(Component.text().content(", aby zobaczyć craftingi fachu!")).build());
 
         ClickEvent clickEvent = ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/craftingi " + name);
 
-        return Component.text().content("   " + nr + ". ").style(Style.style(MenuColors.DECORATIONS)).append(Component.text()
-                .content(this + "\n").style(Style.style(MenuColors.RECIPE_NAME)))
+        return Component.text().content("   " + nr + ". ").style(Style.style(MenuHelper.DECORATIONS)).append(Component.text()
+                .content(this + "\n").style(Style.style(MenuHelper.RECIPE_NAME)))
                 .clickEvent(clickEvent)
                 .hoverEvent(hov).build();
     }

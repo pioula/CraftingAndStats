@@ -1,7 +1,6 @@
 package me.pioula111.craftingandstats.crafting;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
-import me.pioula111.craftingandstats.crafting.NauczFachuManager;
 import me.pioula111.craftingandstats.stats.json.StatManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -77,7 +76,7 @@ public class CommandAkceptujNauke implements CommandExecutor {
     }
 
     private boolean isGoldCoind(ItemStack itemStack) {
-        return itemStack != null && itemStack.hasItemMeta() && itemStack.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.nazwaKey, PersistentDataType.STRING) &&
-                itemStack.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.nazwaKey, PersistentDataType.STRING).equals("Złota_Moneta");
+        return itemStack != null && itemStack.hasItemMeta() && itemStack.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.KEY_NAME, PersistentDataType.STRING) &&
+                itemStack.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.KEY_NAME, PersistentDataType.STRING).equals("Złota_Moneta");
     }
 }

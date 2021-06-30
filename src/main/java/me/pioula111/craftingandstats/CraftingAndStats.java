@@ -1,27 +1,29 @@
 package me.pioula111.craftingandstats;
 
-import com.sun.org.apache.xml.internal.dtm.ref.sax2dtm.SAX2RTFDTM;
 import me.pioula111.craftingandstats.crafting.*;
 import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
-import me.pioula111.craftingandstats.itemy.*;
-import me.pioula111.craftingandstats.itemy.komendy.komendyBroni.*;
-import me.pioula111.craftingandstats.itemy.komendy.komendyInne.CommandPrzerwijRobienieItemu;
-import me.pioula111.craftingandstats.itemy.komendy.komendyInne.CommandStworzItem;
-import me.pioula111.craftingandstats.itemy.komendy.komendyNapoje.*;
-import me.pioula111.craftingandstats.itemy.komendy.komendyNarzedzia.*;
-import me.pioula111.craftingandstats.itemy.komendy.komendyPancerze.CommandObrona;
-import me.pioula111.craftingandstats.itemy.komendy.komendyPancerze.CommandPancerz;
-import me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle.CommandInne;
-import me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle.CommandRzemieslniczy;
-import me.pioula111.craftingandstats.itemy.komendy.komendyPrzedmiotyZwykle.CommandZywnosc;
-import me.pioula111.craftingandstats.itemy.komendy.komendyUlepszenia.CommandBrak;
-import me.pioula111.craftingandstats.itemy.komendy.komendyUlepszenia.CommandWzmocnienie;
+import me.pioula111.craftingandstats.items.ItemManager;
+import me.pioula111.craftingandstats.items.commands.additionCommands.CommandNone;
+import me.pioula111.craftingandstats.items.commands.additionCommands.CommandUpgrade;
+import me.pioula111.craftingandstats.items.commands.drinkCommands.CommandDrink;
+import me.pioula111.craftingandstats.items.commands.drinkCommands.CommandDrinkColor;
+import me.pioula111.craftingandstats.items.commands.drinkCommands.CommandEffectList;
+import me.pioula111.craftingandstats.items.commands.drinkCommands.CommandEffects;
+import me.pioula111.craftingandstats.items.commands.mainCommands.CommandCreateItem;
+import me.pioula111.craftingandstats.items.commands.simpleItemsCommands.CommandFood;
+import me.pioula111.craftingandstats.items.commands.simpleItemsCommands.CommandHandCraft;
+import me.pioula111.craftingandstats.items.commands.simpleItemsCommands.CommandOthers;
+import me.pioula111.craftingandstats.items.commands.toolsCommands.*;
+import me.pioula111.craftingandstats.items.commands.weaponsCommands.*;
+import me.pioula111.craftingandstats.itemy.komendy.komendyBroni.CommandOneHanded;
+import me.pioula111.craftingandstats.itemy.komendy.komendyInne.CommandStopCreatingItem;
+import me.pioula111.craftingandstats.items.commands.armorCommands.CommandDefence;
+import me.pioula111.craftingandstats.items.commands.armorCommands.CommandArmor;
 import me.pioula111.craftingandstats.markers.Marker;
 import me.pioula111.craftingandstats.stats.CommandStaty;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnJoin;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnQuit;
 import me.pioula111.craftingandstats.stats.json.StatManager;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -72,44 +74,41 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("usunrecepture")).setExecutor(new CommandUsunRecepture(jsonManager.getCraftingManager()));
 
         ItemManager itemManager = new ItemManager();
-        Objects.requireNonNull(this.getCommand("stworzitem")).setExecutor(new CommandStworzItem(itemManager));
+        Objects.requireNonNull(this.getCommand("stworzitem")).setExecutor(new CommandCreateItem(itemManager));
 
-        Objects.requireNonNull(this.getCommand("rzemieslniczy")).setExecutor(new CommandRzemieslniczy(itemManager));
-        Objects.requireNonNull(this.getCommand("zywnosc")).setExecutor(new CommandZywnosc(itemManager));
-        Objects.requireNonNull(this.getCommand("inne")).setExecutor(new CommandInne(itemManager));
-        Objects.requireNonNull(this.getCommand("bron")).setExecutor(new CommandBron(itemManager));
+        Objects.requireNonNull(this.getCommand("handcraft")).setExecutor(new CommandHandCraft(itemManager));
+        Objects.requireNonNull(this.getCommand("food")).setExecutor(new CommandFood(itemManager));
+        Objects.requireNonNull(this.getCommand("others")).setExecutor(new CommandOthers(itemManager));
+        Objects.requireNonNull(this.getCommand("weapon")).setExecutor(new CommandWeapon(itemManager));
 
-        Objects.requireNonNull(this.getCommand("jednoreczna")).setExecutor(new CommandJednoreczna(itemManager));
-        Objects.requireNonNull(this.getCommand("dwureczna")).setExecutor(new CommandDwureczna(itemManager));
-        Objects.requireNonNull(this.getCommand("dlugodystansowa")).setExecutor(new CommandDlugodystansowa(itemManager));
+        Objects.requireNonNull(this.getCommand("one_handed")).setExecutor(new CommandOneHanded(itemManager));
+        Objects.requireNonNull(this.getCommand("two_handed")).setExecutor(new CommandTwoHanded(itemManager));
+        Objects.requireNonNull(this.getCommand("long_distance")).setExecutor(new CommandLongDistance(itemManager));
 
         Objects.requireNonNull(this.getCommand("dmg")).setExecutor(new CommandDmg(itemManager));
-        Objects.requireNonNull(this.getCommand("zrecznosc")).setExecutor(new CommandZrecznosc(itemManager));
-        Objects.requireNonNull(this.getCommand("sila")).setExecutor(new CommandSila(itemManager));
+        Objects.requireNonNull(this.getCommand("dexterity")).setExecutor(new CommandDexterity(itemManager));
+        Objects.requireNonNull(this.getCommand("strength")).setExecutor(new CommandStrength(itemManager));
 
-        Objects.requireNonNull(this.getCommand("statystyka")).setExecutor(new CommandStatystyka(itemManager));
-        Objects.requireNonNull(this.getCommand("brak")).setExecutor(new CommandBrak(itemManager));
-        Objects.requireNonNull(this.getCommand("wzmocnienie")).setExecutor(new CommandWzmocnienie(itemManager));
+        Objects.requireNonNull(this.getCommand("statystyka")).setExecutor(new CommandStatistic(itemManager));
+        Objects.requireNonNull(this.getCommand("none")).setExecutor(new CommandNone(itemManager));
+        Objects.requireNonNull(this.getCommand("upgrade")).setExecutor(new CommandUpgrade(itemManager));
 
-        Objects.requireNonNull(this.getCommand("obrona")).setExecutor(new CommandObrona(itemManager));
-        Objects.requireNonNull(this.getCommand("pancerz")).setExecutor(new CommandPancerz(itemManager));
+        Objects.requireNonNull(this.getCommand("obrona")).setExecutor(new CommandDefence(itemManager));
+        Objects.requireNonNull(this.getCommand("armor")).setExecutor(new CommandArmor(itemManager));
 
-        Objects.requireNonNull(this.getCommand("narzedzia")).setExecutor(new CommandNarzedzia(itemManager));
-        Objects.requireNonNull(this.getCommand("kilof")).setExecutor(new CommandKilof(itemManager));
-        Objects.requireNonNull(this.getCommand("kosa")).setExecutor(new CommandKosa(itemManager));
-        Objects.requireNonNull(this.getCommand("wedka")).setExecutor(new CommandWedka(itemManager));
-        Objects.requireNonNull(this.getCommand("topor")).setExecutor(new CommandTopor(itemManager));
-        Objects.requireNonNull(this.getCommand("sierp")).setExecutor(new CommandSierp(itemManager));
+        Objects.requireNonNull(this.getCommand("tool")).setExecutor(new CommandTool(itemManager));
+        Objects.requireNonNull(this.getCommand("pickaxe")).setExecutor(new CommandPickaxe(itemManager));
+        Objects.requireNonNull(this.getCommand("scythe")).setExecutor(new CommandScythe(itemManager));
+        Objects.requireNonNull(this.getCommand("fishing_rod")).setExecutor(new CommandFishingRod(itemManager));
+        Objects.requireNonNull(this.getCommand("axe")).setExecutor(new CommandAxe(itemManager));
+        Objects.requireNonNull(this.getCommand("sickle")).setExecutor(new CommandSicle(itemManager));
 
-        Objects.requireNonNull(this.getCommand("napoj")).setExecutor(new CommandNapoj(itemManager));
-        Objects.requireNonNull(this.getCommand("lingering")).setExecutor(new CommandLingering(itemManager));
-        Objects.requireNonNull(this.getCommand("splash")).setExecutor(new CommandSplash(itemManager));
-        Objects.requireNonNull(this.getCommand("zwykly")).setExecutor(new CommandZwykly(itemManager));
-        Objects.requireNonNull(this.getCommand("efekty")).setExecutor(new CommandEfekty(itemManager));
-        Objects.requireNonNull(this.getCommand("kolornapoju")).setExecutor(new CommandKolorNapoju(itemManager));
-        Objects.requireNonNull(this.getCommand("listaefektow")).setExecutor(new CommandlistaEfektow());
+        Objects.requireNonNull(this.getCommand("drink")).setExecutor(new CommandDrink(itemManager));
+        Objects.requireNonNull(this.getCommand("efekty")).setExecutor(new CommandEffects(itemManager));
+        Objects.requireNonNull(this.getCommand("kolornapoju")).setExecutor(new CommandDrinkColor(itemManager));
+        Objects.requireNonNull(this.getCommand("listaefektow")).setExecutor(new CommandEffectList());
 
-        Objects.requireNonNull(this.getCommand("przerwijrobienieitemu")).setExecutor(new CommandPrzerwijRobienieItemu(itemManager));
+        Objects.requireNonNull(this.getCommand("przerwijrobienieitemu")).setExecutor(new CommandStopCreatingItem(itemManager));
 
         Objects.requireNonNull(this.getCommand("staty")).setExecutor(new CommandStaty(this));
 

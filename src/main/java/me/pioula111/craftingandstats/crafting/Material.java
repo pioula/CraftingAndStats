@@ -1,9 +1,6 @@
 package me.pioula111.craftingandstats.crafting;
 
-import me.pioula111.craftingandstats.NameSpacedKeys;
-import me.pioula111.craftingandstats.itemy.MyItem;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
+import me.pioula111.craftingandstats.items.myItems.MyItem;
 
 public class Material {
     private MyItem material;

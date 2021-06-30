@@ -6,13 +6,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import me.pioula111.craftingandstats.crafting.json.deserializers.*;
 import me.pioula111.craftingandstats.crafting.json.serializers.*;
-import me.pioula111.craftingandstats.itemy.wlasciwosci.Wlasciwosc;
-import me.pioula111.craftingandstats.itemy.wlasciwosci.bronie.TypBroni;
-import me.pioula111.craftingandstats.itemy.wlasciwosci.napoje.Efekt;
-import me.pioula111.craftingandstats.itemy.wlasciwosci.narzedzia.TypNarzedzia;
-import me.pioula111.craftingandstats.itemy.wlasciwosci.rodzaje.RodzajItemu;
-import me.pioula111.craftingandstats.itemy.wlasciwosci.statystyki.Statystyka;
-import me.pioula111.craftingandstats.itemy.wlasciwosci.ulepszenia.Ulepszenie;
+import me.pioula111.craftingandstats.items.properites.Property;
+import me.pioula111.craftingandstats.items.properites.drinks.Effect;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 
@@ -32,13 +27,13 @@ public class CraftingJsonManager {
         gsonBuilder.setPrettyPrinting();
         craftingManager = new CraftingManager();
 
-        gsonBuilder.registerTypeAdapter(Efekt.class, new EfektSerializer());
+        gsonBuilder.registerTypeAdapter(Effect.class, new EfektSerializer());
         gsonBuilder.registerTypeAdapter(Material.class, new MaterialSerializer());
-        gsonBuilder.registerTypeAdapter(Wlasciwosc.class, new WlasciwoscSerializer());
+        gsonBuilder.registerTypeAdapter(Property.class, new WlasciwoscSerializer());
 
-        gsonBuilder.registerTypeAdapter(Efekt.class, new EfektDeserializer());
+        gsonBuilder.registerTypeAdapter(Effect.class, new EfektDeserializer());
         gsonBuilder.registerTypeAdapter(Material.class, new MaterialDeserializer());
-        gsonBuilder.registerTypeAdapter(Wlasciwosc.class, new WlasciwoscDeserializer());
+        gsonBuilder.registerTypeAdapter(Property.class, new WlasciwoscDeserializer());
 
         gson = gsonBuilder.create();
         this.file = file;

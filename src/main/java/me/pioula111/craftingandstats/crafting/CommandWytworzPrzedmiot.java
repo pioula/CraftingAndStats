@@ -2,10 +2,9 @@ package me.pioula111.craftingandstats.crafting;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
-import me.pioula111.craftingandstats.itemy.MyItem;
+import me.pioula111.craftingandstats.items.myItems.MyItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,8 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Set;
 
 public class CommandWytworzPrzedmiot implements CommandExecutor {
     public static final String PASSWORD = "s=D3A{8E>GV~L}k3";
@@ -25,11 +22,11 @@ public class CommandWytworzPrzedmiot implements CommandExecutor {
     }
 
     private boolean isEqual(MyItem a, ItemStack b) {
-        if (!(b.hasItemMeta() && b.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.nazwaKey, PersistentDataType.STRING)))
+        if (!(b.hasItemMeta() && b.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.KEY_NAME, PersistentDataType.STRING)))
             return false;
 
         return a.getNazwa()
-                .equals(b.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.nazwaKey, PersistentDataType.STRING));
+                .equals(b.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.KEY_NAME, PersistentDataType.STRING));
     }
 
     @Override
@@ -90,7 +87,7 @@ public class CommandWytworzPrzedmiot implements CommandExecutor {
             }
         }
 
-         player.getInventory().addItem(recipe.getResult().getMaterial().makeItem(recipe.getResult().getAmount()));
+        player.getInventory().addItem(recipe.getResult().getMaterial().makeItem(recipe.getResult().getAmount()));
         player.sendMessage(ChatColor.GREEN + "Wytworzono przedmiot!");
 
         return true;
