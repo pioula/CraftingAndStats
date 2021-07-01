@@ -1,7 +1,5 @@
 package me.pioula111.craftingandstats;
 
-import me.pioula111.craftingandstats.crafting.*;
-import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
 import me.pioula111.craftingandstats.items.ItemManager;
 import me.pioula111.craftingandstats.items.commands.additionCommands.CommandNone;
 import me.pioula111.craftingandstats.items.commands.additionCommands.CommandUpgrade;
@@ -31,7 +29,6 @@ import java.io.File;
 import java.util.Objects;
 
 public final class CraftingAndStats extends JavaPlugin {
-    private CraftingJsonManager jsonManager;
     private File jsonFile;
     private NameSpacedKeys nameSpacedKeys;
     private StatManager statManager;
@@ -40,38 +37,15 @@ public final class CraftingAndStats extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         jsonFile = new File("plugins/CraftingAndStats/crafting_and_stats.json");
-        jsonManager = new CraftingJsonManager(jsonFile);
         nameSpacedKeys = new NameSpacedKeys(this);
         statManager = new StatManager();
 
         PluginManager pluginManager = getServer().getPluginManager();
 
-        NauczFachuManager nauczFachuManager = new NauczFachuManager(statManager, this);
-
-        pluginManager.registerEvents(new UsingAndRemovingWorkBench(jsonManager.getCraftingManager(), this, statManager), this);
         pluginManager.registerEvents(new Marker(), this);
-        pluginManager.registerEvents(nauczFachuManager, this);
-
 
         pluginManager.registerEvents(new StatJsonOnJoin(statManager), this);
         pluginManager.registerEvents(new StatJsonOnQuit(statManager), this);
-
-
-        Objects.requireNonNull(this.getCommand("nowareceptura")).setExecutor(new CommandNowaReceptura(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("nowycrafting")).setExecutor(new CommandNowyCrafting(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("nowyfach")).setExecutor(new CommandNowyFach(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("postawcrafting")).setExecutor(new CommandPostawCrafting(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("destroyer")).setExecutor(new CommandDestroyer(this));
-        Objects.requireNonNull(this.getCommand("wytworzprzedmiot")).setExecutor(new CommandWytworzPrzedmiot(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("craftingi")).setExecutor(new CommandCraftingi(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("fachy")).setExecutor(new CommandFachy(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("receptury")).setExecutor(new CommandReceptury(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("nauczfachu")).setExecutor(new CommandNauczFachu(statManager, nauczFachuManager,this));
-        Objects.requireNonNull(this.getCommand("akceptujnauke")).setExecutor(new CommandAkceptujNauke(statManager, nauczFachuManager));
-        Objects.requireNonNull(this.getCommand("ustawfach")).setExecutor(new CommandUstawFach(statManager));
-        Objects.requireNonNull(this.getCommand("usunfach")).setExecutor(new CommandUsunFach(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("usuncrafting")).setExecutor(new CommandUsunCrafting(jsonManager.getCraftingManager()));
-        Objects.requireNonNull(this.getCommand("usunrecepture")).setExecutor(new CommandUsunRecepture(jsonManager.getCraftingManager()));
 
         ItemManager itemManager = new ItemManager();
         Objects.requireNonNull(this.getCommand("stworzitem")).setExecutor(new CommandCreateItem(itemManager));
@@ -121,7 +95,6 @@ public final class CraftingAndStats extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        jsonManager.writeToJson();
         statManager.savePlayers();
     }
 }

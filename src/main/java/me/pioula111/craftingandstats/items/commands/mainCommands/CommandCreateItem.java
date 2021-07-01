@@ -2,10 +2,9 @@ package me.pioula111.craftingandstats.items.commands.mainCommands;
 
 import me.pioula111.craftingandstats.MenuHelper;
 import me.pioula111.craftingandstats.items.myItems.*;
-import me.pioula111.craftingandstats.items.properites.Property;
+import me.pioula111.craftingandstats.items.myItems.MyTool;
 import me.pioula111.craftingandstats.items.ItemManager;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextColor;
@@ -18,11 +17,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandCreateItem implements CommandExecutor {
     private ItemManager itemManager;
-    private MyItem[] itemTypes = {new MyOthers(), new MyArmor(), new MyWeapon(), new MyDrink(),
-                                  new MyFood(), new MyHandCraft(), new MyTool()};
+    private MyItem[] itemTypes;
 
     public CommandCreateItem(ItemManager itemManager) {
         this.itemManager = itemManager;
+        itemTypes = new MyItem[] {new MyOthers(), new MyArmor(), new MyWeapon(), new MyDrink(),
+                new MyFood(), new MyHandCraft(), new MyTool()};
     }
 
     @Override
@@ -88,9 +88,6 @@ public class CommandCreateItem implements CommandExecutor {
 
         if (itemTypes[6].toString().equals(arg))
             return new MyTool();
-
-        if (itemTypes[7].toString().equals(arg))
-            return new MyOthers();
 
         return null;
     }

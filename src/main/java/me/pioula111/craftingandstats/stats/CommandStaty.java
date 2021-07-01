@@ -5,7 +5,6 @@ import de.themoep.inventorygui.GuiStateElement;
 import de.themoep.inventorygui.InventoryGui;
 import de.themoep.inventorygui.StaticGuiElement;
 import me.pioula111.craftingandstats.CraftingAndStats;
-import me.pioula111.craftingandstats.crafting.json.CraftingManager;
 import me.pioula111.craftingandstats.stats.json.StatManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;

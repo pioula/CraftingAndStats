@@ -68,12 +68,14 @@ public class MyWeapon extends MyItem {
 
         lore.add(Component.text().content(weaponType.prettyToString()).style(MyItem.LORE_COLOR).build());
         lore.add(Component.text().content("Wymagana " + statistic.prettyToString() + ": " + statisticLevel).style(MyItem.LORE_COLOR).build());
+        lore.add(Component.text().content("Ulepszenie: " + addition.prettyToString()).style(MyItem.LORE_COLOR).build());
         meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,new AttributeModifier(UUID.randomUUID(), "dmg", dmg, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
 
         pdc.set(NameSpacedKeys.KEY_WEAPON_TYPE, PersistentDataType.STRING, weaponType.toString());
         pdc.set(NameSpacedKeys.KEY_DMG, PersistentDataType.DOUBLE, dmg);
         pdc.set(NameSpacedKeys.KEY_STATISTIC, PersistentDataType.STRING, statistic.toString());
         pdc.set(NameSpacedKeys.KEY_STATISTIC_LEVEL, PersistentDataType.INTEGER, statisticLevel);
+        pdc.set(NameSpacedKeys.KEY_ADDITION, PersistentDataType.STRING, addition.toString());
         meta.setUnbreakable(true);
 
         meta.lore(lore);

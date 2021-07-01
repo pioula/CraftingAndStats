@@ -53,13 +53,17 @@ public class MyArmor extends MyItem {
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
         List<Component> lore = item.lore();
 
-        lore.add(Component.text().content("Ulepszenie: " + addition.prettyToString()).style(MyItem.LORE_COLOR).build());
+        if (armor != 0) {
+            lore.add(Component.text().content("Ulepszenie: " + addition.prettyToString()).style(MyItem.LORE_COLOR).build());
+            pdc.set(NameSpacedKeys.KEY_ADDITION, PersistentDataType.STRING, addition.toString());
+        }
+
 
         meta.addAttributeModifier(Attribute.GENERIC_ARMOR,new AttributeModifier(UUID.randomUUID(), "armor", armor, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST));
         meta.setUnbreakable(true);
 
         pdc.set(NameSpacedKeys.KEY_ARMOR, PersistentDataType.INTEGER, armor);
-        pdc.set(NameSpacedKeys.KEY_ADDITION, PersistentDataType.STRING, addition.toString());
+
 
         meta.lore(lore);
         item.setItemMeta(meta);

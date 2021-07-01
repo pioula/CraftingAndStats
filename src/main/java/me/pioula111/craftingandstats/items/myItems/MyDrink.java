@@ -2,6 +2,7 @@ package me.pioula111.craftingandstats.items.myItems;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.items.properites.drinks.Effect;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -41,17 +42,20 @@ public class MyDrink extends MyItem {
 
     public MyDrink() {
         this.type = toString();
+        effects = new ArrayList<>();
     }
 
     @Override
     public ItemStack makeItem(int amount) {
         ItemStack item = super.basicMakeItem(this, amount);
         PotionMeta meta = (PotionMeta) item.getItemMeta();
+        meta.lore(new ArrayList<>());
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
 
         for (Effect effect : effects) {
             meta.addCustomEffect(new PotionEffect(effect.getEffectType(), effect.getTime(), effect.getLevel()),true);
         }
+        meta.setColor(Color.fromRGB(drinkColor));
 
         pdc.set(NameSpacedKeys.KEY_EFFECTS, PersistentDataType.STRING, effects.toString());
         pdc.set(NameSpacedKeys.KEY_DRINK_COLOR, PersistentDataType.INTEGER, drinkColor);
@@ -71,6 +75,9 @@ public class MyDrink extends MyItem {
     }
 
     public void addEffect(Effect effect) {
+        if (effects == null)
+            effects = new ArrayList<>();
+
         effects.add(effect);
     }
 

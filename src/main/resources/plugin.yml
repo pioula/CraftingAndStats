@@ -6,58 +6,35 @@ authors: [ pioula111 ]
 description: Crafting and Stats and fighting
 
 commands:
-  nowareceptura:
-    description: nowareceptura
-    usage: Error
-    permission: Operator
-  nowycrafting:
-    description: nowycrafting
-    usage: Error
-    permission: Operator
-  nowyfach:
-    description: nowyfach
-    usage: Error
-    permission: Operator
-  postawcrafting:
-    description: postawcrafting
-    usage: Error
-    permission: Operator
-  destroyer:
-    description: destroyer
-    usage: Error
-    permission: Operator
-  wytworzprzedmiot:
-    description: wytworzprzedmiot
-    usage: Error
   stworzitem:
     description: stworzitem
     usage: Error
     permission: Operator
-  rzemieslniczy:
+  handcraft:
     description: rzemieslniczy
     usage: Error
     permission: Operator
-  zywnosc:
+  food:
     description: zywnosc
     usage: Error
     permission: Operator
-  inne:
+  others:
     description: zywnosc
     usage: Error
     permission: Operator
-  bron:
+  weapon:
     description: bron
     usage: Error
     permission: Operator
-  jednoreczna:
+  one_handed:
     description: jednoreczna
     usage: Error
     permission: Operator
-  dwureczna:
+  two_handed:
     description: dwureczna
     usage: Error
     permission: Operator
-  dlugodystansowa:
+  long_distance:
     description: dlugodystansowa
     usage: Error
     permission: Operator
@@ -65,11 +42,11 @@ commands:
     description: dmg
     usage: Error
     permission: Operator
-  zrecznosc:
+  dexterity:
     description: zrecznosc
     usage: Error
     permission: Operator
-  sila:
+  strength:
     description: sila
     usage: Error
     permission: Operator
@@ -77,11 +54,11 @@ commands:
     description: statystyka
     usage: Error
     permission: Operator
-  brak:
+  none:
     description: brak
     usage: Error
     permission: Operator
-  wzmocnienie:
+  upgrade:
     description: wzmocnienie
     usage: Error
     permission: Operator
@@ -89,48 +66,36 @@ commands:
     description: obrona
     usage: Error
     permission: Operator
-  pancerz:
+  armor:
     description: pancerz
     usage: Error
     permission: Operator
-  narzedzia:
+  tool:
     description: narzedzia
     usage: Error
     permission: Operator
-  kilof:
+  pickaxe:
     description: kilof
     usage: Error
     permission: Operator
-  kosa:
+  scythe:
     description: kosa
     usage: Error
     permission: Operator
-  sierp:
+  sickle:
     description: sierp
     usage: Error
     permission: Operator
-  topor:
+  axe:
     description: topor
     usage: Error
     permission: Operator
-  wedka:
+  fishing_rod:
     description: wedka
     usage: Error
     permission: Operator
-  napoj:
+  drink:
     description: napoj
-    usage: Error
-    permission: Operator
-  lingering:
-    description: lingering
-    usage: Error
-    permission: Operator
-  splash:
-    description: splash
-    usage: Error
-    permission: Operator
-  zwykly:
-    description: zwykly
     usage: Error
     permission: Operator
   efekty:
@@ -145,46 +110,10 @@ commands:
     description: przerwijrobienieitemu
     usage: Error
     permission: Operator
-  craftingi:
-    description: craftingi
-    usage: Error
-    permission: Operator
-  fachy:
-    description: fachy
-    usage: Error
-    permission: Operator
-  receptury:
-    description: receptury
+  listaefektow:
+    description: listaefektow
     usage: Error
     permission: Operator
   staty:
     description: staty
     usage: Error
-  nauczfachu:
-    description: nauczfachu
-    usage: Error
-  akceptujnauke:
-    description: akceptujnauke
-    usage: Error
-  ustawfach:
-    description: ustawfach
-    usage: Error
-    permission: Operator
-  listaefektow:
-    description: listaefektow
-    usage: Error
-    permission: Operator
-  usunfach:
-    description: usunfach
-    usage: Error
-    permission: Operator
-  usuncrafting:
-    description: usuncrafting
-    usage: Error
-    permission: Operator
-  usunrecepture:
-    description: usunrecepture
-    usage: Error
-    permission: Operator
-
-

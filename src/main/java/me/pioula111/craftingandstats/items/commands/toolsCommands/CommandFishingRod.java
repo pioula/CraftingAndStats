@@ -2,10 +2,8 @@ package me.pioula111.craftingandstats.items.commands.toolsCommands;
 
 import me.pioula111.craftingandstats.items.ItemManager;
 import me.pioula111.craftingandstats.items.commands.CommandsHelper;
-import me.pioula111.craftingandstats.items.myItems.MyItem;
 import me.pioula111.craftingandstats.items.myItems.MyTool;
 import me.pioula111.craftingandstats.items.properites.tools.FishingRod;
-import me.pioula111.craftingandstats.items.properites.tools.Pickaxe;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

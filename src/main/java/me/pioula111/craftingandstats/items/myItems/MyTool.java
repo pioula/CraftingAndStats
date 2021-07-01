@@ -4,12 +4,17 @@ import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.items.properites.Property;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-public class MyTool extends MyItem{
+import java.util.UUID;
+
+public class MyTool extends MyItem {
     private Property toolType;
 
     public MyTool(ItemStack item) {
@@ -42,6 +47,7 @@ public class MyTool extends MyItem{
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
 
         pdc.set(NameSpacedKeys.KEY_TOOL_TYPE, PersistentDataType.STRING, toolType.toString());
+        meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,new AttributeModifier(UUID.randomUUID(), "dmg", 0, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
 
         item.setItemMeta(meta);
         return item;
@@ -49,12 +55,12 @@ public class MyTool extends MyItem{
 
     @Override
     public String toString() {
-        return null;
+        return "tool";
     }
 
     @Override
     public String prettyToString() {
-        return null;
+        return "Narzędzie";
     }
 
     public void setToolType(Property toolType) {
