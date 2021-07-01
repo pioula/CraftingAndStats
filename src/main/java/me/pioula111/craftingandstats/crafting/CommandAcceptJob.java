@@ -11,11 +11,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandAkceptujNauke implements CommandExecutor {
+public class CommandAcceptJob implements CommandExecutor {
     private StatManager statManager;
-    private NauczFachuManager manager;
+    private TeachJobManager manager;
 
-    public CommandAkceptujNauke(StatManager statManager, NauczFachuManager manager) {
+    public CommandAcceptJob(StatManager statManager, TeachJobManager manager) {
         this.statManager = statManager;
         this.manager = manager;
     }

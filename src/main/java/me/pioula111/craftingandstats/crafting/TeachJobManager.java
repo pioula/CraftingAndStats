@@ -19,12 +19,12 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class NauczFachuManager implements Listener {
+public class TeachJobManager implements Listener {
     private HashSet<Player> teachers;
     private HashMap<Player, Player> students;
     private StatManager statManager;
     private CraftingAndStats plugin;
-    public NauczFachuManager(StatManager statManager, CraftingAndStats plugin) {
+    public TeachJobManager(StatManager statManager, CraftingAndStats plugin) {
         this.teachers = new HashSet<>();
         students = new HashMap<>();
         this.statManager = statManager;

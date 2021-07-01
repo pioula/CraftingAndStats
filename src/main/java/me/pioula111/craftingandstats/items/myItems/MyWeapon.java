@@ -1,5 +1,7 @@
 package me.pioula111.craftingandstats.items.myItems;
 
+import me.pioula111.craftingandstats.gui.ComponentWrapper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.items.properites.Property;
 import net.kyori.adventure.text.Component;
@@ -66,9 +68,9 @@ public class MyWeapon extends MyItem {
         List<Component> lore = item.lore();
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
 
-        lore.add(Component.text().content(weaponType.prettyToString()).style(MyItem.LORE_COLOR).build());
-        lore.add(Component.text().content("Wymagana " + statistic.prettyToString() + ": " + statisticLevel).style(MyItem.LORE_COLOR).build());
-        lore.add(Component.text().content("Ulepszenie: " + addition.prettyToString()).style(MyItem.LORE_COLOR).build());
+        lore.add(ComponentWrapper.lore(weaponType.prettyToString()));
+        lore.add(ComponentWrapper.lore("Wymagana " + statistic.prettyToString() + ": " + statisticLevel));
+        lore.add(ComponentWrapper.lore("Ulepszenie: " + addition.prettyToString()));
         meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,new AttributeModifier(UUID.randomUUID(), "dmg", dmg, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
 
         pdc.set(NameSpacedKeys.KEY_WEAPON_TYPE, PersistentDataType.STRING, weaponType.toString());

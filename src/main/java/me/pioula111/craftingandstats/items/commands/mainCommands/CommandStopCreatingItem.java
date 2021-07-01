@@ -1,6 +1,6 @@
 package me.pioula111.craftingandstats.itemy.komendy.komendyInne;
 
-import me.pioula111.craftingandstats.MenuHelper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.items.ItemManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;

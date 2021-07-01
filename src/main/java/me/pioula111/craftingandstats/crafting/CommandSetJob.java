@@ -9,10 +9,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandUstawFach implements CommandExecutor {
+public class CommandSetJob implements CommandExecutor {
     private StatManager statManager;
 
-    public CommandUstawFach(StatManager statManager) {
+    public CommandSetJob(StatManager statManager) {
         this.statManager = statManager;
     }
 

@@ -1,6 +1,6 @@
 package me.pioula111.craftingandstats.crafting;
 
-import me.pioula111.craftingandstats.MenuHelper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -11,43 +11,43 @@ import java.util.HashSet;
 
 public class Job {
     private String name;
-    private HashSet<WorkBench> workBenches;
+    private HashSet<Crafting> craftings;
 
     public Job(String name) {
         this.name = name;
-        workBenches = new HashSet<>();
+        craftings = new HashSet<>();
     }
 
     public String getName() {
         return name;
     }
 
-    public void addWorkbench(WorkBench newWorkbench) {
-        if (workBenches == null)
-            workBenches = new HashSet<>();
-        workBenches.add(newWorkbench);
+    public void addCrafting(Crafting newWorkbench) {
+        if (craftings == null)
+            craftings = new HashSet<>();
+        craftings.add(newWorkbench);
     }
 
-    public boolean hasWorkBench(String arg) {
-        if (workBenches == null)
+    public boolean hasCrafting(String arg) {
+        if (craftings == null)
             return false;
 
-        for (WorkBench workBench : workBenches) {
-            if (workBench.getName().equals(arg))
+        for (Crafting crafting : craftings) {
+            if (crafting.getName().equals(arg))
                 return true;
         }
 
         return false;
     }
 
-    public void removeWorkBench(String arg) {
-        workBenches.removeIf(workBench -> workBench.getName().equals(arg));
+    public void removeCrafting(String arg) {
+        craftings.removeIf(workBench -> workBench.getName().equals(arg));
     }
 
-    public WorkBench getWorkBench(String arg) {
-        for (WorkBench workBench : workBenches) {
-            if (workBench.getName().equals(arg))
-                return workBench;
+    public Crafting getCrafting(String arg) {
+        for (Crafting crafting : craftings) {
+            if (crafting.getName().equals(arg))
+                return crafting;
         }
 
         return null;
@@ -58,8 +58,8 @@ public class Job {
         return this.name.replace("_", " ");
     }
 
-    public HashSet<WorkBench> getWorkBenches() {
-        return workBenches;
+    public HashSet<Crafting> getCraftings() {
+        return craftings;
     }
 
     public Component menuComponent(int nr) {

@@ -1,10 +1,9 @@
 package me.pioula111.craftingandstats.items.myItems;
 
-import me.pioula111.craftingandstats.ComponentWrapper;
+import me.pioula111.craftingandstats.gui.ComponentWrapper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.Style;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -18,7 +17,7 @@ public abstract class MyItem {
     protected String name;
     protected Material swappedItem;
     protected String type;
-    protected static final Style LORE_COLOR = Style.style(TextColor.color(0x009999));
+
 
     public MyItem() {
         this.type = this.toString();
@@ -28,7 +27,7 @@ public abstract class MyItem {
         this.type = this.toString();
     }
 
-    public static MyItem createMyItem(ItemStack item) {
+    public static MyItem fromItemStack(ItemStack item) {
         if (item.hasItemMeta()) {
             PersistentDataContainer pdc = item.getItemMeta().getPersistentDataContainer();
             if (!pdc.has(NameSpacedKeys.KEY_TYPE, PersistentDataType.STRING))
@@ -80,7 +79,7 @@ public abstract class MyItem {
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
         List<Component> lore = new ArrayList<>();
 
-        lore.add(Component.text().content(type.prettyToString()).style(MyItem.LORE_COLOR).build());
+        lore.add(ComponentWrapper.lore(type.prettyToString()));
 
         meta.displayName(ComponentWrapper.itemName(name));
 
@@ -92,5 +91,9 @@ public abstract class MyItem {
         meta.lore(lore);
         item.setItemMeta(meta);
         return item;
+    }
+
+    public String getName() {
+        return name;
     }
 }

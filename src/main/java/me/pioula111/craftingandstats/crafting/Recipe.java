@@ -1,24 +1,26 @@
 package me.pioula111.craftingandstats.crafting;
 
-import me.pioula111.craftingandstats.MenuHelper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class Recipe {
+public class Recipe implements Comparable<Recipe> {
     private String name;
-    private ArrayList<Material> materials;
-    private Material result;
+    private ArrayList<Ingredient> ingredients;
+    private Ingredient result;
 
-    public Recipe(String name, ArrayList<Material> materials, Material result) {
-        this.materials = materials;
+    public Recipe(String name, ArrayList<Ingredient> ingredients, Ingredient result) {
+        this.ingredients = ingredients;
         this.name = name;
         this.result = result;
     }
 
-    public ArrayList<Material> getMaterials() {
-        return materials;
+    public ArrayList<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     public String getName() {
@@ -27,23 +29,20 @@ public class Recipe {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(name.replace("_"," "));
-
-        builder.append(": ");
-        for (Material material : materials) {
-            builder.append(material.toString()).append(", ");
-        }
-
-        return builder.toString();
+        return name.replace("_"," ");
     }
 
-    public Material getResult() {
+    public Ingredient getResult() {
         return result;
     }
 
     public Component menuComponent(int nr) {
         return Component.text().content("   " + nr + ". ").style(Style.style(MenuHelper.DECORATIONS)).append(Component.text()
                 .content(this + "\n").style(Style.style(MenuHelper.RECIPE_NAME))).build();
+    }
+
+    @Override
+    public int compareTo(@NotNull Recipe o) {
+        return name.compareTo(o.getName());
     }
 }

@@ -8,16 +8,16 @@ import me.pioula111.craftingandstats.items.properites.drinks.Effect;
 
 import java.lang.reflect.Type;
 
-public class EfektSerializer implements JsonSerializer<Effect> {
+public class EffectSerializer implements JsonSerializer<Effect> {
     @Override
     public JsonElement serialize(Effect src, Type typeOfSrc, JsonSerializationContext context) {
         if(src == null)
             return null;
 
         JsonObject json = new JsonObject();
-        json.addProperty("typEfektu", src.getEffectType().getName());
-        json.addProperty("czasTrwania", src.getTime());
-        json.addProperty("moc", src.getLevel());
+        json.addProperty("effectType", src.getEffectType().getName());
+        json.addProperty("time", src.getTime());
+        json.addProperty("level", src.getLevel());
         return json;
     }
 }

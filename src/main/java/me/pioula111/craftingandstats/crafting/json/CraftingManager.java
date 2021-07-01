@@ -1,7 +1,7 @@
 package me.pioula111.craftingandstats.crafting.json;
 
 import me.pioula111.craftingandstats.crafting.Job;
-import me.pioula111.craftingandstats.crafting.WorkBench;
+import me.pioula111.craftingandstats.crafting.Crafting;
 
 import java.util.HashSet;
 
@@ -49,17 +49,17 @@ public class CraftingManager {
             return false;
 
         for (Job job : jobs) {
-            if (job.hasWorkBench(arg))
+            if (job.hasCrafting(arg))
                 return true;
         }
 
         return false;
     }
 
-    public WorkBench getCrafting(String crafting) {
+    public Crafting getCrafting(String crafting) {
         for (Job job : jobs) {
-            if (job.hasWorkBench(crafting)) {
-                return job.getWorkBench(crafting);
+            if (job.hasCrafting(crafting)) {
+                return job.getCrafting(crafting);
             }
         }
 

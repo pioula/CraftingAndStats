@@ -2,16 +2,16 @@ package me.pioula111.craftingandstats.crafting;
 
 import me.pioula111.craftingandstats.items.myItems.MyItem;
 
-public class Material {
-    private MyItem material;
+public class Ingredient {
+    private MyItem ingredient;
     private int amount;
-    public Material(MyItem material, int amount) {
-        this.material = material;
+    public Ingredient(MyItem ingredient, int amount) {
+        this.ingredient = ingredient;
         this.amount = amount;
     }
 
-    public MyItem getMaterial() {
-        return material;
+    public MyItem getIngredient() {
+        return ingredient;
     }
 
     public int getAmount() {
@@ -20,6 +20,6 @@ public class Material {
 
     @Override
     public String toString() {
-        return material.getNazwa().replace("_", " ") + " x" + amount;
+        return ingredient.getName().replace("_"," ") + " x" + amount;
     }
 }

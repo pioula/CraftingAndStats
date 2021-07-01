@@ -1,6 +1,6 @@
 package me.pioula111.craftingandstats.crafting;
 
-import me.pioula111.craftingandstats.MenuHelper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -13,11 +13,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-
-public class CommandCraftingi implements CommandExecutor {
+public class CommandRecipes implements CommandExecutor {
     private CraftingManager craftingManager;
 
-    public CommandCraftingi(CraftingManager craftingManager) {
+    public CommandRecipes(CraftingManager craftingManager) {
         this.craftingManager = craftingManager;
     }
 
@@ -31,24 +30,24 @@ public class CommandCraftingi implements CommandExecutor {
             return true;
         }
 
-        if (!craftingManager.hasJob(args[0])) {
-            sender.sendMessage(ChatColor.RED + "Nie ma takiego fachu!");
+        if (!craftingManager.hasCrafting(args[0])) {
+            sender.sendMessage(ChatColor.RED + "Nie ma takiego craftingu!");
             return true;
         }
 
-         Job job = craftingManager.getJob(args[0]);
+        Crafting crafting = craftingManager.getCrafting(args[0]);
 
-        sender.sendMessage(createMenu(job));
+        sender.sendMessage(createMenu(crafting));
         return true;
     }
 
-    private TextComponent createMenu(Job job) {
+    private TextComponent createMenu(Crafting crafting) {
         TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuHelper.DECORATIONS))
-                .append(Component.text().content("Craftingi fachu " + job).style(Style.style(MenuHelper.MAIN_NAME, TextDecoration.BOLD)))
+                .append(Component.text().content("Receptury craftingu " + crafting).style(Style.style(MenuHelper.MAIN_NAME, TextDecoration.BOLD)))
                 .append(Component.text().content(" ᚾᛁᚷᚺᛏ\n").style(Style.style(MenuHelper.DECORATIONS))).build();
         int enumerator = 0;
-        for (WorkBench workBench : job.getWorkBenches()) {
-            menu = menu.append(workBench.menuComponent(++enumerator));
+        for (Recipe recipe : crafting.getRecipes()) {
+            menu = menu.append(recipe.menuComponent(++enumerator));
         }
 
         return menu;

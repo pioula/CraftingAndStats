@@ -1,12 +1,10 @@
 package me.pioula111.craftingandstats.items.commands.toolsCommands;
 
-import me.pioula111.craftingandstats.MenuHelper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.items.ItemManager;
 import me.pioula111.craftingandstats.items.commands.CommandsHelper;
-import me.pioula111.craftingandstats.items.myItems.MyItem;
 import me.pioula111.craftingandstats.items.properites.tools.*;
 import net.kyori.adventure.text.TextComponent;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

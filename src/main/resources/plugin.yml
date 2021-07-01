@@ -117,3 +117,57 @@ commands:
   staty:
     description: staty
     usage: Error
+  akceptujnauke:
+    description: akceptujnauke
+    usage: Error
+  craftingi:
+    description: craftingi
+    usage: Error
+    permission: Operator
+  destroyer:
+    description: destroyer
+    usage: Error
+    permission: Operator
+  fachy:
+    description: fachy
+    usage: Error
+    permission: Operator
+  nowyfach:
+    description: nowyfach
+    usage: Error
+    permission: Operator
+  nowareceptura:
+    description: nowareceptura
+    usage: Error
+    permission: Operator
+  nowycrafting:
+    description: nowycrafting
+    usage: Error
+    permission: Operator
+  receptury:
+    description: receptury
+    usage: Error
+    permission: Operator
+  usunrecepture:
+    description: usunrecepture
+    usage: Error
+    permission: Operator
+  postawcrafting:
+    description: postawcrafting
+    usage: Error
+    permission: Operator
+  ustawfach:
+    description: ustawfach
+    usage: Error
+    permission: Operator
+  nauczfachu:
+    description: nauczfachu
+    usage: Error
+  usuncrafting:
+    description: usuncrafting
+    usage: Error
+    permission: Operator
+  usunfach:
+    description: usunfach
+    usage: Error
+    permission: Operator

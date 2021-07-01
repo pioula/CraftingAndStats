@@ -1,6 +1,6 @@
 package me.pioula111.craftingandstats.items.commands.weaponsCommands;
 
-import me.pioula111.craftingandstats.MenuHelper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.items.ItemManager;
 import me.pioula111.craftingandstats.items.commands.CommandsHelper;
 import me.pioula111.craftingandstats.items.myItems.MyWeapon;

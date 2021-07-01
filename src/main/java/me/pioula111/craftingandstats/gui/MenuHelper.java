@@ -1,4 +1,4 @@
-package me.pioula111.craftingandstats;
+package me.pioula111.craftingandstats.gui;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
@@ -11,6 +11,7 @@ public class MenuHelper {
     public final static TextColor MAIN_NAME = TextColor.color(0x8088FF);
     public final static TextColor RECIPE_NAME = TextColor.color(0x947B1E);
     public final static TextColor LPM_COLOR = TextColor.color(0xDECA1B);
+    public static final Style LORE_COLOR = Style.style(TextColor.color(0x009999));
 
     public static TextComponent createMenu(String mainName) {
         return Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuHelper.DECORATIONS))

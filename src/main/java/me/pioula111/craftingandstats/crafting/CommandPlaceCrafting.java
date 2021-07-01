@@ -12,10 +12,10 @@ import org.bukkit.entity.*;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandPostawCrafting implements CommandExecutor {
+public class CommandPlaceCrafting implements CommandExecutor {
     private CraftingManager craftingManager;
 
-    public CommandPostawCrafting(CraftingManager craftingManager) {
+    public CommandPlaceCrafting(CraftingManager craftingManager) {
         this.craftingManager = craftingManager;
     }
 

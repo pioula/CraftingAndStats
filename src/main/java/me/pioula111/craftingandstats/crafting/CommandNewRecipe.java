@@ -13,10 +13,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class CommandNowaReceptura implements CommandExecutor {
+public class CommandNewRecipe implements CommandExecutor {
     private CraftingManager craftingManager;
 
-    public CommandNowaReceptura(CraftingManager craftingManager) {
+    public CommandNewRecipe(CraftingManager craftingManager) {
         this.craftingManager = craftingManager;
     }
 
@@ -33,14 +33,14 @@ public class CommandNowaReceptura implements CommandExecutor {
             return true;
         }
 
-        WorkBench workBench;
+        Crafting crafting;
         if (!craftingManager.hasCrafting(args[0])) {
             player.sendMessage(ChatColor.RED + "Nie ma takiego craftingu!");
             return true;
         }
-        workBench = craftingManager.getCrafting(args[0]);
+        crafting = craftingManager.getCrafting(args[0]);
 
-        if (workBench.hasRecipe(args[1])) {
+        if (crafting.hasRecipe(args[1])) {
             player.sendMessage(ChatColor.RED + "Jest już taka receptura!");
             return true;
         }
@@ -78,14 +78,14 @@ public class CommandNowaReceptura implements CommandExecutor {
         }
 
 
-        ArrayList<Material> materials = new ArrayList<>();
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             if (player.getInventory().getItem(i) != null) {
-                materials.add(new Material(new MyItem(player.getInventory().getItem(i)), player.getInventory().getItem(i).getAmount()));
+                ingredients.add(new Ingredient(MyItem.fromItemStack(player.getInventory().getItem(i)), player.getInventory().getItem(i).getAmount()));
             }
         }
 
-        workBench.addRecipe(new Recipe(args[1], materials, new Material(new MyItem(player.getInventory().getItemInOffHand()), player.getInventory().getItemInOffHand().getAmount())));
+        crafting.addRecipe(new Recipe(args[1], ingredients, new Ingredient(MyItem.fromItemStack(player.getInventory().getItemInOffHand()), player.getInventory().getItemInOffHand().getAmount())));
         sender.sendMessage(ChatColor.GREEN + "Receptura została pomyślnie stworzona!");
         return true;
     }

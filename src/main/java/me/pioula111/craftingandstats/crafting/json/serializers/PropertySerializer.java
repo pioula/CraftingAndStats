@@ -8,7 +8,7 @@ import me.pioula111.craftingandstats.items.properites.Property;
 
 import java.lang.reflect.Type;
 
-public class WlasciwoscSerializer implements JsonSerializer<Property> {
+public class PropertySerializer implements JsonSerializer<Property> {
     @Override
     public JsonElement serialize(Property src, Type typeOfSrc, JsonSerializationContext context) {
         if(src == null)

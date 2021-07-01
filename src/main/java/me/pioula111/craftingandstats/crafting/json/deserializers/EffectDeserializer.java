@@ -6,10 +6,10 @@ import org.bukkit.potion.PotionEffectTypeWrapper;
 
 import java.lang.reflect.Type;
 
-public class EfektDeserializer implements JsonDeserializer<Effect> {
+public class EffectDeserializer implements JsonDeserializer<Effect> {
     @Override
     public Effect deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonObject jsn = json.getAsJsonObject();
-        return new Effect(PotionEffectTypeWrapper.getByName(jsn.get("typEfektu").getAsString()), jsn.get("czasTrwania").getAsInt(), jsn.get("moc").getAsInt());
+        return new Effect(PotionEffectTypeWrapper.getByName(jsn.get("effectType").getAsString()), jsn.get("time").getAsInt(), jsn.get("level").getAsInt());
     }
 }

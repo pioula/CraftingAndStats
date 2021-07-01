@@ -1,9 +1,8 @@
 package me.pioula111.craftingandstats.items.commands.weaponsCommands;
 
-import me.pioula111.craftingandstats.MenuHelper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.items.ItemManager;
 import me.pioula111.craftingandstats.items.commands.CommandsHelper;
-import me.pioula111.craftingandstats.items.myItems.MyItem;
 import me.pioula111.craftingandstats.items.properites.weapons.LongDistance;
 import me.pioula111.craftingandstats.items.properites.weapons.TwoHanded;
 import me.pioula111.craftingandstats.items.properites.weapons.OneHanded;

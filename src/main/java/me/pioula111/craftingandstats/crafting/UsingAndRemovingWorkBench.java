@@ -32,12 +32,12 @@ public class UsingAndRemovingWorkBench implements Listener {
                 craftingManager.hasCrafting(Marker.getName(event.getEntity()))) {
             if (event.getDamager() instanceof Player) {
                 event.setCancelled(true);
-                WorkBench workBench = craftingManager.getCrafting(Marker.getName(event.getEntity()));
+                Crafting crafting = craftingManager.getCrafting(Marker.getName(event.getEntity()));
                 boolean isAllowed = true;
 
                 Player player = (Player) event.getDamager();
 
-                switch(workBench.getJob()) {
+                switch(crafting.getJob()) {
                     case "Kowal":
                         isAllowed = statManager.getPlayerStats(player).getJob().equals("Kowal");
                         break;
@@ -54,7 +54,7 @@ public class UsingAndRemovingWorkBench implements Listener {
                     return;
                 }
 
-                workBench.openMenu((Player) event.getDamager(), event.getEntity());
+                crafting.openMenu((Player) event.getDamager());
             }
         }
     }

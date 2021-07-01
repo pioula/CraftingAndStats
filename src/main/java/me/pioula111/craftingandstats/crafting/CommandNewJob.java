@@ -7,9 +7,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandNowyFach implements CommandExecutor {
+public class CommandNewJob implements CommandExecutor {
     private CraftingManager craftingManager;
-    public CommandNowyFach(CraftingManager craftingManager) {
+    public CommandNewJob(CraftingManager craftingManager) {
         this.craftingManager = craftingManager;
     }
 

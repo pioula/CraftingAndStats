@@ -1,5 +1,7 @@
 package me.pioula111.craftingandstats.items.myItems;
 
+import me.pioula111.craftingandstats.gui.ComponentWrapper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.items.properites.Property;
 import net.kyori.adventure.text.Component;
@@ -54,7 +56,7 @@ public class MyArmor extends MyItem {
         List<Component> lore = item.lore();
 
         if (armor != 0) {
-            lore.add(Component.text().content("Ulepszenie: " + addition.prettyToString()).style(MyItem.LORE_COLOR).build());
+            lore.add(ComponentWrapper.lore("Ulepszenie: " + addition.prettyToString()));
             pdc.set(NameSpacedKeys.KEY_ADDITION, PersistentDataType.STRING, addition.toString());
         }
 

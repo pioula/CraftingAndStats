@@ -8,10 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandUsunRecepture implements CommandExecutor {
+public class CommandRemoveRecipe implements CommandExecutor {
     private CraftingManager craftingManager;
 
-    public CommandUsunRecepture(CraftingManager craftingManager) {
+    public CommandRemoveRecipe(CraftingManager craftingManager) {
         this.craftingManager = craftingManager;
     }
 
@@ -30,14 +30,14 @@ public class CommandUsunRecepture implements CommandExecutor {
             return true;
         }
 
-        WorkBench workBench = craftingManager.getCrafting(args[0]);
+        Crafting crafting = craftingManager.getCrafting(args[0]);
 
-        if (!workBench.hasRecipe(args[1])) {
+        if (!crafting.hasRecipe(args[1])) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiej receptury w tym craftingu!");
             return true;
         }
 
-        workBench.removeRecipe(args[1]);
+        crafting.removeRecipe(args[1]);
         sender.sendMessage(ChatColor.GREEN + "Receptura została pomyślnie usunięta!");
         return true;
     }

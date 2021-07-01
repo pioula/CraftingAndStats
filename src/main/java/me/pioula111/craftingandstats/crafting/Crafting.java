@@ -1,34 +1,42 @@
 package me.pioula111.craftingandstats.crafting;
 
-import me.pioula111.craftingandstats.MenuHelper;
+import de.themoep.inventorygui.GuiElementGroup;
+import de.themoep.inventorygui.InventoryGui;
+import me.pioula111.craftingandstats.CraftingAndStats;
+import me.pioula111.craftingandstats.gui.CraftingMenu;
+import me.pioula111.craftingandstats.gui.GuiHelper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.markers.Marker;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Comparator;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
-public class WorkBench {
+public class Crafting {
     private String name;
     private String job;
-    private HashSet<Recipe> recipes;
+    private TreeSet<Recipe> recipes;
 
-    public WorkBench(String name, Job job) {
+
+    public Crafting(String name, Job job) {
         this.name = name;
         this.job = job.toString();
+        recipes = new TreeSet<>();
     }
 
     public void addRecipe(Recipe recipe) {
         if (recipes == null)
-            recipes = new HashSet<>();
+            recipes = new TreeSet<>();
 
         recipes.add(recipe);
     }
@@ -49,32 +57,14 @@ public class WorkBench {
         return false;
     }
 
-    public void openMenu(Player player, Entity marker) {
-        if (recipes == null) {
-            player.sendMessage(ChatColor.RED + "Nie potrafisz nic z tym zrobić!");
-            return;
+    public void openMenu(Player player) {
+        CraftingMenu craftingMenu = new CraftingMenu(this.getName().replace("_"," "));
+
+        for (Recipe recipe : recipes) {
+            craftingMenu.addRecipe(recipe, player);
         }
 
-        TextComponent menu = Component.text().content("ᚾᛁᚷᚺᛏ ").style(Style.style(MenuHelper.DECORATIONS))
-                .append(Component.text().content(this.toString()).style(Style.style(MenuHelper.MAIN_NAME,TextDecoration.BOLD)))
-                .append(Component.text().content(" ᚾᛁᚷᚺᛏ").style(Style.style(MenuHelper.DECORATIONS))).build();
-        player.sendMessage(menu);
-        Iterator<Recipe> it = recipes.iterator();
-        for (int i = 0; i < recipes.size(); i++) {
-            Recipe recipe = it.next();
-            HoverEvent<Component> hov = HoverEvent.hoverEvent(HoverEvent.Action.SHOW_TEXT,
-                    Component.text().content("Naciśnij ")
-                            .append(Component.text().content("LPM").style(Style.style(MenuHelper.LPM_COLOR,TextDecoration.BOLD)))
-                            .append(Component.text().content(", aby stworzyć ten przedmiot!")).build());
-
-            ClickEvent clickEvent = ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/wytworzprzedmiot " + marker.getLocation().getX() + " "
-            + marker.getLocation().getY() + " " + marker.getLocation().getZ() + " " + name + " " + recipe.getName() + " " + CommandWytworzPrzedmiot.PASSWORD);
-
-            player.sendMessage(Component.text().content("   " + (i + 1) + ". ").style(Style.style(MenuHelper.DECORATIONS)).append(Component.text()
-                    .content(recipe.toString()).style(Style.style(MenuHelper.RECIPE_NAME)))
-                    .clickEvent(clickEvent)
-                    .hoverEvent(hov));
-        }
+        craftingMenu.showToPlayer(player);
     }
 
     @Override
@@ -116,7 +106,7 @@ public class WorkBench {
                 .hoverEvent(hov).build();
     }
 
-    public HashSet<Recipe> getRecipes() {
+    public TreeSet<Recipe> getRecipes() {
         return recipes;
     }
 

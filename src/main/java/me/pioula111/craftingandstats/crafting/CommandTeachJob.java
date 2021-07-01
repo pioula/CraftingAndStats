@@ -9,18 +9,17 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandNauczFachu implements CommandExecutor {
+public class CommandTeachJob implements CommandExecutor {
     private StatManager statManager;
-    private NauczFachuManager manager;
+    private TeachJobManager manager;
     private CraftingAndStats plugin;
 
-    public CommandNauczFachu(StatManager statManager, NauczFachuManager nauczFachuManager, CraftingAndStats plugin) {
+    public CommandTeachJob(StatManager statManager, TeachJobManager teachJobManager, CraftingAndStats plugin) {
         this.statManager = statManager;
-        this.manager = nauczFachuManager;
+        this.manager = teachJobManager;
         this.plugin = plugin;
     }
 

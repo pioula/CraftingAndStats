@@ -8,10 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandUsunFach implements CommandExecutor {
+public class CommandRemoveJob implements CommandExecutor {
     private CraftingManager craftingManager;
 
-    public CommandUsunFach(CraftingManager craftingManager) {
+    public CommandRemoveJob(CraftingManager craftingManager) {
         this.craftingManager = craftingManager;
     }
 
@@ -32,8 +32,8 @@ public class CommandUsunFach implements CommandExecutor {
         }
         Job job = craftingManager.getJob(args[0]);
         craftingManager.removeJob(args[0]);
-        for (WorkBench workBench : job.getWorkBenches()) {
-            WorkBench.removeWorkBenches(((Player) sender).getWorld(), workBench.getName());
+        for (Crafting crafting : job.getCraftings()) {
+            Crafting.removeWorkBenches(((Player) sender).getWorld(), crafting.getName());
         }
 
         sender.sendMessage(ChatColor.GREEN + "Fach został pomyślnie usunięty!");

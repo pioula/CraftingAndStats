@@ -1,15 +1,12 @@
 package me.pioula111.craftingandstats.itemy.komendy.komendyBroni;
 
-import me.pioula111.craftingandstats.MenuHelper;
+import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.items.ItemManager;
 import me.pioula111.craftingandstats.items.commands.CommandsHelper;
 import me.pioula111.craftingandstats.items.myItems.MyWeapon;
 import me.pioula111.craftingandstats.items.properites.weapons.OneHanded;
-import me.pioula111.craftingandstats.items.myItems.MyItem;
-import me.pioula111.craftingandstats.items.properites.weapons.WeaponType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.Style;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
