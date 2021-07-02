@@ -43,6 +43,7 @@ public class CommandTeachJob implements CommandExecutor {
         if (!statManager.hasPlayer(player) ||
                 (statManager.hasPlayer(player) && statManager.getPlayerStats(player).getJob().equals(PlayerStats.noJob))) {
             player.sendMessage(ChatColor.RED + "Jesteś bezrobotny!");
+            return true;
         }
 
         manager.addPlayer(player);

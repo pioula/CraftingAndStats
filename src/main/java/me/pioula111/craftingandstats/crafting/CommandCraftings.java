@@ -31,12 +31,13 @@ public class CommandCraftings implements CommandExecutor {
             return true;
         }
 
-        if (!craftingManager.hasJob(args[0])) {
+        String craftingName = args[0].replace("_"," ");
+        if (!craftingManager.hasJob(craftingName)) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiego fachu!");
             return true;
         }
 
-         Job job = craftingManager.getJob(args[0]);
+         Job job = craftingManager.getJob(craftingName);
 
         sender.sendMessage(createMenu(job));
         return true;

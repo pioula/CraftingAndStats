@@ -25,19 +25,21 @@ public class CommandRemoveRecipe implements CommandExecutor {
             return true;
         }
 
-        if (!craftingManager.hasCrafting(args[0])) {
+        String craftingName = args[0].replace("_"," ");
+        String recipeName = args[1].replace("_"," ");
+        if (!craftingManager.hasCrafting(craftingName)) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiego craftingu! Wpisz /fachy, a następnie wybierz fach, który cię interesuje by zobaczyć jakie ma craftingi!");
             return true;
         }
 
-        Crafting crafting = craftingManager.getCrafting(args[0]);
+        Crafting crafting = craftingManager.getCrafting(craftingName);
 
-        if (!crafting.hasRecipe(args[1])) {
+        if (!crafting.hasRecipe(recipeName)) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiej receptury w tym craftingu!");
             return true;
         }
 
-        crafting.removeRecipe(args[1]);
+        crafting.removeRecipe(recipeName);
         sender.sendMessage(ChatColor.GREEN + "Receptura została pomyślnie usunięta!");
         return true;
     }

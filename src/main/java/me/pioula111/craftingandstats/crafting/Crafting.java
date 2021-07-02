@@ -43,7 +43,7 @@ public class Crafting {
     }
 
     public void openMenu(Player player) {
-        CraftingMenu craftingMenu = new CraftingMenu(this.getName().replace("_"," "));
+        CraftingMenu craftingMenu = new CraftingMenu(this.getName());
 
         craftingMenu.setRecipes(recipes, player);
         craftingMenu.showToPlayer(player);
@@ -51,11 +51,10 @@ public class Crafting {
 
     @Override
     public String toString() {
-        return name.replace("_"," ");
+        return name;
     }
 
     public static void removeWorkBenches(World world, String crafting) {
-        crafting = crafting.replace("_"," ");
         for (Entity entity : world.getEntities()) {
             if (Marker.isMarker(entity) && Marker.getName(entity).equals(crafting)) {
                 Marker.removeMarker(entity);
@@ -69,7 +68,7 @@ public class Crafting {
                         .append(Component.text().content("LPM").style(Style.style(MenuHelper.LPM_COLOR, TextDecoration.BOLD)))
                         .append(Component.text().content(", aby zobaczyć receptury craftingu!")).build());
 
-        ClickEvent clickEvent = ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/receptury " + name);
+        ClickEvent clickEvent = ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/receptury " + name.replace(" ","_"));
 
         return Component.text().content("   " + nr + ". ").style(Style.style(MenuHelper.DECORATIONS)).append(Component.text()
                 .content(this + "\n").style(Style.style(MenuHelper.RECIPE_NAME)))

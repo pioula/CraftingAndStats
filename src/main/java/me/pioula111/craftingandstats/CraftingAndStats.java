@@ -3,9 +3,10 @@ package me.pioula111.craftingandstats;
 import me.pioula111.craftingandstats.crafting.*;
 import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
+import me.pioula111.craftingandstats.harvestBlocks.BlockSheduler;
 import me.pioula111.craftingandstats.harvestBlocks.CommandAddBlock;
 import me.pioula111.craftingandstats.harvestBlocks.CommandBlocks;
-import me.pioula111.craftingandstats.harvestBlocks.harvestTools.InteractionEventCatcher;
+import me.pioula111.craftingandstats.harvestBlocks.InteractionEventCatcher;
 import me.pioula111.craftingandstats.harvestBlocks.json.HarvestJsonManager;
 import me.pioula111.craftingandstats.harvestBlocks.json.HarvestManager;
 import me.pioula111.craftingandstats.items.ItemManager;
@@ -42,6 +43,7 @@ public final class CraftingAndStats extends JavaPlugin {
     private StatManager statManager;
     private CraftingJsonManager craftingJsonManager;
     private HarvestJsonManager harvestJsonManager;
+    private BlockSheduler blockSheduler;
 
     @Override
     public void onEnable() {
@@ -53,19 +55,24 @@ public final class CraftingAndStats extends JavaPlugin {
         harvestJsonFile = new File("plugins/CraftingAndStats/harvest.json");
         harvestJsonManager = new HarvestJsonManager(harvestJsonFile);
         HarvestManager harvestManager = harvestJsonManager.getHarvestManager();
+        blockSheduler = new BlockSheduler(this);
 
         nameSpacedKeys = new NameSpacedKeys(this);
         statManager = new StatManager();
 
+        TeachJobManager teachJobManager = new TeachJobManager(statManager, this);
+
         PluginManager pluginManager = getServer().getPluginManager();
 
         pluginManager.registerEvents(new UsingAndRemovingWorkBench(craftingManager, this, statManager), this);
+        pluginManager.registerEvents(teachJobManager, this);
         pluginManager.registerEvents(new Marker(), this);
 
         pluginManager.registerEvents(new StatJsonOnJoin(statManager), this);
         pluginManager.registerEvents(new StatJsonOnQuit(statManager), this);
 
         pluginManager.registerEvents(new InteractionEventCatcher(harvestManager), this);
+
 
         Objects.requireNonNull(this.getCommand("bloki")).setExecutor(new CommandBlocks(harvestManager));
         Objects.requireNonNull(this.getCommand("dodajblok")).setExecutor(new CommandAddBlock(harvestManager));
@@ -109,7 +116,7 @@ public final class CraftingAndStats extends JavaPlugin {
 
         Objects.requireNonNull(this.getCommand("staty")).setExecutor(new CommandStaty(this));
 
-        TeachJobManager teachJobManager = new TeachJobManager(statManager, this);
+
         Objects.requireNonNull(this.getCommand("akceptujnauke")).setExecutor(new CommandAcceptJob(statManager, teachJobManager));
         Objects.requireNonNull(this.getCommand("craftingi")).setExecutor(new CommandCraftings(craftingManager));
         Objects.requireNonNull(this.getCommand("destroyer")).setExecutor(new CommandDestroyer(this));
@@ -130,6 +137,10 @@ public final class CraftingAndStats extends JavaPlugin {
 
     public StatManager getStatManager() {
         return statManager;
+    }
+
+    public BlockSheduler getBlockSheduler() {
+        return blockSheduler;
     }
 
     @Override

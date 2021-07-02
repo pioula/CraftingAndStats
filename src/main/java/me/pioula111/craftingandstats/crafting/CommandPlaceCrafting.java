@@ -31,12 +31,14 @@ public class CommandPlaceCrafting implements CommandExecutor {
             return true;
         }
 
-        if (!(craftingManager.hasCrafting(args[0]))) {
+        String craftingName = args[0].replace("_"," ");
+        if (!(craftingManager.hasCrafting(craftingName))) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiego craftingu!");
             return true;
         }
 
-        Marker.newMarker(2, (Player) sender, craftingManager.getCrafting(args[0]).toString());
+
+        Marker.newMarker(2, (Player) sender, craftingManager.getCrafting(craftingName).getName());
 
         return true;
     }

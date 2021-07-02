@@ -77,6 +77,6 @@ public class CommandAcceptJob implements CommandExecutor {
 
     private boolean isGoldCoind(ItemStack itemStack) {
         return itemStack != null && itemStack.hasItemMeta() && itemStack.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.KEY_NAME, PersistentDataType.STRING) &&
-                itemStack.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.KEY_NAME, PersistentDataType.STRING).equals("Złota_Moneta");
+                itemStack.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.KEY_NAME, PersistentDataType.STRING).equals("Złota Moneta");
     }
 }

@@ -33,14 +33,17 @@ public class CommandNewRecipe implements CommandExecutor {
             return true;
         }
 
+        String craftingName = args[0].replace("_"," ");
         Crafting crafting;
-        if (!craftingManager.hasCrafting(args[0])) {
+        if (!craftingManager.hasCrafting(craftingName)) {
             player.sendMessage(ChatColor.RED + "Nie ma takiego craftingu!");
             return true;
         }
-        crafting = craftingManager.getCrafting(args[0]);
+        crafting = craftingManager.getCrafting(craftingName);
 
-        if (crafting.hasRecipe(args[1])) {
+
+        String recipeName = args[1].replace("_"," ");
+        if (crafting.hasRecipe(recipeName)) {
             player.sendMessage(ChatColor.RED + "Jest już taka receptura!");
             return true;
         }
@@ -85,7 +88,7 @@ public class CommandNewRecipe implements CommandExecutor {
             }
         }
 
-        crafting.addRecipe(new Recipe(args[1], ingredients, new Ingredient(MyItem.fromItemStack(player.getInventory().getItemInOffHand()), player.getInventory().getItemInOffHand().getAmount())));
+        crafting.addRecipe(new Recipe(recipeName, ingredients, new Ingredient(MyItem.fromItemStack(player.getInventory().getItemInOffHand()), player.getInventory().getItemInOffHand().getAmount())));
         sender.sendMessage(ChatColor.GREEN + "Receptura została pomyślnie stworzona!");
         return true;
     }

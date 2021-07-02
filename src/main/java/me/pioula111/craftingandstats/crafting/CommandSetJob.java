@@ -22,7 +22,7 @@ public class CommandSetJob implements CommandExecutor {
             return false;
 
         if (args.length != 2) {
-            sender.sendMessage(ChatColor.RED + "Zła komenda! Użyj /ustawfach <nick_gracza> <kowal/luczarz/alchemik/brak>");
+            sender.sendMessage(ChatColor.RED + "Zła komenda! Użyj /ustawfach <nick_gracza> <Kowal/Łuczarz/Alchemik/brak>");
             return true;
         }
 
@@ -33,13 +33,13 @@ public class CommandSetJob implements CommandExecutor {
         }
 
         switch(args[1]) {
-            case "kowal":
+            case "Kowal":
                 statManager.getPlayerStats(player).setJobSmith();
                 break;
-            case "luczarz":
+            case "Łuczarz":
                 statManager.getPlayerStats(player).setJobArcher();
                 break;
-            case "alchemik":
+            case "Alchemik":
                 statManager.getPlayerStats(player).setJobAlchemist();
                 break;
             default:

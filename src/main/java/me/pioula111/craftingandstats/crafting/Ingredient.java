@@ -20,6 +20,6 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return ingredient.getName().replace("_"," ") + " x" + amount;
+        return ingredient.getName() + " x" + amount;
     }
 }

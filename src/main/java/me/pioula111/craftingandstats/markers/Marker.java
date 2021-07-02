@@ -55,7 +55,7 @@ public class Marker implements Listener {
         if (passengers.size() == 0)
             return null;
 
-        return passengers.get(0).getName().replace("_", " ");
+        return passengers.get(0).getName();
     }
 
     @EventHandler

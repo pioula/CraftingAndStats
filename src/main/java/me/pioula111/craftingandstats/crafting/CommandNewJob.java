@@ -20,12 +20,14 @@ public class CommandNewJob implements CommandExecutor {
             return true;
         }
 
-        if (craftingManager.hasJob(args[0])) {
+        String jobName = args[0].replace("_"," ");
+
+        if (craftingManager.hasJob(jobName)) {
             sender.sendMessage(ChatColor.RED + "Jest już taka praca!");
             return true;
         }
 
-        craftingManager.addJob(new Job(args[0]));
+        craftingManager.addJob(new Job(jobName));
         sender.sendMessage(ChatColor.GREEN + "Dodano pomyślnie nowy fach!");
         return true;
     }

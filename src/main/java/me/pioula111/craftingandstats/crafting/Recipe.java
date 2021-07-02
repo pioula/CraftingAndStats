@@ -29,7 +29,7 @@ public class Recipe implements Comparable<Recipe> {
 
     @Override
     public String toString() {
-        return name.replace("_"," ");
+        return name;
     }
 
     public Ingredient getResult() {
@@ -38,7 +38,7 @@ public class Recipe implements Comparable<Recipe> {
 
     public Component menuComponent(int nr) {
         return Component.text().content("   " + nr + ". ").style(Style.style(MenuHelper.DECORATIONS)).append(Component.text()
-                .content(this + "\n").style(Style.style(MenuHelper.RECIPE_NAME))).build();
+                .content(this + " " + ingredients.toString() + "\n").style(Style.style(MenuHelper.RECIPE_NAME))).build();
     }
 
     @Override

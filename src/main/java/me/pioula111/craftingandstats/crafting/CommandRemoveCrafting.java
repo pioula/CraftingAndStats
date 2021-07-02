@@ -25,18 +25,20 @@ public class CommandRemoveCrafting implements CommandExecutor {
             return true;
         }
 
-        if (!craftingManager.hasJob(args[0])) {
+        String jobName = args[0].replace("_"," ");
+        if (!craftingManager.hasJob(jobName)) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiego fachu!");
             return true;
         }
-        Job job = craftingManager.getJob(args[0]);
+        Job job = craftingManager.getJob(jobName);
 
-        if (!job.hasCrafting(args[1])) {
+        String craftingName = args[1].replace("_"," ");
+        if (!job.hasCrafting(craftingName)) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiego craftingu!");
             return true;
         }
 
-        job.removeCrafting(args[1]);
+        job.removeCrafting(craftingName);
         Crafting.removeWorkBenches(((Player) sender).getWorld(), args[1]);
 
         sender.sendMessage(ChatColor.GREEN + "Pomyślnie usunięto wszystkie craftingi!");

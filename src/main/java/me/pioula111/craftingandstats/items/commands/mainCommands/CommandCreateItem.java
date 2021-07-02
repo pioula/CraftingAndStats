@@ -36,6 +36,7 @@ public class CommandCreateItem implements CommandExecutor {
             return true;
         }
 
+
         Player player = (Player) sender;
         if (player.getInventory().getItemInMainHand().getAmount() != 1) {
             player.sendMessage(ChatColor.RED + "Musisz mieć dokładnie jeden item w głównej ręce, który chcesz podmienić!");
@@ -54,7 +55,7 @@ public class CommandCreateItem implements CommandExecutor {
         }
 
         item.setSwappedItem(player.getInventory().getItemInMainHand().getType());
-        item.setName(args[0]);
+        item.setName(args[0].replace("_"," "));
         itemManager.updateMaker(player, item);
 
         player.sendMessage(nextStep(item));

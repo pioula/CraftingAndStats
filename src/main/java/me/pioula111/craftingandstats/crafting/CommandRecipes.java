@@ -30,12 +30,13 @@ public class CommandRecipes implements CommandExecutor {
             return true;
         }
 
-        if (!craftingManager.hasCrafting(args[0])) {
+        String craftingName = args[0].replace("_"," ");
+        if (!craftingManager.hasCrafting(craftingName)) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiego craftingu!");
             return true;
         }
 
-        Crafting crafting = craftingManager.getCrafting(args[0]);
+        Crafting crafting = craftingManager.getCrafting(craftingName);
 
         sender.sendMessage(createMenu(crafting));
         return true;

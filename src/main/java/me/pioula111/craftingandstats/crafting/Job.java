@@ -55,7 +55,7 @@ public class Job {
 
     @Override
     public String toString() {
-        return this.name.replace("_", " ");
+        return this.name;
     }
 
     public HashSet<Crafting> getCraftings() {
@@ -68,7 +68,7 @@ public class Job {
                         .append(Component.text().content("LPM").style(Style.style(MenuHelper.LPM_COLOR, TextDecoration.BOLD)))
                         .append(Component.text().content(", aby zobaczyć craftingi fachu!")).build());
 
-        ClickEvent clickEvent = ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/craftingi " + name);
+        ClickEvent clickEvent = ClickEvent.clickEvent(ClickEvent.Action.RUN_COMMAND, "/craftingi " + name.replace(" ","_"));
 
         return Component.text().content("   " + nr + ". ").style(Style.style(MenuHelper.DECORATIONS)).append(Component.text()
                 .content(this + "\n").style(Style.style(MenuHelper.RECIPE_NAME)))

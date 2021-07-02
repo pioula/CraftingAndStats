@@ -1,7 +1,8 @@
-package me.pioula111.craftingandstats.harvestBlocks.harvestTools;
+package me.pioula111.craftingandstats.harvestBlocks;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.harvestBlocks.HarvestBlock;
+import me.pioula111.craftingandstats.harvestBlocks.harvestTools.HTool;
 import me.pioula111.craftingandstats.harvestBlocks.json.HarvestManager;
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
@@ -24,7 +25,7 @@ public class InteractionEventCatcher implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock() != null) {
+        if (event.getAction() == Action.LEFT_CLICK_BLOCK && event.getClickedBlock() != null) {
             Player player = event.getPlayer();
             ItemStack tool = player.getInventory().getItemInMainHand();
             if (tool.getAmount() == 1 &&

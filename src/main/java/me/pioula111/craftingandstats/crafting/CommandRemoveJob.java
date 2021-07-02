@@ -26,12 +26,13 @@ public class CommandRemoveJob implements CommandExecutor {
             return true;
         }
 
-        if (!craftingManager.hasJob(args[0])) {
+        String jobName = args[0].replace("_"," ");
+        if (!craftingManager.hasJob(jobName)) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiego fachu!");
             return true;
         }
-        Job job = craftingManager.getJob(args[0]);
-        craftingManager.removeJob(args[0]);
+        Job job = craftingManager.getJob(jobName);
+        craftingManager.removeJob(jobName);
         for (Crafting crafting : job.getCraftings()) {
             Crafting.removeWorkBenches(((Player) sender).getWorld(), crafting.getName());
         }

@@ -21,21 +21,24 @@ public class CommandNewCrafting implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "Zła komenda, wpisz /nowycrafting <nazwa_fachu> <nazwa_craftingu>");
             return true;
         }
+        String jobName = args[0].replace("_"," ");
 
         Job job;
-        if (!craftingManager.hasJob(args[0])) {
+        if (!craftingManager.hasJob(jobName)) {
             sender.sendMessage(ChatColor.RED + "Nie ma takiego fachu!");
             return true;
         }
-        job = craftingManager.getJob(args[0]);
+        job = craftingManager.getJob(jobName);
 
-        if (craftingManager.hasCrafting(args[1])) {
+        String craftingName = args[1].replace("_"," ");
+
+        if (craftingManager.hasCrafting(craftingName)) {
             sender.sendMessage(ChatColor.RED + "Jest już taki crafting!");
             return true;
         }
 
 
-        Crafting newWorkbench = new Crafting(args[1], job);
+        Crafting newWorkbench = new Crafting(craftingName, job);
         job.addCrafting(newWorkbench);
 
         sender.sendMessage(ChatColor.GREEN + "Crafting został pomyślnie stworzony!");
