@@ -3,6 +3,11 @@ package me.pioula111.craftingandstats;
 import me.pioula111.craftingandstats.crafting.*;
 import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
+import me.pioula111.craftingandstats.harvestBlocks.CommandAddBlock;
+import me.pioula111.craftingandstats.harvestBlocks.CommandBlocks;
+import me.pioula111.craftingandstats.harvestBlocks.harvestTools.InteractionEventCatcher;
+import me.pioula111.craftingandstats.harvestBlocks.json.HarvestJsonManager;
+import me.pioula111.craftingandstats.harvestBlocks.json.HarvestManager;
 import me.pioula111.craftingandstats.items.ItemManager;
 import me.pioula111.craftingandstats.items.commands.additionCommands.CommandNone;
 import me.pioula111.craftingandstats.items.commands.additionCommands.CommandUpgrade;
@@ -32,17 +37,23 @@ import java.io.File;
 import java.util.Objects;
 
 public final class CraftingAndStats extends JavaPlugin {
-    private File jsonFile;
+    private File craftingJsonFile, harvestJsonFile;
     private NameSpacedKeys nameSpacedKeys;
     private StatManager statManager;
     private CraftingJsonManager craftingJsonManager;
+    private HarvestJsonManager harvestJsonManager;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        jsonFile = new File("plugins/CraftingAndStats/crafting_and_stats.json");
-        craftingJsonManager = new CraftingJsonManager(jsonFile);
+        craftingJsonFile = new File("plugins/CraftingAndStats/crafting_and_stats.json");
+        craftingJsonManager = new CraftingJsonManager(craftingJsonFile);
         CraftingManager craftingManager = craftingJsonManager.getCraftingManager();
+
+        harvestJsonFile = new File("plugins/CraftingAndStats/harvest.json");
+        harvestJsonManager = new HarvestJsonManager(harvestJsonFile);
+        HarvestManager harvestManager = harvestJsonManager.getHarvestManager();
+
         nameSpacedKeys = new NameSpacedKeys(this);
         statManager = new StatManager();
 
@@ -53,6 +64,11 @@ public final class CraftingAndStats extends JavaPlugin {
 
         pluginManager.registerEvents(new StatJsonOnJoin(statManager), this);
         pluginManager.registerEvents(new StatJsonOnQuit(statManager), this);
+
+        pluginManager.registerEvents(new InteractionEventCatcher(harvestManager), this);
+
+        Objects.requireNonNull(this.getCommand("bloki")).setExecutor(new CommandBlocks(harvestManager));
+        Objects.requireNonNull(this.getCommand("dodajblok")).setExecutor(new CommandAddBlock(harvestManager));
 
         ItemManager itemManager = new ItemManager();
         Objects.requireNonNull(this.getCommand("stworzitem")).setExecutor(new CommandCreateItem(itemManager));
@@ -120,6 +136,7 @@ public final class CraftingAndStats extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         craftingJsonManager.writeToJson();
+        harvestJsonManager.writeToJson();
         statManager.savePlayers();
     }
 }

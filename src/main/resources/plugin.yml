@@ -171,3 +171,11 @@ commands:
     description: usunfach
     usage: Error
     permission: Operator
+  bloki:
+    description: bloki
+    usage: Error
+    permission: Operator
+  dodajblok:
+    description: dodajblok
+    usage: Error
+    permission: Operator

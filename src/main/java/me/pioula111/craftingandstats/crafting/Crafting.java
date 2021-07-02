@@ -31,13 +31,9 @@ public class Crafting {
     public Crafting(String name, Job job) {
         this.name = name;
         this.job = job.toString();
-        recipes = new TreeSet<>();
     }
 
     public void addRecipe(Recipe recipe) {
-        if (recipes == null)
-            recipes = new TreeSet<>();
-
         recipes.add(recipe);
     }
 
@@ -84,10 +80,8 @@ public class Crafting {
     public static void removeWorkBenches(World world, String crafting) {
         crafting = crafting.replace("_"," ");
         for (Entity entity : world.getEntities()) {
-            if (Marker.isMarker(entity)) {
-                if (Marker.getName(entity).equals(crafting)) {
-                    Marker.removeMarker(entity);
-                }
+            if (Marker.isMarker(entity) && Marker.getName(entity).equals(crafting)) {
+                Marker.removeMarker(entity);
             }
         }
     }

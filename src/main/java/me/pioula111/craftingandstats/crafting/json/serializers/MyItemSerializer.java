@@ -1,5 +1,6 @@
 package me.pioula111.craftingandstats.crafting.json.serializers;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
@@ -9,29 +10,29 @@ import me.pioula111.craftingandstats.items.myItems.*;
 import java.lang.reflect.Type;
 
 public class MyItemSerializer implements JsonSerializer<MyItem> {
-    private CraftingJsonManager jsonManager;
+    private Gson gson;
 
-    public MyItemSerializer(CraftingJsonManager jsonManager) {
-        this.jsonManager = jsonManager;
+    public void setGson(Gson gson) {
+        this.gson = gson;
     }
 
     @Override
     public JsonElement serialize(MyItem src, Type typeOfSrc, JsonSerializationContext context) {
         switch (src.getType()) {
             case "armor":
-                return jsonManager.getGson().toJsonTree(src, MyArmor.class);
+                return gson.toJsonTree(src, MyArmor.class);
             case "drink":
-                return jsonManager.getGson().toJsonTree(src, MyDrink.class);
+                return gson.toJsonTree(src, MyDrink.class);
             case "food":
-                return jsonManager.getGson().toJsonTree(src, MyFood.class);
+                return gson.toJsonTree(src, MyFood.class);
             case "handcraft":
-                return jsonManager.getGson().toJsonTree(src, MyHandCraft.class);
+                return gson.toJsonTree(src, MyHandCraft.class);
             case "others":
-                return jsonManager.getGson().toJsonTree(src, MyOthers.class);
+                return gson.toJsonTree(src, MyOthers.class);
             case "tool":
-                return jsonManager.getGson().toJsonTree(src, MyTool.class);
+                return gson.toJsonTree(src, MyTool.class);
             case "weapon":
-                return jsonManager.getGson().toJsonTree(src, MyWeapon.class);
+                return gson.toJsonTree(src, MyWeapon.class);
         }
         return null;
     }

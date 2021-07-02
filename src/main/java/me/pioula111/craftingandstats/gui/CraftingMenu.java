@@ -19,6 +19,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CraftingMenu {
@@ -51,24 +52,38 @@ public class CraftingMenu {
         gui.addElement(GuiHelper.leftArrow('<'));
     }
 
-    public void addRecipe(Recipe recipe, Player player) {
-        ItemStack result = recipe.getResult().getIngredient().makeItem(recipe.getResult().getAmount());
-        firstRow[next()].addElement(new StaticGuiElement((char)(next() + '0'), result));
+    public void setRecipes(List<Recipe> recipes, Player player) {
+        Iterator<Recipe> it = recipes.listIterator();
+        for (int i = 0; i < recipes.size(); i++) {
+            int ind = i % 7;
+            Recipe recipe = it.next();
+            ItemStack result = recipe.getResult().getIngredient().makeItem(recipe.getResult().getAmount());
+            firstRow[ind].addElement(new StaticGuiElement((char)(ind + '0'), result));
 
-        ItemStack ingredients = createIngredients(recipe);
-        secondRow[next()].addElement(new StaticGuiElement((char)(next() + 'a'), ingredients));
-        
-        thirdRow[next()].addElement(new DynamicGuiElement((char)(next() + 'A'),
-                (viewer) -> new StaticGuiElement((char)(next() + 'A'), craftIcon(recipe, player),
-        click -> {
-            if (checkIngredients(recipe.getIngredients(), player.getInventory()).size() == 0) {
-                craftItem(recipe, player);
-            }
-            click.getGui().draw();
-            return true;
-        })));
+            ItemStack ingredients = createIngredients(recipe);
+            secondRow[ind].addElement(new StaticGuiElement((char)(ind + 'a'), ingredients));
 
-        numberOfItems++;
+            char tmp = (char)(ind + 'A');
+            thirdRow[ind].addElement(new DynamicGuiElement(tmp,
+                    (viewer) -> new StaticGuiElement(tmp, craftIcon(recipe, player),
+                            click -> {
+                                if (checkIngredients(recipe.getIngredients(), player.getInventory()).size() == 0) {
+                                    craftItem(recipe, player);
+                                }
+                                click.getGui().draw();
+                                return true;
+                            })));
+        }
+
+        addEmptyColumns(7 - (recipes.size() % 7));
+    }
+
+    private void addEmptyColumns(int emptyCols) {
+        for (int i = 0; i < emptyCols; i++) {
+            firstRow[6 - i].addElement(new StaticGuiElement((char)(6 - i + '0'), GuiHelper.getFiller()));
+            secondRow[6 - i].addElement(new StaticGuiElement((char)(6 - i + 'a'), GuiHelper.getFiller()));
+            thirdRow[6 - i].addElement(new StaticGuiElement((char)(6 - i + 'A'), GuiHelper.getFiller()));
+        }
     }
 
     private void craftItem(Recipe recipe, Player player) {
@@ -155,13 +170,8 @@ public class CraftingMenu {
         return item;
     }
 
-    public int next() {
-        return numberOfItems % 7;
-    }
-
     public void showToPlayer(Player player) {
         for (int i = 0; i < firstRow.length; i++) {
-            firstRow[i].getElements();
             gui.addElement(firstRow[i]);
             gui.addElement(secondRow[i]);
             gui.addElement(thirdRow[i]);
