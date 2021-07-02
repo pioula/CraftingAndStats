@@ -32,13 +32,12 @@ public class CraftingMenu {
             "<abcdefg>",
             " ABCDEFG "
     };
-    private int numberOfItems;
 
     public CraftingMenu(String title) {
         firstRow = new GuiElementGroup[7];
         secondRow = new GuiElementGroup[7];
         thirdRow = new GuiElementGroup[7];
-        numberOfItems = 0;
+
         for (int i = 0; i < firstRow.length; i++) {
             firstRow[i] = new GuiElementGroup((char)(i + '0'));
             secondRow[i] = new GuiElementGroup((char)(i + 'a'));
