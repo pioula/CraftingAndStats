@@ -27,7 +27,7 @@ public class BrokenBlock implements Comparable<BrokenBlock> {
 
     @Override
     public int compareTo(@NotNull BrokenBlock o) {
-        return appearTime() - o.appearTime() > 0 ? -1 : 1;
+        return appearTime() - o.appearTime() > 0 ? 1 : -1;
     }
 
     public Location getLocation() {

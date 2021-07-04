@@ -146,6 +146,7 @@ public final class CraftingAndStats extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        blockSheduler.placeAllBlocks();
         craftingJsonManager.writeToJson();
         harvestJsonManager.writeToJson();
         statManager.savePlayers();

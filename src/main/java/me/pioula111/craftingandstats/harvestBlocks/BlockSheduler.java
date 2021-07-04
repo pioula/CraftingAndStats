@@ -34,10 +34,17 @@ public class BlockSheduler {
 
 
     public void sheduleBlockPlacement(Material block, Location location, long respawnTime) {
-        queue.add(new BrokenBlock(block, location, respawnTime));
+        queue.add(new BrokenBlock(block, location, minutesToMilis(respawnTime)));
     }
 
     public long minutesToMilis(long minutes) {
-        return minutes * 60000; //60 seconds * 1000 miliseconds
+        return minutes * 60000; //60 sekund * 1000 milisekund
+    }
+
+    public void placeAllBlocks() {
+        while (!queue.isEmpty()) {
+            BrokenBlock block = queue.poll();
+            block.getLocation().getWorld().getBlockAt(block.getLocation()).setType(block.getBlock());
+        }
     }
 }

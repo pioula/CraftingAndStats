@@ -5,19 +5,19 @@ import me.pioula111.craftingandstats.CraftingAndStats;
 import me.pioula111.craftingandstats.gui.ComponentWrapper;
 import me.pioula111.craftingandstats.gui.GuiHelper;
 import me.pioula111.craftingandstats.harvestBlocks.HarvestBlock;
+import me.pioula111.craftingandstats.harvestBlocks.IncreasedStat;
 import me.pioula111.craftingandstats.items.myItems.MyItem;
+import me.pioula111.craftingandstats.stats.json.StatManager;
 import net.kyori.adventure.text.Component;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -29,6 +29,8 @@ public abstract class HTool implements Listener {
     protected HashSet<HarvestBlock> blocks;
     protected String name;
     protected long respawnTime = 45; //45 minutes
+    protected ArrayList<IncreasedStat> stats;
+    protected Material blockReplacement;
     private static final int NUMBER_OF_SLOTS = 21;
     private static final String[] guiSetup = {
             " abcdefg ",
@@ -38,6 +40,7 @@ public abstract class HTool implements Listener {
 
     public HTool() {
         this.blocks = new HashSet<>();
+        stats = new ArrayList<>();
     }
 
     public boolean hasSpace() {
@@ -95,5 +98,34 @@ public abstract class HTool implements Listener {
         return name;
     }
 
-    public abstract void onPlayerInteract(Player player, Block block);
+    public void onPlayerInteract(Player player, Block block) {
+        CraftingAndStats plugin = JavaPlugin.getPlugin(CraftingAndStats.class);
+        StatManager statManager = plugin.getStatManager();
+        ItemStack tool = player.getInventory().getItemInMainHand();
+
+        HarvestBlock hBlock = getBlock(block);
+        if (hBlock == null)
+            return;
+
+        plugin.getBlockSheduler().sheduleBlockPlacement(block.getType(), block.getLocation(), respawnTime);
+        block.setType(blockReplacement);
+        player.getInventory().addItem(getLoot(hBlock, player));
+        Damageable meta = (Damageable) tool.getItemMeta();
+        meta.setDamage(meta.getDamage() + 1);
+
+        for (IncreasedStat stat : stats) {
+            statManager.getPlayerStats(player).increaseStatExp(player, stat.getStatName(), stat.getExp());
+        }
+
+        if (meta.getDamage() == tool.getType().getMaxDurability()) {
+            player.getInventory().removeItem(tool);
+        }
+        else {
+            tool.setItemMeta((ItemMeta) meta);
+        }
+    }
+
+    public ItemStack getLoot(HarvestBlock hBlock, Player player) {
+        return hBlock.getDrop().makeItem(1);
+    }
 }

@@ -38,29 +38,29 @@ public class CommandStaty implements CommandExecutor {
 
         PlayerStats playerStats = statManager.getPlayerStats(player);
 
-        StaticGuiElement health_stat = GuiHelper.createStat('ż', "Życie", playerStats.getHealth());
-        StaticGuiElement strength_stat = GuiHelper.createStat('s', "Siła", playerStats.getStrength());
-        StaticGuiElement dexterity_stat = GuiHelper.createStat('z', "Zręczność", playerStats.getDexterity());
-        StaticGuiElement one_handed_stat = GuiHelper.createStat('j', "Broń Jednoręczna", playerStats.getOneHanded());
-        StaticGuiElement two_handed_stat = GuiHelper.createStat('d', "Broń dwuręczna", playerStats.getTwoHanded());
-        StaticGuiElement archery_stat = GuiHelper.createStat('ł', "Łucznictwo", playerStats.getArchery());
-        StaticGuiElement hunting_stat = GuiHelper.createStat('m', "Myślistwo", playerStats.getHunting());
-        StaticGuiElement mining_stat = GuiHelper.createStat('g', "Górnictwo", playerStats.getMining());
-        StaticGuiElement job_stat = new StaticGuiElement('f', new ItemStack(Material.SLIME_BALL),
+        StaticGuiElement healthStat = GuiHelper.createStat('ż', "Życie", playerStats.getStat("health"));
+        StaticGuiElement strengthStat = GuiHelper.createStat('s', "Siła", playerStats.getStat("strength"));
+        StaticGuiElement dexterityStat = GuiHelper.createStat('z', "Zręczność", playerStats.getStat("dexterity"));
+        StaticGuiElement oneHandedStat = GuiHelper.createStat('j', "Broń Jednoręczna", playerStats.getStat("oneHanded"));
+        StaticGuiElement twoHandedStat = GuiHelper.createStat('d', "Broń dwuręczna", playerStats.getStat("twoHanded"));
+        StaticGuiElement archeryStat = GuiHelper.createStat('ł', "Łucznictwo", playerStats.getStat("archery"));
+        StaticGuiElement huntingStat = GuiHelper.createStat('m', "Myślistwo", playerStats.getStat("hunting"));
+        StaticGuiElement miningStat = GuiHelper.createStat('g', "Górnictwo", playerStats.getStat("mining"));
+        StaticGuiElement jobStat = new StaticGuiElement('f', new ItemStack(Material.SLIME_BALL),
                 ChatColor.translateAlternateColorCodes('&', GuiHelper.NAME_FLAGS + playerStats.getJob()));
 
 
         InventoryGui gui = new InventoryGui(plugin, GuiHelper.createGuiTitle("Statystyki"), guiSetup);
         gui.setFiller(GuiHelper.getFiller());
-        gui.addElement(health_stat);
-        gui.addElement(strength_stat);
-        gui.addElement(dexterity_stat);
-        gui.addElement(one_handed_stat);
-        gui.addElement(two_handed_stat);
-        gui.addElement(archery_stat);
-        gui.addElement(hunting_stat);
-        gui.addElement(mining_stat);
-        gui.addElement(job_stat);
+        gui.addElement(healthStat);
+        gui.addElement(strengthStat);
+        gui.addElement(dexterityStat);
+        gui.addElement(oneHandedStat);
+        gui.addElement(twoHandedStat);
+        gui.addElement(archeryStat);
+        gui.addElement(huntingStat);
+        gui.addElement(miningStat);
+        gui.addElement(jobStat);
         gui.show(player);
         return true;
     }

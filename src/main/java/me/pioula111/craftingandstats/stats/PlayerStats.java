@@ -1,42 +1,36 @@
 package me.pioula111.craftingandstats.stats;
 
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+
 public class PlayerStats {
-    private int health, oneHanded, twoHanded, archery, strength, dexterity, mining, hunting;
-    private int oneHandedHits, twoHandedHits, archeryHits, numOfDexAndStr, oreMined, mobsKilled;
-    private int oneHandedLevelsADay, twoHandedLevelsADay, archeryLevelsADay, strengLevelsADay, dexterityLevelsADay;
-    private int minigLevelsADay, huntingLevelsADay;
+    private HashMap<String, Long> stats;
     private String job;
     public static final String archer = "Łuczarz";
     public static final String smith = "Kowal";
     public static final String alchemist = "Alchemik";
     public static final String noJob = "Nie Masz Fachu!";
+    private static final long statExp = 1000;
+    private static final long maxStatLevelUpsADay = 3;
+    private static final long maxStatLevel = 100;
+    private static final long day = 86400000; // 24 godziny
 
     public PlayerStats() {
         resetStats();
     }
 
     public void resetStats() {
-        health = 20;
-        oneHanded = 10;
-        twoHanded = 10;
-        strength = 10;
-        dexterity = 10;
-        mining = 10;
-        hunting = 10;
-        archery = 10;
-        oneHandedHits = 0;
-        twoHandedHits = 0;
-        archeryHits = 0;
-        numOfDexAndStr = 0;
-        oreMined = 0;
-        mobsKilled = 0;
-        oneHandedLevelsADay = 0;
-        twoHandedLevelsADay = 0;
-        archeryLevelsADay = 0;
-        strengLevelsADay = 0;
-        dexterityLevelsADay = 0;
-        minigLevelsADay = 0;
-        huntingLevelsADay = 0;
+        stats = new HashMap<>();
+        stats.put("health", 20L);
+        stats.put("oneHanded", 10L);
+        stats.put("twoHanded", 10L);
+        stats.put("strength", 10L);
+        stats.put("dexterity", 10L);
+        stats.put("mining", 10L);
+        stats.put("hunting", 10L);
+        stats.put("archery", 10L);
         setJobNone();
     }
 
@@ -64,65 +58,38 @@ public class PlayerStats {
         this.job = job;
     }
 
-    public int getArchery() {
-        return archery;
+    public Long getStat(String stat) {
+        statCheck(stat);
+
+        return stats.get(stat);
     }
 
-    public int getDexterity() {
-        return dexterity;
+    public void increaseStatExp(Player player, String stat, int value) {
+        if (getStat(stat) == maxStatLevel)
+            return;
+
+        String lastLevelUps = stat + "Last";
+        if (getStat(lastLevelUps) + day <= System.currentTimeMillis()) {
+            String statExp = stat + "Exp";
+
+            stats.put(statExp, getStat(statExp) + value);
+            if (getStat(statExp) >= PlayerStats.statExp) {
+                String statThisDay = stat + "ThisDay";
+
+                stats.put(statThisDay, getStat(statThisDay) + 1);
+                stats.put(stat, Math.min(getStat(stat) + 1, maxStatLevel));
+                stats.put(statExp, 0L);
+                if (getStat(statThisDay) == maxStatLevelUpsADay) {
+                    stats.put(lastLevelUps, System.currentTimeMillis());
+                    stats.put(statThisDay, 0L);
+                }
+                player.sendMessage(ChatColor.GREEN + "Twoja statystyka wzrosła!");
+            }
+        }
     }
 
-    public int getHealth() {
-        return health;
+    private void statCheck(String stat) {
+        if (!stats.containsKey(stat))
+            stats.put(stat, 0L);
     }
-
-    public int getHunting() {
-        return hunting;
-    }
-
-    public int getMining() {
-        return mining;
-    }
-
-    public int getOneHanded() {
-        return oneHanded;
-    }
-
-    public int getStrength() {
-        return strength;
-    }
-
-    public int getTwoHanded() {
-        return twoHanded;
-    }
-
-    public void setDexterity(int dexterity) {
-        this.dexterity = dexterity;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void setHunting(int hunting) {
-        this.hunting = hunting;
-    }
-
-    public void setMining(int mining) {
-        this.mining = mining;
-    }
-
-    public void setOneHanded(int oneHanded) {
-        this.oneHanded = oneHanded;
-    }
-
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-
-    public void setTwoHanded(int twoHanded) {
-        this.twoHanded = twoHanded;
-    }
-
-
 }

@@ -16,7 +16,7 @@ public class GuiHelper {
         return ChatColor.translateAlternateColorCodes('&',GuiHelper.TITLE_FLAGS + " " + title);
     }
 
-    public static StaticGuiElement createStat(char replacement, String name, int value) {
+    public static StaticGuiElement createStat(char replacement, String name, long value) {
         return new StaticGuiElement(replacement, new ItemStack(Material.SLIME_BALL),
                 ChatColor.translateAlternateColorCodes('&', GuiHelper.NAME_FLAGS + name),
                 ChatColor.translateAlternateColorCodes('&', GuiHelper.VALUE_NAME_FLAGS + "Wartość: " + GuiHelper.ACTUAL_VALUE_FLAGS + value));
