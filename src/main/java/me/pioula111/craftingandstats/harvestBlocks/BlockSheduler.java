@@ -7,10 +7,8 @@ import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.util.PriorityQueue;
-import java.util.Random;
 
 public class BlockSheduler {
-    private final Random r = new Random();
     private PriorityQueue<BrokenBlock> queue;
     private static final long taskPeriod = 300L; //15 sekund
 

@@ -27,6 +27,7 @@ import me.pioula111.craftingandstats.itemy.komendy.komendyInne.CommandStopCreati
 import me.pioula111.craftingandstats.items.commands.armorCommands.CommandDefence;
 import me.pioula111.craftingandstats.items.commands.armorCommands.CommandArmor;
 import me.pioula111.craftingandstats.markers.Marker;
+import me.pioula111.craftingandstats.pvp.PlayerAttack;
 import me.pioula111.craftingandstats.stats.CommandStaty;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnJoin;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnQuit;
@@ -73,6 +74,7 @@ public final class CraftingAndStats extends JavaPlugin {
 
         pluginManager.registerEvents(new InteractionEventCatcher(harvestManager), this);
 
+        pluginManager.registerEvents(new PlayerAttack(statManager), this);
 
         Objects.requireNonNull(this.getCommand("bloki")).setExecutor(new CommandBlocks(harvestManager));
         Objects.requireNonNull(this.getCommand("dodajblok")).setExecutor(new CommandAddBlock(harvestManager));

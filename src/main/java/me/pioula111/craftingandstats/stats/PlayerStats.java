@@ -24,13 +24,13 @@ public class PlayerStats {
     public void resetStats() {
         stats = new HashMap<>();
         stats.put("health", 20L);
-        stats.put("oneHanded", 10L);
-        stats.put("twoHanded", 10L);
+        stats.put("one_handed", 10L);
+        stats.put("two_handed", 10L);
         stats.put("strength", 10L);
         stats.put("dexterity", 10L);
         stats.put("mining", 10L);
         stats.put("hunting", 10L);
-        stats.put("archery", 10L);
+        stats.put("long_distance", 10L);
         setJobNone();
     }
 

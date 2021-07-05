@@ -41,9 +41,9 @@ public class CommandStaty implements CommandExecutor {
         StaticGuiElement healthStat = GuiHelper.createStat('ż', "Życie", playerStats.getStat("health"));
         StaticGuiElement strengthStat = GuiHelper.createStat('s', "Siła", playerStats.getStat("strength"));
         StaticGuiElement dexterityStat = GuiHelper.createStat('z', "Zręczność", playerStats.getStat("dexterity"));
-        StaticGuiElement oneHandedStat = GuiHelper.createStat('j', "Broń Jednoręczna", playerStats.getStat("oneHanded"));
-        StaticGuiElement twoHandedStat = GuiHelper.createStat('d', "Broń dwuręczna", playerStats.getStat("twoHanded"));
-        StaticGuiElement archeryStat = GuiHelper.createStat('ł', "Łucznictwo", playerStats.getStat("archery"));
+        StaticGuiElement oneHandedStat = GuiHelper.createStat('j', "Broń Jednoręczna", playerStats.getStat("one_handed"));
+        StaticGuiElement twoHandedStat = GuiHelper.createStat('d', "Broń dwuręczna", playerStats.getStat("two_handed"));
+        StaticGuiElement archeryStat = GuiHelper.createStat('ł', "Łucznictwo", playerStats.getStat("long_distance"));
         StaticGuiElement huntingStat = GuiHelper.createStat('m', "Myślistwo", playerStats.getStat("hunting"));
         StaticGuiElement miningStat = GuiHelper.createStat('g', "Górnictwo", playerStats.getStat("mining"));
         StaticGuiElement jobStat = new StaticGuiElement('f', new ItemStack(Material.SLIME_BALL),
