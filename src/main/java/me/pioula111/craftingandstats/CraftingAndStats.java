@@ -3,6 +3,13 @@ package me.pioula111.craftingandstats;
 import me.pioula111.craftingandstats.crafting.*;
 import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
+import me.pioula111.craftingandstats.fishingAndBoats.boats.BoatPlacing;
+import me.pioula111.craftingandstats.fishingAndBoats.boats.BoatRemoving;
+import me.pioula111.craftingandstats.fishingAndBoats.boats.PreventBoatDestroying;
+import me.pioula111.craftingandstats.fishingAndBoats.fishing.CommandFishChances;
+import me.pioula111.craftingandstats.fishingAndBoats.fishing.CommandFishingLoot;
+import me.pioula111.craftingandstats.fishingAndBoats.fishing.CommandPlaceFishery;
+import me.pioula111.craftingandstats.fishingAndBoats.fishing.PlayerFishing;
 import me.pioula111.craftingandstats.harvestBlocks.BlockSheduler;
 import me.pioula111.craftingandstats.harvestBlocks.CommandAddBlock;
 import me.pioula111.craftingandstats.harvestBlocks.CommandBlocks;
@@ -37,7 +44,7 @@ import me.pioula111.craftingandstats.stats.json.StatJsonOnJoin;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnQuit;
 import me.pioula111.craftingandstats.stats.json.StatManager;
 import me.pioula111.craftingandstats.thievery.keyLocking.*;
-import me.pioula111.craftingandstats.thievery.keyLocking.json.LockpickJsonManager;
+import me.pioula111.craftingandstats.thievery.keyLocking.json.LootJsonManager;
 import me.pioula111.craftingandstats.thievery.keyLocking.json.LootManager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,12 +53,12 @@ import java.io.File;
 import java.util.Objects;
 
 public final class CraftingAndStats extends JavaPlugin {
-    private File craftingJsonFile, harvestJsonFile, lockpickJsonFile;
+    private File craftingJsonFile, harvestJsonFile, lockpickJsonFile, fishingJsonFile;
     private NameSpacedKeys nameSpacedKeys;
     private StatManager statManager;
     private CraftingJsonManager craftingJsonManager;
     private HarvestJsonManager harvestJsonManager;
-    private LockpickJsonManager lockpickJsonManager;
+    private LootJsonManager lockpickJsonManager, fishingJsonManager;
     private BlockSheduler blockSheduler;
 
     @Override
@@ -66,8 +73,12 @@ public final class CraftingAndStats extends JavaPlugin {
         HarvestManager harvestManager = harvestJsonManager.getHarvestManager();
 
         lockpickJsonFile = new File("plugins/CraftingAndStats/lockpick.json");
-        lockpickJsonManager = new LockpickJsonManager(lockpickJsonFile);
-        LootManager lootManager = lockpickJsonManager.getLootManager();
+        lockpickJsonManager = new LootJsonManager(lockpickJsonFile);
+        LootManager lockpickManager = lockpickJsonManager.getLootManager();
+
+        fishingJsonFile = new File("plugins/CraftingAndStats/fishing.json");
+        fishingJsonManager = new LootJsonManager(fishingJsonFile);
+        LootManager fishingManager = fishingJsonManager.getLootManager();
 
         blockSheduler = new BlockSheduler(this);
 
@@ -94,8 +105,14 @@ public final class CraftingAndStats extends JavaPlugin {
         pluginManager.registerEvents(new NPCVanillaDamageStopper(), this);
         pluginManager.registerEvents(new PlayerHpIncrease(statManager), this);
 
-        pluginManager.registerEvents(new OpeningChest(statManager, chestManager, lootManager), this);
-        pluginManager.registerEvents(lootManager, this);
+        pluginManager.registerEvents(new OpeningChest(statManager, chestManager, lockpickManager), this);
+        pluginManager.registerEvents(lockpickManager, this);
+
+        pluginManager.registerEvents(fishingManager, this);
+        pluginManager.registerEvents(new BoatPlacing(), this);
+        pluginManager.registerEvents(new PreventBoatDestroying(), this);
+        pluginManager.registerEvents(new BoatRemoving(), this);
+        pluginManager.registerEvents(new PlayerFishing(fishingManager), this);
 
         Objects.requireNonNull(this.getCommand("bloki")).setExecutor(new CommandBlocks(harvestManager));
         Objects.requireNonNull(this.getCommand("dodajblok")).setExecutor(new CommandAddBlock(harvestManager));
@@ -156,8 +173,12 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("usunfach")).setExecutor(new CommandRemoveJob(craftingManager));
 
         Objects.requireNonNull(this.getCommand("postawskrzynie")).setExecutor(new CommandPlaceChest());
-        Objects.requireNonNull(this.getCommand("lootskrzyni")).setExecutor(new CommandChestLoot(lootManager));
-        Objects.requireNonNull(this.getCommand("lootszanse")).setExecutor(new CommandLootChances(lootManager));
+        Objects.requireNonNull(this.getCommand("lootskrzyni")).setExecutor(new CommandChestLoot(lockpickManager));
+        Objects.requireNonNull(this.getCommand("lootszanse")).setExecutor(new CommandLootChances(lockpickManager));
+
+        Objects.requireNonNull(this.getCommand("fishchances")).setExecutor(new CommandFishChances(fishingManager));
+        Objects.requireNonNull(this.getCommand("fishloot")).setExecutor(new CommandFishingLoot(fishingManager));
+        Objects.requireNonNull(this.getCommand("postawlowisko")).setExecutor(new CommandPlaceFishery());
 
     }
 
@@ -175,6 +196,7 @@ public final class CraftingAndStats extends JavaPlugin {
         blockSheduler.placeAllBlocks();
         lockpickJsonManager.getLootManager().saveInventory(null);
         lockpickJsonManager.writeToJson();
+        fishingJsonManager.writeToJson();
         craftingJsonManager.writeToJson();
         harvestJsonManager.writeToJson();
         statManager.savePlayers();

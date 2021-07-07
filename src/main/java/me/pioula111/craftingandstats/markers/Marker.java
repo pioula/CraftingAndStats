@@ -47,13 +47,24 @@ public class Marker implements Listener {
             passenger.remove();
         }
 
+        for (Entity nearbyEntity : marker.getNearbyEntities(0.1, 0.75, 0.1)) {
+            if (nearbyEntity.getType() == EntityType.ARMOR_STAND) {
+                nearbyEntity.remove();
+            }
+        }
+
         marker.remove();
     }
 
     public static String getName(Entity marker) {
         List<Entity> passengers = marker.getPassengers();
-        if (passengers.size() == 0)
-            return null;
+        if (passengers.size() == 0) {
+            for (Entity nearbyEntity : marker.getNearbyEntities(0.1, 0.75, 0.1)) {
+                if (nearbyEntity.getType() == EntityType.ARMOR_STAND) {
+                    return nearbyEntity.getName();
+                }
+            }
+        }
 
         return passengers.get(0).getName();
     }

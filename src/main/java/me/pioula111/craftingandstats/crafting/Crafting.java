@@ -1,6 +1,5 @@
 package me.pioula111.craftingandstats.crafting;
 
-import me.pioula111.craftingandstats.gui.CraftingMenu;
 import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.markers.Marker;
 import net.kyori.adventure.text.Component;

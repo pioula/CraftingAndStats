@@ -24,14 +24,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class LockpickJsonManager {
+public class LootJsonManager {
     private GsonBuilder gsonBuilder = new GsonBuilder();
     private Gson gson;
     private File file;
     private JsonReader reader;
     private LootManager lootManager;
 
-    public LockpickJsonManager(File file) {
+    public LootJsonManager(File file) {
         gsonBuilder.setPrettyPrinting();
         lootManager = new LootManager();
 

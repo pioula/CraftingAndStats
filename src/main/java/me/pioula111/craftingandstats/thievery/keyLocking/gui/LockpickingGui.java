@@ -104,5 +104,3 @@ public class LockpickingGui {
     }
 }
 
-//player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 100, 0);
-//player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 100, 2);

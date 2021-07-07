@@ -195,3 +195,15 @@ commands:
     description: lootszanse
     usage: Error
     permission: Operator
+  fishchances:
+    description: fishchances
+    usage: Error
+    permission: Operator
+  fishloot:
+    description: fishloot
+    usage: Error
+    permission: Operator
+  postawlowisko:
+    description: postawlowisko
+    usage: Error
+    permission: Operator

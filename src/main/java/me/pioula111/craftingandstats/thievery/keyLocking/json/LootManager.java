@@ -1,8 +1,6 @@
 package me.pioula111.craftingandstats.thievery.keyLocking.json;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
-import me.pioula111.craftingandstats.gui.ComponentWrapper;
-import me.pioula111.craftingandstats.gui.CraftingMenu;
 import me.pioula111.craftingandstats.gui.GuiHelper;
 import me.pioula111.craftingandstats.gui.MenuHelper;
 import me.pioula111.craftingandstats.items.myItems.MyItem;

@@ -1,13 +1,16 @@
-package me.pioula111.craftingandstats.gui;
+package me.pioula111.craftingandstats.crafting;
 
 import de.themoep.inventorygui.DynamicGuiElement;
 import de.themoep.inventorygui.GuiElementGroup;
 import de.themoep.inventorygui.InventoryGui;
 import de.themoep.inventorygui.StaticGuiElement;
 import me.pioula111.craftingandstats.CraftingAndStats;
+import me.pioula111.craftingandstats.DropItemHelper;
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.crafting.Ingredient;
 import me.pioula111.craftingandstats.crafting.Recipe;
+import me.pioula111.craftingandstats.gui.ComponentWrapper;
+import me.pioula111.craftingandstats.gui.GuiHelper;
 import me.pioula111.craftingandstats.items.myItems.MyItem;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
@@ -101,7 +104,7 @@ public class CraftingMenu {
             }
         }
 
-        player.getInventory().addItem(recipe.getResult().getIngredient().makeItem(recipe.getResult().getAmount()));
+        DropItemHelper.dropItem(player, recipe.getResult().getIngredient().makeItem(recipe.getResult().getAmount()));
     }
 
     private ItemStack craftIcon(Recipe recipe, Player player) {

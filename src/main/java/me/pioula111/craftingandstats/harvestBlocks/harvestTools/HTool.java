@@ -2,6 +2,7 @@ package me.pioula111.craftingandstats.harvestBlocks.harvestTools;
 
 import de.themoep.inventorygui.*;
 import me.pioula111.craftingandstats.CraftingAndStats;
+import me.pioula111.craftingandstats.DropItemHelper;
 import me.pioula111.craftingandstats.gui.ComponentWrapper;
 import me.pioula111.craftingandstats.gui.GuiHelper;
 import me.pioula111.craftingandstats.harvestBlocks.HarvestBlock;
@@ -109,7 +110,7 @@ public abstract class HTool implements Listener {
 
         plugin.getBlockSheduler().sheduleBlockPlacement(block.getType(), block.getLocation(), respawnTime);
         block.setType(blockReplacement);
-        player.getInventory().addItem(getLoot(hBlock, player));
+        DropItemHelper.dropItem(player, getLoot(hBlock, player));
         Damageable meta = (Damageable) tool.getItemMeta();
         meta.setDamage(meta.getDamage() + 1);
 
