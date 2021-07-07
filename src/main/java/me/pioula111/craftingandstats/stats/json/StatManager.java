@@ -53,7 +53,7 @@ public class StatManager {
     }
 
     private File makeFile(Player player) {
-        return new File("plugins/CraftingAndStats/stats/" + player.getUniqueId() + ".json");
+        return new File("plugins/CraftingAndStats/stats/" + player.getName() + "-" +  player.getUniqueId() + ".json");
     }
 
     public void savePlayer(Player player) {

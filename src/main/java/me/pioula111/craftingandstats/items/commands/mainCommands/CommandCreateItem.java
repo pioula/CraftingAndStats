@@ -22,7 +22,7 @@ public class CommandCreateItem implements CommandExecutor {
     public CommandCreateItem(ItemManager itemManager) {
         this.itemManager = itemManager;
         itemTypes = new MyItem[] {new MyOthers(), new MyArmor(), new MyWeapon(), new MyDrink(),
-                new MyFood(), new MyHandCraft(), new MyTool()};
+                new MyFood(), new MyHandCraft(), new MyTool(), new MyShield()};
     }
 
     @Override
@@ -89,6 +89,9 @@ public class CommandCreateItem implements CommandExecutor {
 
         if (itemTypes[6].toString().equals(arg))
             return new MyTool();
+
+        if (itemTypes[7].toString().equals(arg))
+            return new MyShield();
 
         return null;
     }

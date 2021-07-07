@@ -30,6 +30,8 @@ public class MyItemDeserializer implements JsonDeserializer<MyItem> {
                 return gson.fromJson(json, MyTool.class);
             case "weapon":
                 return gson.fromJson(json, MyWeapon.class);
+            case "shield":
+                return gson.fromJson(json, MyShield.class);
         }
 
         return null;

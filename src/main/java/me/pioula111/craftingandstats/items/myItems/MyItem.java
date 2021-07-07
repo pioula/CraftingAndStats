@@ -48,6 +48,8 @@ public abstract class MyItem {
                     return new MyDrink(item);
                 case "weapon":
                     return new MyWeapon(item);
+                case "shield":
+                    return new MyShield(item);
             }
         }
 

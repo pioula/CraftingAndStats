@@ -61,8 +61,7 @@ public class UsingAndRemovingWorkBench implements Listener {
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractAtEntityEvent event) {
-        if (Marker.isMarker(event.getRightClicked()) &&
-                craftingManager.hasCrafting(Marker.getName(event.getRightClicked()))) {
+        if (Marker.isMarker(event.getRightClicked())) {
             if (event.getPlayer().getInventory().getItemInMainHand().getAmount() != 0 &&
                     event.getPlayer().getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.KEY_DESTROYER, PersistentDataType.BYTE)
                     && event.getPlayer().isOp()) {

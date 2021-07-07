@@ -55,8 +55,9 @@ public class MyArmor extends MyItem {
         PersistentDataContainer pdc = meta.getPersistentDataContainer();
         List<Component> lore = item.lore();
 
-        if (armor != 0) {
-            lore.add(ComponentWrapper.lore("Ulepszenie: " + addition.prettyToString()));
+        if (armor != 0 ) {
+            if (!addition.toString().equals("none"))
+                lore.add(ComponentWrapper.lore("Ulepszenie: " + addition.prettyToString()));
             pdc.set(NameSpacedKeys.KEY_ADDITION, PersistentDataType.STRING, addition.toString());
         }
 

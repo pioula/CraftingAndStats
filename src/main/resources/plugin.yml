@@ -179,3 +179,19 @@ commands:
     description: dodajblok
     usage: Error
     permission: Operator
+  shield:
+    description: shield
+    usage: Error
+    permission: Operator
+  postawskrzynie:
+    description: postawskrzynie
+    usage: Error
+    permission: Operator
+  lootskrzyni:
+    description: lootskrzyni
+    usage: Error
+    permission: Operator
+  lootszanse:
+    description: lootszanse
+    usage: Error
+    permission: Operator

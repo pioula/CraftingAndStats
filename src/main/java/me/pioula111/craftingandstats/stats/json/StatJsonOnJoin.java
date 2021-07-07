@@ -60,7 +60,7 @@ public class StatJsonOnJoin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        File jsonFile = new File("plugins/CraftingAndStats/stats/" + event.getPlayer().getUniqueId() + ".json");
+        File jsonFile = new File("plugins/CraftingAndStats/stats/" + event.getPlayer().getName() + "-" + event.getPlayer().getUniqueId() + ".json");
 
         readJson(jsonFile, event.getPlayer());
     }

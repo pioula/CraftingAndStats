@@ -1,17 +1,15 @@
-package me.pioula111.craftingandstats.pvp;
+package me.pioula111.craftingandstats.pvpAndPve;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.RandomHelper;
 import me.pioula111.craftingandstats.stats.PlayerStats;
 import me.pioula111.craftingandstats.stats.json.StatManager;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -36,11 +34,11 @@ public class PlayerAttack implements Listener {
     }
 
     @EventHandler
-    public void onPlayerTakeDamage(EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity) {
             Player damager = (Player) event.getDamager();
-            Player attacked = (Player) event.getEntity();
-            event.setCancelled(true);
+            LivingEntity attacked = (LivingEntity) event.getEntity();
+            event.setDamage(0);
             double damage = 0;
             if (damager.getInventory().getItemInMainHand().getAmount() > 0 && damager.getInventory().getItemInMainHand().hasItemMeta())
                 damage = getDamage(attacked, damager, damager.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer());
@@ -49,23 +47,24 @@ public class PlayerAttack implements Listener {
 
             attacked.damage(damage);
         }
-        else if (event.getDamager() instanceof Arrow && event.getEntity() instanceof Player) {
+        else if (event.getDamager() instanceof Arrow && event.getEntity() instanceof LivingEntity) {
             Arrow arrow = (Arrow) event.getDamager();
             if (arrow.getShooter() instanceof Player) {
-                event.setCancelled(true);
-                ((Player) event.getEntity()).damage(getDamage((Player) event.getEntity(), (Player) arrow.getShooter(), arrow.getPersistentDataContainer()));
+                event.setDamage(0);
+                ((LivingEntity) event.getEntity()).damage(getDamage((LivingEntity) event.getEntity(), (Player) arrow.getShooter(), arrow.getPersistentDataContainer()));
             }
         }
     }
 
 
-    private double getDamage(Player attacked, Player damager, PersistentDataContainer weapon) {
+    private double getDamage(LivingEntity attacked, Player damager, PersistentDataContainer weapon) {
         if (weapon == null)
             return 1.;
         int armor = 0;
-        if (attacked.getInventory().getChestplate() != null) {
-            PersistentDataContainer attackedArmorPdc = attacked.getInventory().getChestplate().getItemMeta().getPersistentDataContainer();
-            if (attackedArmorPdc.has(NameSpacedKeys.KEY_ARMOR, PersistentDataType.INTEGER)) {
+
+        if (attacked.getEquipment() != null && attacked.getEquipment().getChestplate() != null && attacked.getEquipment().getChestplate().hasItemMeta()) {
+            PersistentDataContainer attackedArmorPdc = attacked.getEquipment().getChestplate().getItemMeta().getPersistentDataContainer();
+            if (attackedArmorPdc != null && attackedArmorPdc.has(NameSpacedKeys.KEY_ARMOR, PersistentDataType.INTEGER)) {
                 armor = attackedArmorPdc.get(NameSpacedKeys.KEY_ARMOR, PersistentDataType.INTEGER);
             }
         }
@@ -82,6 +81,8 @@ public class PlayerAttack implements Listener {
             else {
                 if (!(weapon.has(NameSpacedKeys.KEY_AUTHOR, PersistentDataType.STRING) && weapon.get(NameSpacedKeys.KEY_WEAPON_TYPE, PersistentDataType.STRING).equals("long_distance"))) {
                     long stat = damagerStats.getStat(weapon.get(NameSpacedKeys.KEY_WEAPON_TYPE, PersistentDataType.STRING));
+                    statManager.getPlayerStats(damager).increaseStatExp(damager, weapon.get(NameSpacedKeys.KEY_WEAPON_TYPE, PersistentDataType.STRING), 5);
+                    statManager.getPlayerStats(damager).increaseStatExp(damager, weapon.get(NameSpacedKeys.KEY_STATISTIC, PersistentDataType.STRING), 5);
                     if (RandomHelper.hasHappened(stat)) {
                         dmg = weapon.get(NameSpacedKeys.KEY_DMG, PersistentDataType.DOUBLE) + (double)damagerStats.getStat(requiredStat) / 10.;
                     }

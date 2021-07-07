@@ -33,6 +33,8 @@ public class MyItemSerializer implements JsonSerializer<MyItem> {
                 return gson.toJsonTree(src, MyTool.class);
             case "weapon":
                 return gson.toJsonTree(src, MyWeapon.class);
+            case "shield":
+                return gson.toJsonTree(src, MyShield.class);
         }
         return null;
     }

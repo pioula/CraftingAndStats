@@ -70,7 +70,8 @@ public class MyWeapon extends MyItem {
 
         lore.add(ComponentWrapper.lore(weaponType.prettyToString()));
         lore.add(ComponentWrapper.lore("Wymagana " + statistic.prettyToString() + ": " + statisticLevel));
-        lore.add(ComponentWrapper.lore("Ulepszenie: " + addition.prettyToString()));
+        if (!addition.toString().equals("none"))
+            lore.add(ComponentWrapper.lore("Ulepszenie: " + addition.prettyToString()));
         meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,new AttributeModifier(UUID.randomUUID(), "dmg", dmg, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HAND));
 
         pdc.set(NameSpacedKeys.KEY_WEAPON_TYPE, PersistentDataType.STRING, weaponType.toString());

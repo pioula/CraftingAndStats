@@ -5,6 +5,7 @@ import de.themoep.inventorygui.StaticGuiElement;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class GuiHelper {
     public static final String NAME_FLAGS = "&f&B&L";
@@ -32,5 +33,13 @@ public class GuiHelper {
 
     public static ItemStack getFiller() {
         return new ItemStack(Material.SLIME_BALL);
+    }
+
+    public static ItemStack craftIcon(String name) {
+        ItemStack item = new ItemStack(Material.SLIME_BALL);
+        ItemMeta meta = item.getItemMeta();
+        meta.displayName(ComponentWrapper.itemName(name));
+        item.setItemMeta(meta);
+        return item;
     }
 }

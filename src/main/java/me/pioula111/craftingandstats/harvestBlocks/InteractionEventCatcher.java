@@ -29,7 +29,7 @@ public class InteractionEventCatcher implements Listener {
             Player player = event.getPlayer();
             ItemStack tool = player.getInventory().getItemInMainHand();
             if (tool.getAmount() == 1 &&
-                    tool.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.KEY_AUTHOR, PersistentDataType.STRING)) {
+                    tool.getItemMeta().getPersistentDataContainer().has(NameSpacedKeys.KEY_TOOL_TYPE, PersistentDataType.STRING)) {
                 HTool hTool = harvestManager.getTool(Objects.requireNonNull(tool.getItemMeta().getPersistentDataContainer().get(NameSpacedKeys.KEY_TOOL_TYPE, PersistentDataType.STRING)));
                 if (hTool == null)
                     return;
