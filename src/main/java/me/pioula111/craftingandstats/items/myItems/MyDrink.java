@@ -59,7 +59,6 @@ public class MyDrink extends MyItem {
 
         pdc.set(NameSpacedKeys.KEY_EFFECTS, PersistentDataType.STRING, effects.toString());
         pdc.set(NameSpacedKeys.KEY_DRINK_COLOR, PersistentDataType.INTEGER, drinkColor);
-
         item.setItemMeta(meta);
         return item;
     }

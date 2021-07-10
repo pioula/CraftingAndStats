@@ -2,6 +2,7 @@ package me.pioula111.craftingandstats.pvpAndPve;
 
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.RandomHelper;
+import me.pioula111.craftingandstats.pvpAndPve.death.DeathManager;
 import me.pioula111.craftingandstats.stats.PlayerStats;
 import me.pioula111.craftingandstats.stats.json.StatManager;
 import org.bukkit.ChatColor;
@@ -14,9 +15,11 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 public class PlayerAttack implements Listener {
-    public StatManager statManager;
+    private StatManager statManager;
+    private DeathManager deathManager;
 
-    public PlayerAttack(StatManager statManager) {
+    public PlayerAttack(StatManager statManager, DeathManager deathManager) {
+        this.deathManager = deathManager;
         this.statManager = statManager;
     }
 
@@ -58,6 +61,8 @@ public class PlayerAttack implements Listener {
 
 
     private double getDamage(LivingEntity attacked, Player damager, PersistentDataContainer weapon) {
+        if (deathManager.playerIsDead(damager))
+            return 0.;
         if (weapon == null)
             return 1.;
         int armor = 0;
@@ -83,6 +88,7 @@ public class PlayerAttack implements Listener {
                     long stat = damagerStats.getStat(weapon.get(NameSpacedKeys.KEY_WEAPON_TYPE, PersistentDataType.STRING));
                     statManager.getPlayerStats(damager).increaseStatExp(damager, weapon.get(NameSpacedKeys.KEY_WEAPON_TYPE, PersistentDataType.STRING), 5);
                     statManager.getPlayerStats(damager).increaseStatExp(damager, weapon.get(NameSpacedKeys.KEY_STATISTIC, PersistentDataType.STRING), 5);
+
                     if (RandomHelper.hasHappened(stat)) {
                         dmg = weapon.get(NameSpacedKeys.KEY_DMG, PersistentDataType.DOUBLE) + (double)damagerStats.getStat(requiredStat) / 10.;
                     }

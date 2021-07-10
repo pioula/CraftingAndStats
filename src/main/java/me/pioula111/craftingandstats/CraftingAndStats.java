@@ -39,7 +39,12 @@ import me.pioula111.craftingandstats.npcs.BlockNpcPickup;
 import me.pioula111.craftingandstats.pvpAndPve.NPCVanillaDamageStopper;
 import me.pioula111.craftingandstats.pvpAndPve.PlayerAttack;
 import me.pioula111.craftingandstats.pvpAndPve.PlayerHpIncrease;
+import me.pioula111.craftingandstats.pvpAndPve.TwoHandedWeapons;
+import me.pioula111.craftingandstats.pvpAndPve.death.CommandSearch;
+import me.pioula111.craftingandstats.pvpAndPve.death.DeathManager;
+import me.pioula111.craftingandstats.pvpAndPve.death.PlayerDeath;
 import me.pioula111.craftingandstats.stats.CommandStaty;
+import me.pioula111.craftingandstats.stats.HealthManager;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnJoin;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnQuit;
 import me.pioula111.craftingandstats.stats.json.StatManager;
@@ -85,11 +90,21 @@ public final class CraftingAndStats extends JavaPlugin {
         nameSpacedKeys = new NameSpacedKeys(this);
         statManager = new StatManager();
 
+        DeathManager deathManager = new DeathManager();
+
         ChestManager chestManager = new ChestManager();
 
         TeachJobManager teachJobManager = new TeachJobManager(statManager, this);
 
         PluginManager pluginManager = getServer().getPluginManager();
+
+        TwoHandedWeapons sheduler = new TwoHandedWeapons(this);
+        sheduler.shedule();
+
+        //pluginManager.registerEvents(new HealthManager(statManager), this);
+
+        pluginManager.registerEvents(new PlayerDeath(deathManager, this), this);
+        pluginManager.registerEvents(deathManager, this);
 
         pluginManager.registerEvents(new UsingAndRemovingWorkBench(craftingManager, this, statManager), this);
         pluginManager.registerEvents(teachJobManager, this);
@@ -100,10 +115,10 @@ public final class CraftingAndStats extends JavaPlugin {
 
         pluginManager.registerEvents(new InteractionEventCatcher(harvestManager), this);
 
-        pluginManager.registerEvents(new PlayerAttack(statManager), this);
+        pluginManager.registerEvents(new PlayerAttack(statManager, deathManager), this);
         pluginManager.registerEvents(new BlockNpcPickup(), this);
         pluginManager.registerEvents(new NPCVanillaDamageStopper(), this);
-        pluginManager.registerEvents(new PlayerHpIncrease(statManager), this);
+        pluginManager.registerEvents(new PlayerHpIncrease(statManager, deathManager), this);
 
         pluginManager.registerEvents(new OpeningChest(statManager, chestManager, lockpickManager), this);
         pluginManager.registerEvents(lockpickManager, this);
@@ -179,6 +194,9 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("fishchances")).setExecutor(new CommandFishChances(fishingManager));
         Objects.requireNonNull(this.getCommand("fishloot")).setExecutor(new CommandFishingLoot(fishingManager));
         Objects.requireNonNull(this.getCommand("postawlowisko")).setExecutor(new CommandPlaceFishery());
+
+        Objects.requireNonNull(this.getCommand("przeszukaj")).setExecutor(new CommandSearch(deathManager));
+
 
     }
 

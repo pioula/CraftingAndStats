@@ -8,6 +8,7 @@ import me.pioula111.craftingandstats.thievery.keyLocking.LootItem;
 import me.pioula111.craftingandstats.thievery.keyLocking.json.LootManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

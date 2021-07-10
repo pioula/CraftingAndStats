@@ -1,6 +1,7 @@
 package me.pioula111.craftingandstats.stats;
 
 import org.bukkit.ChatColor;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -29,7 +30,6 @@ public class PlayerStats {
         stats.put("strength", 10L);
         stats.put("dexterity", 10L);
         stats.put("mining", 10L);
-        stats.put("hunting", 10L);
         stats.put("long_distance", 10L);
         setJobNone();
     }
@@ -83,9 +83,16 @@ public class PlayerStats {
                     stats.put(lastLevelUps, System.currentTimeMillis());
                     stats.put(statThisDay, 0L);
                 }
-                player.sendMessage(ChatColor.GREEN + "Twoja statystyka wzrosła!");
+                  player.sendMessage(ChatColor.GREEN + "Twoja statystyka wzrosła!");
+                if (stat.equals("health")) {
+                    player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(getHealth());
+                }
             }
         }
+    }
+
+    private double getHealth() {
+        return (double)stats.get("health");
     }
 
     private void statCheck(String stat) {

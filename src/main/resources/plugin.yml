@@ -207,3 +207,6 @@ commands:
     description: postawlowisko
     usage: Error
     permission: Operator
+  przeszukaj:
+    description: przeszukaj
+    usage: Error

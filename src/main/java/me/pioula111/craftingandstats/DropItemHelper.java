@@ -7,8 +7,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class DropItemHelper {
     public static void dropItem(Player player, ItemStack itemStack) {
-        Item boat = (Item) player.getLocation().getWorld().spawnEntity(player.getLocation(), EntityType.DROPPED_ITEM);
-        boat.setCanPlayerPickup(true);
-        boat.setItemStack(itemStack);
+        player.getWorld().dropItem(player.getLocation(), itemStack);
     }
 }

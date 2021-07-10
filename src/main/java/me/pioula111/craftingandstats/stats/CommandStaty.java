@@ -31,8 +31,8 @@ public class CommandStaty implements CommandExecutor {
         Player player = (Player) sender;
 
         String[] guiSetup = {
-                " ż j m f ",
-                " s d g   ",
+                " ż j g f ",
+                " s d     ",
                 " z ł     "
         };
 
@@ -44,7 +44,6 @@ public class CommandStaty implements CommandExecutor {
         StaticGuiElement oneHandedStat = GuiHelper.createStat('j', "Broń Jednoręczna", playerStats.getStat("one_handed"));
         StaticGuiElement twoHandedStat = GuiHelper.createStat('d', "Broń dwuręczna", playerStats.getStat("two_handed"));
         StaticGuiElement archeryStat = GuiHelper.createStat('ł', "Łucznictwo", playerStats.getStat("long_distance"));
-        StaticGuiElement huntingStat = GuiHelper.createStat('m', "Myślistwo", playerStats.getStat("hunting"));
         StaticGuiElement miningStat = GuiHelper.createStat('g', "Górnictwo", playerStats.getStat("mining"));
         StaticGuiElement jobStat = new StaticGuiElement('f', new ItemStack(Material.SLIME_BALL),
                 ChatColor.translateAlternateColorCodes('&', GuiHelper.NAME_FLAGS + playerStats.getJob()));
@@ -58,7 +57,6 @@ public class CommandStaty implements CommandExecutor {
         gui.addElement(oneHandedStat);
         gui.addElement(twoHandedStat);
         gui.addElement(archeryStat);
-        gui.addElement(huntingStat);
         gui.addElement(miningStat);
         gui.addElement(jobStat);
         gui.show(player);
