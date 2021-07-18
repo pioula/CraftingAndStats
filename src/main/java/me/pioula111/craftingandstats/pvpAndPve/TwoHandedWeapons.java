@@ -1,9 +1,8 @@
 package me.pioula111.craftingandstats.pvpAndPve;
 
 import me.pioula111.craftingandstats.CraftingAndStats;
-import me.pioula111.craftingandstats.DropItemHelper;
+import me.pioula111.craftingandstats.ItemHelper;
 import me.pioula111.craftingandstats.NameSpacedKeys;
-import me.pioula111.craftingandstats.harvestBlocks.BrokenBlock;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -29,7 +28,7 @@ public class TwoHandedWeapons {
                         ItemStack itemInOffHand = onlinePlayer.getInventory().getItemInOffHand();
                         if (itemInOffHand.getAmount() > 0) {
                             onlinePlayer.sendMessage(ChatColor.RED + "Musisz mieć dwie wolne ręce by obsługiwać tę broń!");
-                            DropItemHelper.dropItem(onlinePlayer,itemInOffHand.clone());
+                            ItemHelper.dropItem(onlinePlayer,itemInOffHand.clone());
                             onlinePlayer.getInventory().setItemInOffHand(null);
                         }
                     }

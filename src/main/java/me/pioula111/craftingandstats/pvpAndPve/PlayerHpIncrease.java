@@ -21,6 +21,8 @@ public class PlayerHpIncrease implements Listener {
     public void onEntityDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
+            if (event.getCause() == EntityDamageEvent.DamageCause.CONTACT)
+                return;
             if (deathManager.playerIsDead(player)) {
                 event.setCancelled(true);
             }

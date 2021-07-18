@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import java.util.List;
 
 public class Marker implements Listener {
-    public static void newMarker(int size, Player player, String name) {
+    public static Entity newMarker(int size, Player player, String name) {
         Location spawnPoint = player.getLocation();
         spawnPoint.setY(spawnPoint.getY() - 1);
         spawnPoint.setX(Math.floor(spawnPoint.getX()) + 0.5);
@@ -35,6 +35,8 @@ public class Marker implements Listener {
             nametag.setCustomNameVisible(true);
             marker.addPassenger(nametag);
         }
+
+        return marker;
     }
 
     public static boolean isMarker(Entity entity) {
@@ -64,6 +66,7 @@ public class Marker implements Listener {
                     return nearbyEntity.getName();
                 }
             }
+            return "";
         }
 
         return passengers.get(0).getName();

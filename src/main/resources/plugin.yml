@@ -210,3 +210,10 @@ commands:
   przeszukaj:
     description: przeszukaj
     usage: Error
+  dodajtowar:
+    description: dodajtowar
+    usage: Error
+  postawsklep:
+    description: postawsklep
+    usage: Error
+    permission: Operator

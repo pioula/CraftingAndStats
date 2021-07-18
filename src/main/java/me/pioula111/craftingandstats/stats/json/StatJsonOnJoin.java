@@ -7,6 +7,7 @@ import me.pioula111.craftingandstats.stats.PlayerStats;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -58,7 +59,7 @@ public class StatJsonOnJoin implements Listener {
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent event) {
         File jsonFile = new File("plugins/CraftingAndStats/stats/" + event.getPlayer().getName() + "-" + event.getPlayer().getUniqueId() + ".json");
 

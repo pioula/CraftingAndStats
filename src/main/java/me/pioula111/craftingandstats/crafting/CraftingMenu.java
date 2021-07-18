@@ -5,10 +5,8 @@ import de.themoep.inventorygui.GuiElementGroup;
 import de.themoep.inventorygui.InventoryGui;
 import de.themoep.inventorygui.StaticGuiElement;
 import me.pioula111.craftingandstats.CraftingAndStats;
-import me.pioula111.craftingandstats.DropItemHelper;
+import me.pioula111.craftingandstats.ItemHelper;
 import me.pioula111.craftingandstats.NameSpacedKeys;
-import me.pioula111.craftingandstats.crafting.Ingredient;
-import me.pioula111.craftingandstats.crafting.Recipe;
 import me.pioula111.craftingandstats.gui.ComponentWrapper;
 import me.pioula111.craftingandstats.gui.GuiHelper;
 import me.pioula111.craftingandstats.items.myItems.MyItem;
@@ -104,7 +102,7 @@ public class CraftingMenu {
             }
         }
 
-        DropItemHelper.dropItem(player, recipe.getResult().getIngredient().makeItem(recipe.getResult().getAmount()));
+        ItemHelper.dropItem(player, recipe.getResult().getIngredient().makeItem(recipe.getResult().getAmount()));
     }
 
     private ItemStack craftIcon(Recipe recipe, Player player) {

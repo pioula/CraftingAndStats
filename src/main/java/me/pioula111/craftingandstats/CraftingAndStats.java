@@ -1,5 +1,6 @@
 package me.pioula111.craftingandstats;
 
+import me.pioula111.craftingandstats.bushes.*;
 import me.pioula111.craftingandstats.crafting.*;
 import me.pioula111.craftingandstats.crafting.json.CraftingJsonManager;
 import me.pioula111.craftingandstats.crafting.json.CraftingManager;
@@ -43,6 +44,11 @@ import me.pioula111.craftingandstats.pvpAndPve.TwoHandedWeapons;
 import me.pioula111.craftingandstats.pvpAndPve.death.CommandSearch;
 import me.pioula111.craftingandstats.pvpAndPve.death.DeathManager;
 import me.pioula111.craftingandstats.pvpAndPve.death.PlayerDeath;
+import me.pioula111.craftingandstats.shoping.CommandAddGood;
+import me.pioula111.craftingandstats.shoping.CommandPlaceShop;
+import me.pioula111.craftingandstats.shoping.UsingShop;
+import me.pioula111.craftingandstats.shoping.json.ShopJsonManager;
+import me.pioula111.craftingandstats.shoping.json.ShopManager;
 import me.pioula111.craftingandstats.stats.CommandStaty;
 import me.pioula111.craftingandstats.stats.HealthManager;
 import me.pioula111.craftingandstats.stats.json.StatJsonOnJoin;
@@ -58,9 +64,10 @@ import java.io.File;
 import java.util.Objects;
 
 public final class CraftingAndStats extends JavaPlugin {
-    private File craftingJsonFile, harvestJsonFile, lockpickJsonFile, fishingJsonFile;
+    private File craftingJsonFile, harvestJsonFile, lockpickJsonFile, fishingJsonFile, shopJsonFile;
     private NameSpacedKeys nameSpacedKeys;
     private StatManager statManager;
+    private ShopJsonManager shopJsonManager;
     private CraftingJsonManager craftingJsonManager;
     private HarvestJsonManager harvestJsonManager;
     private LootJsonManager lockpickJsonManager, fishingJsonManager;
@@ -85,6 +92,11 @@ public final class CraftingAndStats extends JavaPlugin {
         fishingJsonManager = new LootJsonManager(fishingJsonFile);
         LootManager fishingManager = fishingJsonManager.getLootManager();
 
+        shopJsonFile = new File("plugins/CraftingAndStats/shop.json");
+        shopJsonManager = new ShopJsonManager(shopJsonFile);
+        ShopManager shopManager = shopJsonManager.getShopManager();
+
+
         blockSheduler = new BlockSheduler(this);
 
         nameSpacedKeys = new NameSpacedKeys(this);
@@ -101,7 +113,7 @@ public final class CraftingAndStats extends JavaPlugin {
         TwoHandedWeapons sheduler = new TwoHandedWeapons(this);
         sheduler.shedule();
 
-        //pluginManager.registerEvents(new HealthManager(statManager), this);
+        pluginManager.registerEvents(new HealthManager(statManager), this);
 
         pluginManager.registerEvents(new PlayerDeath(deathManager, this), this);
         pluginManager.registerEvents(deathManager, this);
@@ -128,6 +140,14 @@ public final class CraftingAndStats extends JavaPlugin {
         pluginManager.registerEvents(new PreventBoatDestroying(), this);
         pluginManager.registerEvents(new BoatRemoving(), this);
         pluginManager.registerEvents(new PlayerFishing(fishingManager), this);
+
+        pluginManager.registerEvents(new UsingShop(shopManager, this), this);
+
+        pluginManager.registerEvents(new NoDamageFromBush(), this);
+        pluginManager.registerEvents(new BlackberryProperty(), this);
+        pluginManager.registerEvents(new BeautyberryProperty(), this);
+        pluginManager.registerEvents(new RaspberryProperty(), this);
+        pluginManager.registerEvents(new CustomDropFromBushes(this), this);
 
         Objects.requireNonNull(this.getCommand("bloki")).setExecutor(new CommandBlocks(harvestManager));
         Objects.requireNonNull(this.getCommand("dodajblok")).setExecutor(new CommandAddBlock(harvestManager));
@@ -161,7 +181,7 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("scythe")).setExecutor(new CommandScythe(itemManager));
         Objects.requireNonNull(this.getCommand("fishing_rod")).setExecutor(new CommandFishingRod(itemManager));
         Objects.requireNonNull(this.getCommand("axe")).setExecutor(new CommandAxe(itemManager));
-        Objects.requireNonNull(this.getCommand("sickle")).setExecutor(new CommandSicle(itemManager));
+        Objects.requireNonNull(this.getCommand("sickle")).setExecutor(new CommandSickle(itemManager));
 
         Objects.requireNonNull(this.getCommand("drink")).setExecutor(new CommandDrink(itemManager));
         Objects.requireNonNull(this.getCommand("efekty")).setExecutor(new CommandEffects(itemManager));
@@ -197,6 +217,8 @@ public final class CraftingAndStats extends JavaPlugin {
 
         Objects.requireNonNull(this.getCommand("przeszukaj")).setExecutor(new CommandSearch(deathManager));
 
+        Objects.requireNonNull(this.getCommand("dodajtowar")).setExecutor(new CommandAddGood(shopManager));
+        Objects.requireNonNull(this.getCommand("postawsklep")).setExecutor(new CommandPlaceShop(shopManager));
 
     }
 
@@ -217,6 +239,7 @@ public final class CraftingAndStats extends JavaPlugin {
         fishingJsonManager.writeToJson();
         craftingJsonManager.writeToJson();
         harvestJsonManager.writeToJson();
+        shopJsonManager.writeToJson();
         statManager.savePlayers();
     }
 }

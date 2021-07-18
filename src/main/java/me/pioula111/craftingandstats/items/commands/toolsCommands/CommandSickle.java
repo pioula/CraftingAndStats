@@ -11,10 +11,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CommandSicle implements CommandExecutor {
+public class CommandSickle implements CommandExecutor {
     private ItemManager itemManager;
 
-    public CommandSicle(ItemManager itemManager) {
+    public CommandSickle(ItemManager itemManager) {
         this.itemManager = itemManager;
     }
 

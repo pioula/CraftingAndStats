@@ -1,6 +1,6 @@
 package me.pioula111.craftingandstats.fishingAndBoats.fishing;
 
-import me.pioula111.craftingandstats.DropItemHelper;
+import me.pioula111.craftingandstats.ItemHelper;
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.items.myItems.MyOthers;
 import me.pioula111.craftingandstats.markers.Marker;
@@ -8,7 +8,6 @@ import me.pioula111.craftingandstats.thievery.keyLocking.LootItem;
 import me.pioula111.craftingandstats.thievery.keyLocking.json.LootManager;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,7 +39,7 @@ public class PlayerFishing implements Listener {
                 return;
             }
 
-            DropItemHelper.dropItem(event.getPlayer(), itemStack);
+            ItemHelper.dropItem(event.getPlayer(), itemStack);
         }
     }
 

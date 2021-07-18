@@ -1,6 +1,6 @@
 package me.pioula111.craftingandstats.fishingAndBoats.boats;
 
-import me.pioula111.craftingandstats.DropItemHelper;
+import me.pioula111.craftingandstats.ItemHelper;
 import me.pioula111.craftingandstats.NameSpacedKeys;
 import me.pioula111.craftingandstats.items.myItems.MyOthers;
 import org.bukkit.ChatColor;
@@ -21,7 +21,7 @@ public class BoatRemoving implements Listener {
         event.getRightClicked().getPersistentDataContainer().has(NameSpacedKeys.KEY_NAME, PersistentDataType.STRING) && event.getPlayer().isSneaking()) {
             if (event.getRightClicked().getPersistentDataContainer().get(NameSpacedKeys.KEY_NAME, PersistentDataType.STRING).equals(event.getPlayer().getUniqueId().toString())) {
                 event.getRightClicked().remove();
-                DropItemHelper.dropItem(event.getPlayer(), createBoatItem());
+                ItemHelper.dropItem(event.getPlayer(), createBoatItem());
             }
             else {
                 event.getPlayer().sendMessage(ChatColor.RED + "Nie jesteś właścicielem tej łodzi!");

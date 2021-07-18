@@ -30,7 +30,7 @@ public abstract class Property {
                 return new Pickaxe();
             case "scythe":
                 return new Scythe();
-            case "sicle":
+            case "sickle":
                 return new Sickle();
             case "axe":
                 return new Axe();
