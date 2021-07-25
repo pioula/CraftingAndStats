@@ -24,6 +24,9 @@ public class BlockSheduler {
                         BrokenBlock block = queue.poll();
                         block.getLocation().getWorld().getBlockAt(block.getLocation()).setType(block.getBlock());
                     }
+                    else {
+                        break;
+                    }
                 }
             }
         }, 20L, taskPeriod);

@@ -17,6 +17,8 @@ public class NameSpacedKeys {
     public static NamespacedKey KEY_EFFECTS;
     public static NamespacedKey KEY_DRINK_COLOR;
     public static NamespacedKey KEY_AUTHOR;
+    public static NamespacedKey KEY_OPENERS;
+    public static NamespacedKey KEY_KEY_NAME;
     private CraftingAndStats plugin;
 
     public NameSpacedKeys(CraftingAndStats plugin) {
@@ -35,5 +37,7 @@ public class NameSpacedKeys {
         KEY_EFFECTS = new NamespacedKey(plugin, "effects");//STRING
         KEY_DRINK_COLOR = new NamespacedKey(plugin, "drink_color");//INT
         KEY_AUTHOR = new NamespacedKey(plugin, "author");//STRING
+        KEY_OPENERS = new NamespacedKey(plugin, "openers");//STRING
+        KEY_KEY_NAME = new NamespacedKey(plugin, "key_name"); //STRING
     }
 }

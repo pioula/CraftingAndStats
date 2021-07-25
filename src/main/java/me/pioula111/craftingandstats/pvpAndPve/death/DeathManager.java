@@ -35,7 +35,7 @@ public class DeathManager implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerJump(PlayerMoveEvent event) {
-        if (playerIsDead(event.getPlayer()))
+        if (playerIsDead(event.getPlayer()) && event.getPlayer().getActivePotionEffects() != null && event.getPlayer().getActivePotionEffects().size() > 0)
             event.setCancelled(true);
     }
 }

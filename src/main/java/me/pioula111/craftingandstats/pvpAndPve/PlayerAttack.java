@@ -5,6 +5,7 @@ import me.pioula111.craftingandstats.RandomHelper;
 import me.pioula111.craftingandstats.pvpAndPve.death.DeathManager;
 import me.pioula111.craftingandstats.stats.PlayerStats;
 import me.pioula111.craftingandstats.stats.json.StatManager;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -38,7 +39,8 @@ public class PlayerAttack implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Player && event.getEntity() instanceof LivingEntity) {
+        if (event.getDamager() instanceof Player && statManager.hasPlayer(((Player) event.getDamager())) && event.getEntity() instanceof LivingEntity) {
+
             Player damager = (Player) event.getDamager();
             LivingEntity attacked = (LivingEntity) event.getEntity();
             event.setDamage(0);
@@ -60,11 +62,11 @@ public class PlayerAttack implements Listener {
     }
 
 
-    private double getDamage(LivingEntity attacked, Player damager, PersistentDataContainer weapon) {
+    private int getDamage(LivingEntity attacked, Player damager, PersistentDataContainer weapon) {
         if (deathManager.playerIsDead(damager))
-            return 0.;
+            return 0;
         if (weapon == null)
-            return 1.;
+            return 1;
         int armor = 0;
 
         if (attacked.getEquipment() != null && attacked.getEquipment().getChestplate() != null && attacked.getEquipment().getChestplate().hasItemMeta()) {
@@ -74,7 +76,7 @@ public class PlayerAttack implements Listener {
             }
         }
 
-        double dmg = 0;
+        int dmg = 0;
         PlayerStats damagerStats = statManager.getPlayerStats(damager);
         if (weapon.has(NameSpacedKeys.KEY_DMG, PersistentDataType.DOUBLE)) {
 
@@ -90,7 +92,7 @@ public class PlayerAttack implements Listener {
                     statManager.getPlayerStats(damager).increaseStatExp(damager, weapon.get(NameSpacedKeys.KEY_STATISTIC, PersistentDataType.STRING), 5);
 
                     if (RandomHelper.hasHappened(stat)) {
-                        dmg = weapon.get(NameSpacedKeys.KEY_DMG, PersistentDataType.DOUBLE) + (double)damagerStats.getStat(requiredStat) / 10.;
+                        dmg = (int) (damagerStats.getStat(requiredStat) / 10 +(int)((double)weapon.get(NameSpacedKeys.KEY_DMG, PersistentDataType.DOUBLE)));
                     }
                 }
             }

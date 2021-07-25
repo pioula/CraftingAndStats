@@ -217,3 +217,13 @@ commands:
     description: postawsklep
     usage: Error
     permission: Operator
+  dodajwlasciciela:
+    description: dodajwlasciciela
+    usage: Error
+    permission: Operator
+  dorobklucze:
+    description: dorobklucze
+    usage: Error
+  nazwijklucz:
+    description: nazwijklucz
+    usage: Error

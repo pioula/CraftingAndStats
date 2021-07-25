@@ -35,6 +35,9 @@ import me.pioula111.craftingandstats.itemy.komendy.komendyBroni.CommandOneHanded
 import me.pioula111.craftingandstats.itemy.komendy.komendyInne.CommandStopCreatingItem;
 import me.pioula111.craftingandstats.items.commands.armorCommands.CommandDefence;
 import me.pioula111.craftingandstats.items.commands.armorCommands.CommandArmor;
+import me.pioula111.craftingandstats.lockedChests.*;
+import me.pioula111.craftingandstats.lockedChests.json.LockedJsonManager;
+import me.pioula111.craftingandstats.lockedChests.json.LockedManager;
 import me.pioula111.craftingandstats.markers.Marker;
 import me.pioula111.craftingandstats.npcs.BlockNpcPickup;
 import me.pioula111.craftingandstats.pvpAndPve.NPCVanillaDamageStopper;
@@ -64,7 +67,7 @@ import java.io.File;
 import java.util.Objects;
 
 public final class CraftingAndStats extends JavaPlugin {
-    private File craftingJsonFile, harvestJsonFile, lockpickJsonFile, fishingJsonFile, shopJsonFile;
+    private File craftingJsonFile, harvestJsonFile, lockpickJsonFile, fishingJsonFile, shopJsonFile, keysJsonFile;
     private NameSpacedKeys nameSpacedKeys;
     private StatManager statManager;
     private ShopJsonManager shopJsonManager;
@@ -72,6 +75,7 @@ public final class CraftingAndStats extends JavaPlugin {
     private HarvestJsonManager harvestJsonManager;
     private LootJsonManager lockpickJsonManager, fishingJsonManager;
     private BlockSheduler blockSheduler;
+    private LockedJsonManager lockedJsonManager;
 
     @Override
     public void onEnable() {
@@ -96,6 +100,9 @@ public final class CraftingAndStats extends JavaPlugin {
         shopJsonManager = new ShopJsonManager(shopJsonFile);
         ShopManager shopManager = shopJsonManager.getShopManager();
 
+        keysJsonFile = new File("plugins/CraftingAndStats/keys.json");
+        lockedJsonManager = new LockedJsonManager(keysJsonFile);
+        LockedManager lockedManager = lockedJsonManager.getLockedManager();
 
         blockSheduler = new BlockSheduler(this);
 
@@ -112,6 +119,12 @@ public final class CraftingAndStats extends JavaPlugin {
 
         TwoHandedWeapons sheduler = new TwoHandedWeapons(this);
         sheduler.shedule();
+
+        pluginManager.registerEvents(new KeyManager(lockedManager), this);
+        pluginManager.registerEvents(new RemovingOpenerManager(lockedManager), this);
+
+        AddingOwnerManager addingOwnerManager = new AddingOwnerManager(lockedManager);
+        pluginManager.registerEvents(addingOwnerManager, this);
 
         pluginManager.registerEvents(new HealthManager(statManager), this);
 
@@ -220,6 +233,9 @@ public final class CraftingAndStats extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("dodajtowar")).setExecutor(new CommandAddGood(shopManager));
         Objects.requireNonNull(this.getCommand("postawsklep")).setExecutor(new CommandPlaceShop(shopManager));
 
+        Objects.requireNonNull(this.getCommand("dodajwlasciciela")).setExecutor(new CommandAddOwner(addingOwnerManager));
+        Objects.requireNonNull(this.getCommand("dorobklucze")).setExecutor(new CommandDuplicateKey());
+        Objects.requireNonNull(this.getCommand("nazwijklucz")).setExecutor(new CommandNameKey());
     }
 
     public StatManager getStatManager() {
@@ -241,5 +257,6 @@ public final class CraftingAndStats extends JavaPlugin {
         harvestJsonManager.writeToJson();
         shopJsonManager.writeToJson();
         statManager.savePlayers();
+        lockedJsonManager.writeToJson();
     }
 }
